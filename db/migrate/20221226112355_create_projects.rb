@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration[7.0]
       t.string :project_number
       t.string :organization_id
       t.string :parent_id
-      t.string :bialling_account_id
+      t.string :billing_account_id
       t.text :description
 
       t.timestamps

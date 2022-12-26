@@ -17,7 +17,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create project" do
     assert_difference("Project.count") do
-      post projects_url, params: { project: { bialling_account_id: @project.bialling_account_id, description: @project.description, organization_id: @project.organization_id, parent_id: @project.parent_id, project_id: @project.project_id, project_number: @project.project_number } }
+      post projects_url, params: { project: { billing_account_id: @project.billing_account_id, description: @project.description, organization_id: @project.organization_id, parent_id: @project.parent_id, project_id: @project.project_id, project_number: @project.project_number } }
     end
 
     assert_redirected_to project_url(Project.last)
@@ -34,7 +34,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: { bialling_account_id: @project.bialling_account_id, description: @project.description, organization_id: @project.organization_id, parent_id: @project.parent_id, project_id: @project.project_id, project_number: @project.project_number } }
+    patch project_url(@project), params: { project: { billing_account_id: @project.billing_account_id, description: @project.description, organization_id: @project.organization_id, parent_id: @project.parent_id, project_id: @project.project_id, project_number: @project.project_number } }
     assert_redirected_to project_url(@project)
   end
 

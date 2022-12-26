@@ -14,7 +14,7 @@ class ProjectsTest < ApplicationSystemTestCase
     visit projects_url
     click_on "New project"
 
-    fill_in "Bialling account", with: @project.bialling_account_id
+    fill_in "Billing account", with: @project.billing_account_id
     fill_in "Description", with: @project.description
     fill_in "Organization", with: @project.organization_id
     fill_in "Parent", with: @project.parent_id
@@ -30,7 +30,7 @@ class ProjectsTest < ApplicationSystemTestCase
     visit project_url(@project)
     click_on "Edit this project", match: :first
 
-    fill_in "Bialling account", with: @project.bialling_account_id
+    fill_in "Billing account", with: @project.billing_account_id
     fill_in "Description", with: @project.description
     fill_in "Organization", with: @project.organization_id
     fill_in "Parent", with: @project.parent_id

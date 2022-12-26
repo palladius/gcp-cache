@@ -5,7 +5,7 @@ one:
   project_number: MyString
   organization_id: MyString
   parent_id: MyString
-  bialling_account_id: MyString
+  billing_account_id: MyString
   description: MyText
 
 two:
@@ -13,5 +13,5 @@ two:
   project_number: MyString
   organization_id: MyString
   parent_id: MyString
-  bialling_account_id: MyString
+  billing_account_id: MyString
   description: MyText
