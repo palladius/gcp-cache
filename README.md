@@ -1,18 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
+Built with:
+* Rails 7.0.4
+* Ruby `2.7.5` (but might get to 3.x soon why not)
 * Configuration
 
-* Database creation
-
+* Database creation: TODO under `iac/`
 * Database initialization
 
 * How to run the test suite
