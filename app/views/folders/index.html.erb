@@ -1,14 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Folders</h1>
+<%= render 'folders/index_addon' %>
 
-<div id="folders">
-  <% @folders.each do |folder| %>
-    <%= render folder %>
-    <p>
-      <%= link_to "Show this folder", folder %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New folder", new_folder_path %>
+<%= link_to "+ New folder", new_folder_path %>

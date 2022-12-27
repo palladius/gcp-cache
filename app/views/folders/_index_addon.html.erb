@@ -1,0 +1,9 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= FOLDER_ICON %>Folders</h1>
+
+  <% @folders.each do |folder| %>
+      - <%= render_folder folder %><br/>
+  <% end %>
