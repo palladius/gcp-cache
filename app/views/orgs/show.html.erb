@@ -1,4 +1,23 @@
 
-<h1> 🌲 TODO Tree view for ...</h1>
+<h1> 🌲 Orgs view for: <%= @folder %></h1>
 
 <%= render_org(@folder) %>
+
+<h2>Tree view (gem)</h2>
+
+<pre>
+    <%= Folder.tree_view(:id) %>
+</pre>
+
+<h2>Tree view Carlessian</h2>
+
+
+
+    <%= render_org_recursively_html(@folder).html_safe %>
+
+<h3>And in txt</h3>
+<pre>Here it is:
+<%= render_org_recursively_txt(@folder) %>
+</pre>
+
+

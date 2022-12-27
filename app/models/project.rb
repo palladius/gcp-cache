@@ -23,4 +23,9 @@ class Project < ApplicationRecord
         return self.project_id unless verbose
         "#{project_id} (#{project_number}) # #{baid}"
     end
+
+
+    def self.class_emoji 
+        PROJECT_ICON
+    end
 end

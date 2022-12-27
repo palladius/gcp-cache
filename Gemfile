@@ -7,7 +7,8 @@ ruby "2.7.5"
 # Riccardo Start
 #gem 'dotenv'
 gem 'dotenv-rails'
-
+#gem 'acts_as_tree' # https://github.com/amerine/acts_as_tree
+gem 'acts_as_tree', '~> 2.4'
 # /Riccardo end
 ################################################
 
