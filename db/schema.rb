@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_103903) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.string "folder_id"
-    t.boolean "is_org"
+    t.boolean "is_org", default: false
     t.string "parent_id"
     t.text "description"
     t.datetime "created_at", null: false

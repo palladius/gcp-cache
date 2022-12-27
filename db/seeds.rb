@@ -39,10 +39,19 @@ root_folder2 = Folder.create(
         child_n = Folder.create(
             name: "my-l1-child#{i}",
             folder_id: "0#{i}00",
-            is_org: false, 
+            #is_org: false, 
             parent_id: my_root.id,
             description: "Child of #{my_root}. Added by rake db:seed v#{SeedVersion}",
         )
+        if i ==2
+            Folder.create(
+            name: "my-l2-grandchild2-1",
+            folder_id: "02#{i}0",
+            #is_org: false, 
+            parent_id: child_n.id,
+            description: "7th son of a 7th son - with low budget. Added by rake db:seed v#{SeedVersion}",
+        )
+        end
         fake_projects[i].setParent(child_n)
     end
 end
