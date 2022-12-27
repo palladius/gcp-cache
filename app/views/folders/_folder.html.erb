@@ -12,9 +12,6 @@
   <p>
     <strong>Is org:</strong>
     <%= folder.is_org %>
-    <% if folder.is_org %>
-      Org view: <%= render_org(folder) %>
-    <% end %>
   </p>
 
   <p>
@@ -25,6 +22,16 @@
   <p>
     <strong>Description:</strong>
     <%= folder.description %>
+  </p>
+
+  <p>
+    <strong>Domain:</strong>
+    <%= folder.domain %>
+  </p>
+
+  <p>
+    <strong>Directory customer:</strong>
+    <%= folder.directory_customer_id %>
   </p>
 
 </div>

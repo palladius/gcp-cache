@@ -18,7 +18,7 @@ run-migrations-once-hopefully:
 		lifecycle_state:string project_name:string project_creation_time:timestamp # --force
 	#git restore app/helpers/projects_helper.rb
  	#git restore app/models/
-	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text
+	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string
 
 db-show:
 	echo Project.count | rails c

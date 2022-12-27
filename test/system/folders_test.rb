@@ -15,6 +15,8 @@ class FoldersTest < ApplicationSystemTestCase
     click_on "New folder"
 
     fill_in "Description", with: @folder.description
+    fill_in "Directory customer", with: @folder.directory_customer_id
+    fill_in "Domain", with: @folder.domain
     fill_in "Folder", with: @folder.folder_id
     check "Is org" if @folder.is_org
     fill_in "Name", with: @folder.name
@@ -30,6 +32,8 @@ class FoldersTest < ApplicationSystemTestCase
     click_on "Edit this folder", match: :first
 
     fill_in "Description", with: @folder.description
+    fill_in "Directory customer", with: @folder.directory_customer_id
+    fill_in "Domain", with: @folder.domain
     fill_in "Folder", with: @folder.folder_id
     check "Is org" if @folder.is_org
     fill_in "Name", with: @folder.name

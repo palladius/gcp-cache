@@ -37,6 +37,16 @@
   </div>
 
   <div>
+    <%= form.label :domain, style: "display: block" %>
+    <%= form.text_field :domain %>
+  </div>
+
+  <div>
+    <%= form.label :directory_customer_id, style: "display: block" %>
+    <%= form.text_field :directory_customer_id %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

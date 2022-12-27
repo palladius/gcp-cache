@@ -6,6 +6,8 @@ one:
   is_org: false
   parent_id: MyString
   description: MyText
+  domain: MyString
+  directory_customer_id: MyString
 
 two:
   name: MyString
@@ -13,3 +15,5 @@ two:
   is_org: false
   parent_id: MyString
   description: MyText
+  domain: MyString
+  directory_customer_id: MyString

@@ -17,7 +17,7 @@ class FoldersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create folder" do
     assert_difference("Folder.count") do
-      post folders_url, params: { folder: { description: @folder.description, folder_id: @folder.folder_id, is_org: @folder.is_org, name: @folder.name, parent_id: @folder.parent_id } }
+      post folders_url, params: { folder: { description: @folder.description, directory_customer_id: @folder.directory_customer_id, domain: @folder.domain, folder_id: @folder.folder_id, is_org: @folder.is_org, name: @folder.name, parent_id: @folder.parent_id } }
     end
 
     assert_redirected_to folder_url(Folder.last)
@@ -34,7 +34,7 @@ class FoldersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update folder" do
-    patch folder_url(@folder), params: { folder: { description: @folder.description, folder_id: @folder.folder_id, is_org: @folder.is_org, name: @folder.name, parent_id: @folder.parent_id } }
+    patch folder_url(@folder), params: { folder: { description: @folder.description, directory_customer_id: @folder.directory_customer_id, domain: @folder.domain, folder_id: @folder.folder_id, is_org: @folder.is_org, name: @folder.name, parent_id: @folder.parent_id } }
     assert_redirected_to folder_url(@folder)
   end
 
