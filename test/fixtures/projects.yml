@@ -7,6 +7,9 @@ one:
   parent_id: MyString
   billing_account_id: MyString
   description: MyText
+  lifecycle_state: MyString
+  project_name: MyString
+  project_creation_time: 2022-12-27 16:10:58
 
 two:
   project_id: MyString
@@ -15,3 +18,6 @@ two:
   parent_id: MyString
   billing_account_id: MyString
   description: MyText
+  lifecycle_state: MyString
+  project_name: MyString
+  project_creation_time: 2022-12-27 16:10:58

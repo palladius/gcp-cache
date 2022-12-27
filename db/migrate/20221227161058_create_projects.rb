@@ -7,6 +7,9 @@ class CreateProjects < ActiveRecord::Migration[7.0]
       t.string :parent_id
       t.string :billing_account_id
       t.text :description
+      t.string :lifecycle_state
+      t.string :project_name
+      t.timestamp :project_creation_time
 
       t.timestamps
     end

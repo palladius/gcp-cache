@@ -16,9 +16,12 @@ class ProjectsTest < ApplicationSystemTestCase
 
     fill_in "Billing account", with: @project.billing_account_id
     fill_in "Description", with: @project.description
+    fill_in "Lifecycle state", with: @project.lifecycle_state
     fill_in "Organization", with: @project.organization_id
     fill_in "Parent", with: @project.parent_id
+    fill_in "Project creation time", with: @project.project_creation_time
     fill_in "Project", with: @project.project_id
+    fill_in "Project name", with: @project.project_name
     fill_in "Project number", with: @project.project_number
     click_on "Create Project"
 
@@ -32,9 +35,12 @@ class ProjectsTest < ApplicationSystemTestCase
 
     fill_in "Billing account", with: @project.billing_account_id
     fill_in "Description", with: @project.description
+    fill_in "Lifecycle state", with: @project.lifecycle_state
     fill_in "Organization", with: @project.organization_id
     fill_in "Parent", with: @project.parent_id
+    fill_in "Project creation time", with: @project.project_creation_time
     fill_in "Project", with: @project.project_id
+    fill_in "Project name", with: @project.project_name
     fill_in "Project number", with: @project.project_number
     click_on "Update Project"
 
