@@ -83,6 +83,8 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    cssbundling-rails (1.1.2)
+      railties (>= 6.0.0)
     date (3.3.3)
     debug (1.7.1)
       irb (>= 1.5.0)
@@ -92,15 +94,14 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.6.0)
     irb (1.6.2)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsbundling-rails (1.1.1)
+      railties (>= 6.0.0)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -211,11 +212,12 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  cssbundling-rails
   debug
-  importmap-rails
   jbuilder
+  jsbundling-rails
   puma (~> 5.0)
-  rails (~> 7.0.3, >= 7.0.3.1)
+  rails (~> 7.0.4)
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
