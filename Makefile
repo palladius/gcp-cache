@@ -2,6 +2,7 @@
 SHELL := /bin/bash
 
 run:
+	rake assets:precompile
 	rails s
 
 migrate:
