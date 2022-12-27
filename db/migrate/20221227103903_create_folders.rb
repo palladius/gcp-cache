@@ -5,6 +5,7 @@ class CreateFolders < ActiveRecord::Migration[7.0]
       t.string :folder_id
       t.boolean :is_org
       t.string :parent_id
+      t.text :description
 
       t.timestamps
     end

@@ -5,9 +5,11 @@ one:
   folder_id: MyString
   is_org: false
   parent_id: MyString
+  description: MyText
 
 two:
   name: MyString
   folder_id: MyString
   is_org: false
   parent_id: MyString
+  description: MyText

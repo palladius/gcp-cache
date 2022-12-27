@@ -14,6 +14,7 @@ class FoldersTest < ApplicationSystemTestCase
     visit folders_url
     click_on "New folder"
 
+    fill_in "Description", with: @folder.description
     fill_in "Folder", with: @folder.folder_id
     check "Is org" if @folder.is_org
     fill_in "Name", with: @folder.name
@@ -28,6 +29,7 @@ class FoldersTest < ApplicationSystemTestCase
     visit folder_url(@folder)
     click_on "Edit this folder", match: :first
 
+    fill_in "Description", with: @folder.description
     fill_in "Folder", with: @folder.folder_id
     check "Is org" if @folder.is_org
     fill_in "Name", with: @folder.name
