@@ -1,0 +1,11 @@
+-------------- -------------- -------------- -------------- --------------
+-- Select all CRM projects, folders, and orgs form Riccardo account on BigQuery :)
+-------------- -------------- -------------- -------------- --------------
+SELECT 
+  asset_type, 
+  COUNT(*) as carlessian_asset_caridnality  
+FROM `ric-cccwiki.assets2020.assetinventoric_*` 
+WHERE asset_type like 'cloudresourcemanager.googleapis.com/%'
+GROUP BY 1
+
+LIMIT 10000

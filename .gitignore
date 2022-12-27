@@ -39,3 +39,5 @@
 
 /node_modules
 .envrc
+.tmp
+db/fixtures/bq-exports/assets-export20221227-190529.json

@@ -14,5 +14,8 @@ export ORG_FOLDER_PROJECTS_GRAPH_DIR="./db/fixtures/org-folder-projects-graph/pr
 export PROJECT_ICON='🍕'
 export FOLDER_ICON='📂'
 export ORG_ICON='🗂'
+
+# Set this to make the BQ query work for you :) and get all Projects and stuff from your BQ export (see README.)
+export ASSET_INVENTORY_TABLES='my-project.my-dataset.my_tables_'
 #### v1.1 2022-12-XX ####
 
