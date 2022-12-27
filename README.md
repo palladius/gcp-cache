@@ -37,3 +37,7 @@ I'd like to make this project re-creatable as much as possible, so I'll keep in 
 * `Projects` - DONE
 * `Folders and Orgs` - I'd like to have a similar foirmat to project so i get a SINGLE table and its easy to do parental control :) . Let me see how the two DBs look like and diff them intelligently.
 * See https://github.com/palladius/org-folder-projects-graph to get them out :)
+
+# TODO 
+
+* add Labels support
