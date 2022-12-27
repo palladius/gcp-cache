@@ -12,3 +12,18 @@ Project.create(
     project_number: '1234567890',
     billing_account_id: '123456-7890AB-CDEF12',
 )
+
+root_folder = Folder.create(
+    name: 'my-root',
+    folder_id: '1000',
+    is_org: true, 
+    #parent_id:string
+)
+(1..3).each do |i| 
+    child_n = Folder.create(
+        name: 'my-l1-child#{i}',
+        folder_id: "0#{i}00",
+        is_org: false, 
+        parent_id: root_folder.id
+    )
+end

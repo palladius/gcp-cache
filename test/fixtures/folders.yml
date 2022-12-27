@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  folder_id: MyString
+  is_org: false
+  parent_id: MyString
+
+two:
+  name: MyString
+  folder_id: MyString
+  is_org: false
+  parent_id: MyString
