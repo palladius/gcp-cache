@@ -8,6 +8,8 @@ run:
 
 migrate:
 	rake db:migrate db:seed
+
+db-drop-and-then-regenerate-YES-IM-SURE: delete-database-YES-IM-SURE migrate
 delete-database-YES-IM-SURE:
 	rake db:drop 
 run-migrations-once-hopefully:

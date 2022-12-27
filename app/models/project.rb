@@ -34,6 +34,12 @@ This is how a project id JSON looks like in one of my gcloud json exports :) (so
 *    "name": "OrgNode Project for Palladi US",
 *    "lifecycleState": "ACTIVE", Todo
 
+Note on IDs: to avoid confusion maybe I should rename them as "gcp_organization_id" vs "rails_parent_id" to avoid confusions :)
+One id exists only within THIS Database and not in the real world, GCP ids are consistent across the real world.
+* organization_id: GCP folder id
+* parent_id: its a Ruby object, to imoplement Tree.
+* folder_id:  GCP folder id.
+
 =end
 
 class Project < ApplicationRecord
@@ -52,14 +58,23 @@ class Project < ApplicationRecord
         self.organization_id = parent_folder.folder_id # where recurively finding for parent. Wait for acts_as_tree to find it :) 
         self.description = "[debug] Setting parent to #{parent_folder}" 
         puts "* Is this valid? #{self.valid?}"
-        self.save!
+        self.save
         # TODO: also set Organization_id
         #self.organization_id = parent_folder.id where recurively finding for parent. Wait for acts_as_tree to find it :) 
     end
 
+    def active?
+        @lifecycle_state == 'ACTIVE' rescue true
+    end
+
+    def active_icon
+      active? ? '✅' : '❌' # checkmark vs crossmark
+    end
+
+
     def to_s(verbose=true)
         return self.project_id unless verbose
-        "#{project_id} (#{project_number}) # #{baid}"
+        "#{active_icon}#{project_id} (#{project_number}) # #{baid}"
     end
 
 

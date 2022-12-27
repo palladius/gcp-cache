@@ -1,18 +1,39 @@
+=begin
+ 
+
+JSON representation of folder according to this gcloud command:
+  {
+    "createTime": "2020-01-22T17:05:33.521Z",
+    "displayName": "TF2b - sempronius",
+    "lifecycleState": "ACTIVE",
+    "name": "folders/802144187596",
+    "parent": "folders/93350088776"
+  },
+
+=end
+
 class Folder < ApplicationRecord
     extend ActsAsTree::TreeView
     acts_as_tree order: "name"
 
     # https://guides.rubyonrails.org/active_record_validations.html
     validates :folder_id, uniqueness: true, presence: true
-    validates :name,  presence: true
+    #validates :name,  presence: true
 
     # not self.emoji 
     def emoji
-        is_org ? ORG_ICON : FOLDER_ICON
+        is_org ? ORG_ICON : FOLDER_ICON rescue '?!?'
     end
 
+    def most_representative_name
+        return name if name.to_s.length > 0
+        return folder_id if folder_id.to_s.length > 0
+        return id if id.to_s.length > 0
+        return "oid=#{self.object_id}"
+    end
+   
     def to_s
-        self.emoji + " " + self.name
+        "#{self.emoji} #{most_representative_name}" 
     end
 
 

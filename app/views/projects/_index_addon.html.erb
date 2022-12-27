@@ -1,0 +1,9 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= PROJECT_ICON %>Projects 2</h1>
+
+  <% @projects.each do |project| %>
+      <%= render_project project %><br/>
+  <% end %>

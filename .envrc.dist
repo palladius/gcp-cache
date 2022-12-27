@@ -9,6 +9,7 @@ export ENVRC_VERSION="1.0"
 export CODE_URL="http://github.com/palladius/gcp-cache"
 export APP_NAME="🌩 GCP Cache (dist)"
 export APP_DESCRIPTION="A lightning-fast cache for your GCP Orgs, Folders, Projects and GCP entities"
+export ORG_FOLDER_PROJECTS_GRAPH_DIR="./db/fixtures/org-folder-projects-graph/projects/"
 
 export PROJECT_ICON='🍕'
 export FOLDER_ICON='📂'
