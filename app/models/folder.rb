@@ -70,7 +70,7 @@ class Folder < ApplicationRecord
         indentation = depth==0 ? '🌲 ' :
             "   " * (depth-1) + ' ├─ 📂 '
         debug_info = opts_debug ? "[L🌊=#{depth}]" : ''
-        ret = "#{indentation}#{debug_info}" + folder.name + "\n" # .name})", "/orgs/#{folder.id}" ) + "<br/>" # rescue :Err
+        ret = "#{indentation}#{debug_info}" + folder.most_representative_name + "\n" # .name})", "/orgs/#{folder.id}" ) + "<br/>" # rescue :Err
         # 2. Then, the N children
         children.each do |child_folder|
             ret +=  child_folder.carlessian_tree_view(depth+1, opts)

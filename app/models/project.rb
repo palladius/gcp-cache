@@ -74,7 +74,8 @@ class Project < ApplicationRecord
 
     def to_s(verbose=true)
         return self.project_id unless verbose
-        "#{active_icon}#{project_id} (#{project_number}) # #{baid}"
+        son_of = self.parent_id.nil? ? '' : "🚸SonOf(#{parent_id})"
+        "#{active_icon}#{project_id} (#{project_number}) # #{baid}#{son_of}"
     end
 
 

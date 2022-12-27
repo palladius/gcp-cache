@@ -131,5 +131,5 @@ def seed_from_org_folder_projects_graph(dir=nil)
 end
 
 
-#seed_random_stuff
+seed_random_stuff
 seed_from_org_folder_projects_graph
