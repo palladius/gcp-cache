@@ -13,7 +13,9 @@ delete-database-YES-IM-SURE:
 run-migrations-once-hopefully:
 	# repeat with --force if you make a mistake
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text \
-		lifecycle_state:string project_name:string project_creation_time:timestamp --force
+		lifecycle_state:string project_name:string project_creation_time:timestamp # --force
+	#git restore app/helpers/projects_helper.rb
+ 	#git restore app/models/
 	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text
 
 db-show:

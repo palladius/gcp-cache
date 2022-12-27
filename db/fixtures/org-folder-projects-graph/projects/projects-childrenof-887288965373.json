@@ -1,0 +1,17 @@
+[
+  {
+    "createTime": "2017-02-18T17:02:19.812Z",
+    "labels": {
+      "acme-project": "gbanana",
+      "billing-tag": "tag842424"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "gbanana-prod",
+    "parent": {
+      "id": "887288965373",
+      "type": "folder"
+    },
+    "projectId": "gbanana-prod",
+    "projectNumber": "626662139195"
+  }
+]

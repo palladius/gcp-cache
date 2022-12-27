@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_27_103903) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_27_161058) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.string "folder_id"
@@ -28,6 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_103903) do
     t.string "parent_id"
     t.string "billing_account_id"
     t.text "description"
+    t.string "lifecycle_state"
+    t.string "project_name"
+    t.datetime "project_creation_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

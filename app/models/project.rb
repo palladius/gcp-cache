@@ -25,16 +25,14 @@ This is how a project id JSON looks like in one of my gcloud json exports :) (so
 
 [RED] TODO:
 *    "labels": Array[str,str]: Totally todo
-*    "lifecycleState": "ACTIVE", Todo
-
-[YELLOW] Can do with what we have but better re-do:
-* "createTime": we could override the created_at, which makes sense. Or makybe we keep it separated.
-*    "name": "OrgNode Project for Palladi US",
 
 [GREEN] We have it ok:
 *    "parent": DONE
 *    "projectId": "orgnode-palladi-us",
 *    "projectNumber": "704861684515"
+* "createTime": we could override the created_at, which makes sense. Or makybe we keep it separated.
+*    "name": "OrgNode Project for Palladi US",
+*    "lifecycleState": "ACTIVE", Todo
 
 =end
 
