@@ -10,5 +10,8 @@ export CODE_URL="http://github.com/palladius/gcp-cache"
 export APP_NAME="🌩 GCP Cache (dist)"
 export APP_DESCRIPTION="A lightning-fast cache for your GCP Orgs, Folders, Projects and GCP entities"
 
+export PROJECT_ICON='🍕'
+export FOLDER_ICON='📂'
+export ORG_ICON='🗂'
 #### v1.1 2022-12-XX ####
 

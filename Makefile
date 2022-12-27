@@ -2,12 +2,14 @@
 SHELL := /bin/bash
 
 run:
-	rake assets:precompile
+	#https://stackoverflow.com/questions/72448485/the-asset-application-js-is-not-present-in-the-asset-pipeline-in-rails-7
+	rake assets:precompile || yarn build
 	rails s
 
 migrate:
 	rake db:migrate db:seed
-
+delete-database-YES-IM-SURE:
+	rake db:drop 
 run-migrations-once-hopefully:
 	# repeat with --force if you make a mistake
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text

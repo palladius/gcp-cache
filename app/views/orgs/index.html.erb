@@ -1,16 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>🗂️ Org Folders</h1>
+<h1>🗂️ Organizations</h1>
 
 
 
 <div id="folders">
   <% @folders.each do |folder| %>
-    <%= render folder %>
     <p>
-      <%= link_to "Show this folder", folder %>
+      <%= render_folder(folder) %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New folder", new_folder_path %>

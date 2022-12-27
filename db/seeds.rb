@@ -8,12 +8,17 @@
 
 SeedVersion = "1.1_221227"
 
-Project.create(
-    project_id: 'fake-riccardo-project',
-    project_number: '1234567890',
-    billing_account_id: '123456-7890AB-CDEF12',
-    description: "Added by rake db:seed v#{SeedVersion}",
-)
+fake_projects = [] 
+
+(1..5).each do |ix|
+    p = Project.create(
+        project_id: "fake-riccardo-project-#{ix}",
+        project_number: 12345678900 + ix,
+        billing_account_id: '123456-7890AB-CDEF12',
+        description: "Project # #{ix}.\nAdded by rake db:seed v#{SeedVersion}",
+    )
+    fake_projects << p
+end
 
 root_folder = Folder.create(
     name: 'my-root',
@@ -29,13 +34,15 @@ root_folder2 = Folder.create(
     #parent_id:string
     description: "This is my second root folder, also a dir. Added by rake db:seed v#{SeedVersion}",
 )
-
-(1..3).each do |i| 
-    child_n = Folder.create(
-        name: "my-l1-child#{i}",
-        folder_id: "0#{i}00",
-        is_org: false, 
-        parent_id: root_folder.id,
-        description: "Added by rake db:seed v#{SeedVersion}",
-    )
+[ root_folder, root_folder2].each do |my_root| 
+    (1..3).each do |i| 
+        child_n = Folder.create(
+            name: "my-l1-child#{i}",
+            folder_id: "0#{i}00",
+            is_org: false, 
+            parent_id: my_root.id,
+            description: "Child of #{my_root}. Added by rake db:seed v#{SeedVersion}",
+        )
+        fake_projects[i].setParent(child_n)
+    end
 end

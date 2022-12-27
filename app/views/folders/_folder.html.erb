@@ -12,6 +12,9 @@
   <p>
     <strong>Is org:</strong>
     <%= folder.is_org %>
+    <% if folder.is_org %>
+      Org view: <%= render_org(folder) %>
+    <% end %>
   </p>
 
   <p>
