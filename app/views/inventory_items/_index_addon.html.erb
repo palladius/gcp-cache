@@ -1,0 +1,24 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= INVENTORY_ITEM_ICON %>Inventory Items</h1>
+
+<% @latest_inventory_item = InventoryItem.order(:gcp_update_time).last %>
+Latest, newest Inventory Item (which also tells you how behind your import job is :P):
+
+<%= render_inventory_item(@latest_inventory_item)  %>
+<%#= @latest_inventory_item.inspect %>
+
+<table border='1' >
+    <tr>
+        <th>Name
+        <th>AssetType
+        <th>Ancestors
+  <% @inventory_items.each do |x| %>
+    <tr>
+        <td><%= link_to x.name, x %>:
+        <td><%= x.asset_type %>
+        <td><%= x.ancestors %>
+    <% end %>
+</table>

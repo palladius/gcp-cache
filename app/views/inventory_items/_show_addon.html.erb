@@ -1,0 +1,23 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h2>Show addon</h2>
+
+<p> Parents: </p>
+<% @inventory_item.ancestors.each_with_index do |a,ix| %>
+    🐸
+    <%= ix%>
+    <%= a %>
+    <% if( x = ApplicationRecord.find_magically_by_fqdn(a)) %>
+        <%= x %>
+    <% else %>
+        Frog 🐸 not found. Mind to create? 
+        <!-- TODO(ricc): use render instead of this crappy VIEW mess. 
+        This example has just prohects, not folder, and the autopopulation does NOT work-->
+        <%= link_to "New #{a.split('/').first} with id=#{a.split('/').second}", "/projects/new?params[project_number]=#{a.split('/').second}"%>
+    <% end %>
+
+    <br/>
+
+<% end %>

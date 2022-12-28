@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_090546) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_28_104326) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.string "folder_id"
@@ -22,6 +22,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_090546) do
     t.string "lifecycle_state"
     t.datetime "gcp_creation_time"
     t.string "frog_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.text "serialized_ancestors"
+    t.text "description"
+    t.string "asset_type"
+    t.string "name"
+    t.datetime "gcp_update_time", precision: nil
+    t.string "resource_location"
+    t.string "resource_discovery_name"
+    t.string "resource_parent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

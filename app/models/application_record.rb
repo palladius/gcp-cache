@@ -1,6 +1,22 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  ParseVersion = '1.0'
+
+
+  def self.find_magically_by_fqdn(my_fqdn)
+    polymorphic_type, polymorphic_id = my_fqdn.split('/')
+    case polymorphic_type
+    when 'projects'
+      Project.find_by_project_number(polymorphic_id)
+    when 'folders', 'organizations'
+      #Folder.where(folder_id: polymorphic_id, folder_type: polymorphic_type)
+      Folder.find_by_folder_id(polymorphic_id) # , folder_type: polymorphic_type)
+    else 
+      raise "Unknown 🐸 Frog type: '#{polymorphic_type}'. I only know Projects, Folders and Orgs (aka Frogs)"
+    end
+  end
+
 
 =begin  
 Smaple project:
@@ -89,9 +105,9 @@ This is how my object looks like:
 =end  
   # from Folder but could come from everywhere, gence i put it here.
   # TODO move to concern -> parser :)
-  def self.parse_asset_inventoy_dict(aid) # rescue nil
+  def self.parse_asset_inventory_dict(aid) # rescue nil
     #puts "+++ Folder.parse_asset_inventoy_dict(asset_inventoy_dict)"
-    puts "parse_asset_inventoy_dict: 📝TODO📝 I might want to manage this once I have a vision of ALL asset inventotry objects and maybe can put them al in a similar place."
+    #puts "parse_asset_inventory_dict: 📝TODO📝 I might want to manage this once I have a vision of ALL asset inventotry objects and maybe can put them al in a similar place."
     
     puts "🔑 Keys: #{aid.keys}" # aid.keys
     puts "💛Ancestors: #{aid['ancestors']}"
@@ -101,6 +117,15 @@ This is how my object looks like:
     non_nil_resources = aid['resource'].select{|k,v| not v.nil?}
     puts "💛💛💛💛NonNullResource: #{non_nil_resources}" unless non_nil_resources == {}
     #pp aid
+    ii = InventoryItem.create(
+      description: "Created by parse_asset_inventoy_dict v#{ParseVersion}",
+      serialized_ancestors: aid['ancestors'],
+      asset_type:  aid['asset_type'],
+      name: aid['name'],
+      gcp_update_time: aid['update_time'],     
+      #TODO(riocc): add stuff which for now is always empty.. 
+    )
+    puts "👍 Created ii: #{ii}"
     puts "^" * 80
     
   end

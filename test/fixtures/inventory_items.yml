@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serialized_ancestors: MyText
+  description: MyText
+  asset_type: MyString
+  name: MyString
+  gcp_update_time: 2022-12-28 10:43:26
+  resource_location: MyString
+  resource_discovery_name: MyString
+  resource_parent: MyString
+
+two:
+  serialized_ancestors: MyText
+  description: MyText
+  asset_type: MyString
+  name: MyString
+  gcp_update_time: 2022-12-28 10:43:26
+  resource_location: MyString
+  resource_discovery_name: MyString
+  resource_parent: MyString

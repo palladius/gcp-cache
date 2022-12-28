@@ -71,6 +71,11 @@ class Project < ApplicationRecord
       active? ? '✅' : '❌' # checkmark vs crossmark
     end
 
+    # "projects/268290255727",
+    def fqdn
+        "projects/#{project_number}"
+    end
+
 
     def to_s(verbose=true)
         return self.project_id unless verbose

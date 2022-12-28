@@ -99,8 +99,8 @@ def seed_from_bq_assets(dir=nil)
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each_with_index do |asset_inventoy_dict, ix|
-            Folder.parse_asset_inventoy_dict(asset_inventoy_dict) # rescue nil
-            if ix > 3
+            Folder.parse_asset_inventory_dict(asset_inventoy_dict) # rescue nil
+            if ix >= 15000
                 puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
                 return 
 
