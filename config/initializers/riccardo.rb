@@ -9,3 +9,4 @@ APP_DESCRIPTION = ENV.fetch 'APP_DESCRIPTION', '{ Missing APP_DESCRIPTION. fix t
 PROJECT_ICON = ENV.fetch 'PROJECT_ICON', '🍕'
 FOLDER_ICON = ENV.fetch 'FOLDER_ICON', '?'
 ORG_ICON = ENV.fetch 'ORG_ICON', '?'
+LABEL_ICON = ENV.fetch 'LABEL_ICON', '🏷️'

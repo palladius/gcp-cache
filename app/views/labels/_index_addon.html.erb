@@ -1,0 +1,13 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= LABEL_ICON %>Labels</h1>
+
+<table border='1' >
+  <% @labels.each do |label| %>
+    <tr>
+        <td><%= label.gcp_key %>:
+        <td><%= label.gcp_value %>
+    <% end %>
+</table>

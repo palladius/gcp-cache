@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_073236) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_28_074916) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.string "folder_id"
@@ -21,6 +21,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_073236) do
     t.string "directory_customer_id"
     t.string "lifecycle_state"
     t.datetime "gcp_creation_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "gcp_key"
+    t.string "gcp_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
