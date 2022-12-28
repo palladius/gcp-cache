@@ -17,5 +17,6 @@ export ORG_ICON='🗂'
 
 # Set this to make the BQ query work for you :) and get all Projects and stuff from your BQ export (see README.)
 export ASSET_INVENTORY_TABLES='my-project.my-dataset.my_tables_'
+export ORGANIZATION_ID="1234567890"
 #### v1.1 2022-12-XX ####
 

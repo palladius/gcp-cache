@@ -1,11 +1,11 @@
 [
   {
     "creationTime": "2020-12-16T11:50:12.519Z",
-    "displayName": "palladius.it",
+    "displayName": "example.com",
     "lifecycleState": "ACTIVE",
-    "name": "organizations/44433984155",
+    "name": "organizations/1234567890",
     "owner": {
-      "directoryCustomerId": "C02w19ipr"
+      "directoryCustomerId": "A01a23bcd"
     }
   }
 ]

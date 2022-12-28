@@ -15,10 +15,10 @@ delete-database-YES-IM-SURE:
 run-migrations-once-hopefully:
 	# repeat with --force if you make a mistake
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text \
-		lifecycle_state:string project_name:string gcp__creation_time:timestamp # --force
-	#git restore app/helpers/projects_helper.rb
- 	#git restore app/models/
+		lifecycle_state:string project_name:string gcp__creation_time:timestamp --force
 	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string lifecycle_state:string gcp_creation_time:datetime
+	git restore app/helpers app/models/
+	echo Now take a quick look at VIEWS..
 
 db-show:
 	echo Project.count | rails c
@@ -29,4 +29,4 @@ watch-db:
 	watch make db-show
 
 gcloud-generate-info:
-	gcloud organizations list --format json | tee db/fixtures/gcloud/organizations.json
+	./gcloud-generate-info.sh

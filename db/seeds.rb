@@ -153,7 +153,8 @@ end
 
 
 # TODO(ricc): restore the other two
-
-#seed_random_stuff
-#seed_from_org_folder_projects_graph
+# TODO(ricc): query all assets :)
+seed_random_stuff
+seed_from_org_folder_projects_graph
 seed_from_bq_assets
+#seed_from_gcloud_dumps
