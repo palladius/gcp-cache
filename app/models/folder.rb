@@ -37,7 +37,7 @@ class Folder < ApplicationRecord
     end
 
     def fqdn
-        "#{type}/#{folder_id}"
+        "#{frog_type}/#{folder_id}"
     end
 
 
@@ -88,8 +88,8 @@ class Folder < ApplicationRecord
 
     # eg, "organizations/12345"
     def self.find_by_fqdn(input_fqdn)
-        type,folder_id = input_fqdn.split('/')
-        find_by(type: type, folder_id: folder_id)
+        frog_type,folder_id = input_fqdn.split('/')
+        find_by(frog_type: frog_type, folder_id: folder_id)
     end
 
 end

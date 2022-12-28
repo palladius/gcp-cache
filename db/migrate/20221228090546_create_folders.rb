@@ -10,7 +10,7 @@ class CreateFolders < ActiveRecord::Migration[7.0]
       t.string :directory_customer_id
       t.string :lifecycle_state
       t.datetime :gcp_creation_time
-      t.string :type
+      t.string :frog_type
 
       t.timestamps
     end
