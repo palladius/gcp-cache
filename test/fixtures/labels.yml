@@ -7,3 +7,7 @@ one:
 two:
   gcp_key: test-env
   gcp_value: test-prod
+
+riccardo:
+  gcp_key: find-me-in
+  gcp_value: test-fixtures-labels.yml

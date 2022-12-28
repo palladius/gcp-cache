@@ -5,20 +5,27 @@ There's another theory which states that this has already happened 😉
 <h1><%= INVENTORY_ITEM_ICON %>Inventory Items</h1>
 
 <% @latest_inventory_item = InventoryItem.order(:gcp_update_time).last %>
-Latest, newest Inventory Item (which also tells you how behind your import job is :P):
+Latest, newest Inventory Item (which also tells you how behind your import job is :P): <br/>
 
-<%= render_inventory_item(@latest_inventory_item)  %>
-<%#= @latest_inventory_item.inspect %>
+<%= render_inventory_item(@latest_inventory_item)  %> <br/>
+
+⏲ Created on: 
+<%= @latest_inventory_item.gcp_update_time %>
+(<b>
+<%= time_ago_in_words @latest_inventory_item.gcp_update_time %>
+ago</b>)
 
 <table border='1' >
     <tr>
-        <th>Name
         <th>AssetType
+        <th>Name
         <th>Ancestors
+        <th>Organization
   <% @inventory_items.each do |x| %>
     <tr>
-        <td><%= link_to x.name, x %>:
-        <td><%= x.asset_type %>
-        <td><%= x.ancestors %>
+        <td><%= x.simplified_type %>
+        <td><%= link_to x.simplified_name, x %>
+        <td><%= x.ancestors.count %>
+        <td><%= x.organization.is_a?(Folder) ? link_to( x.organization,x.organization) : x.organization_id %>
     <% end %>
 </table>
