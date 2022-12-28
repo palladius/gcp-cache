@@ -7,7 +7,7 @@ _fatal() {
 source .envrc ||
     _fatal 'Not .envrc to slurp. Exiting.'
 
-MAX_ROWS='10000'
+MAX_ROWS='1000'
 
 #echo "ASSET_INVENTORY_TABLES: $ASSET_INVENTORY_TABLES"
 

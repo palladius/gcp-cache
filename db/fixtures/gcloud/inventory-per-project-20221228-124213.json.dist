@@ -1,0 +1,24 @@
+[
+    {
+        "assetType": "logging.googleapis.com/LogMetric",
+        "createTime": "2020-09-14T09:28:43Z",
+        "description": "errori che ho in k8s prod",
+        "displayName": "errori-in-k8s-prod-distro",
+        "location": "global",
+        "name": "//logging.googleapis.com/projects/134140879415/metrics/errori-in-k8s-prod-distro",
+        "parentAssetType": "cloudresourcemanager.googleapis.com/Project",
+        "parentFullResourceName": "//cloudresourcemanager.googleapis.com/projects/ric-cccwiki",
+        "project": "projects/134140879415",
+        "updateTime": "2020-09-14T09:28:43Z"
+    },
+    {
+        "assetType": "spanner.googleapis.com/Database",
+        "displayName": "pastang2023-postgre",
+        "location": "europe-west1",
+        "name": "//spanner.googleapis.com/projects/ric-cccwiki/instances/cloud-eu/databases/pastang2023-postgre",
+        "parentAssetType": "spanner.googleapis.com/Instance",
+        "parentFullResourceName": "//spanner.googleapis.com/projects/ric-cccwiki/instances/cloud-eu",
+        "project": "projects/134140879415",
+        "state": "READY"
+    }
+]

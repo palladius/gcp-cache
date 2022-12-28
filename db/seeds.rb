@@ -116,26 +116,42 @@ end
 
 def seed_from_gcloud_dumps
     Dir["db/fixtures/gcloud/project*.json"].each do |gcloud_json_file|
+        puts "🔬 Parsing Project file #{gcloud_json_file}"
         json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each do |gcloud_project_dict|
             Folder.parse_project_info(gcloud_project_dict) # rescue nil
         end
-    end
+    end if false
     Dir["db/fixtures/gcloud/organizations*.json"].each do |gcloud_json_file|
+        puts "🔬 Parsing Org file #{gcloud_json_file}"
         json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each do |gcloud_org_dict|
             Folder.parse_organization_info(gcloud_org_dict) # rescue nil
         end
-    end
+    end if false
     Dir["db/fixtures/gcloud/folders*.json"].each do |gcloud_json_file|
+        puts "🔬 Parsing Folder file #{gcloud_json_file}"
         json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         json_buridone.each do |gcloud_folder_dict|
             Folder.parse_folder_info(gcloud_folder_dict) # rescue nil
+        end
+    end if false
+    # These files are created from `populate-asset-inventory-from-gcloud.sh`
+    Dir["db/fixtures/gcloud/inventory-per-project*.json"].each do |gcloud_json_file|
+        puts "🔬 Parsing Inventory from single project from file #{gcloud_json_file}"
+        json_buridone = JSON.parse(File.read(gcloud_json_file)) rescue nil 
+        if json_buridone.nil? 
+            puts "Error parsing.."
+        end
+        next unless json_buridone.is_a? Array 
+        json_buridone.each do |gcloud_inventory_stuff_dict|
+            #Folder.parse_folder_info(gcloud_folder_dict) # rescue nil
+            puts :todo
         end
     end
 end
@@ -143,10 +159,10 @@ end
 
 
 
-
+puts :main
 # TODO(ricc): restore the other two
 # TODO(ricc): query all assets :)
 #seed_random_stuff
 #seed_from_org_folder_projects_graph
-seed_from_bq_assets
-#seed_from_gcloud_dumps
+#seed_from_bq_assets
+seed_from_gcloud_dumps
