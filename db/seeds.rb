@@ -130,6 +130,30 @@ def seed_from_org_folder_projects_graph(dir=nil)
 
 end
 
+def seed_from_bq_assets(dir=nil)
+    #dir ||= 'db/fixtures/bq-exports/'
+    Dir["db/fixtures/bq-exports/*.json"].each do |bq_json_file|
+        json_buridone = JSON.parse(File.read(bq_json_file))
+        puts json_buridone.class
+        next unless json_buridone.is_a? Array 
+        # we do have an array
+        json_buridone.each do |asset_inventoy_dict|
+            Folder.parse_asset_inventoy_dict(asset_inventoy_dict) # rescue nil
+        end
+    end
+    # f = File.read(json_file)
+    # json_buridone = JSON.parse(f)
+    # puts json_buridone.class
+    # return unless  json_buridone.is_a? Array 
+end
 
-seed_random_stuff
-seed_from_org_folder_projects_graph
+
+
+
+
+
+# TODO(ricc): restore the other two
+
+#seed_random_stuff
+#seed_from_org_folder_projects_graph
+seed_from_bq_assets

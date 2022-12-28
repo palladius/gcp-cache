@@ -42,3 +42,4 @@
 .tmp
 db/fixtures/bq-exports/assets-export20221227-190529.json
 .git-privatize
+db/fixtures/gcloud/organizations.json

@@ -81,4 +81,16 @@ class Folder < ApplicationRecord
     def self.class_emoji 
         FOLDER_ICON
     end
+
+    def self.parse_asset_inventoy_dict(aid) # rescue nil
+        puts "+++ Folder.parse_asset_inventoy_dict(asset_inventoy_dict)"
+        #puts aid.keys
+        puts "💛Ancestors💛: #{aid['ancestors']}"
+        puts "💛AssetType💛: #{aid['asset_type']}"
+        puts "💛Name💛: #{aid['name']}"
+        puts "💛update_time💛: #{aid['update_time']}"
+        #puts "NonNullResources: #{aid['resources']}"
+        #pp aid
+    end
+
 end

@@ -27,3 +27,6 @@ db-show:
 
 watch-db:
 	watch make db-show
+
+gcloud-generate-info:
+	gcloud organizations list --format json | tee db/fixtures/gcloud/organizations.json
