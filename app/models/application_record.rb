@@ -56,7 +56,7 @@ Smaple project:
           lifecycle_state: ph['lifecycleState'],
           parent_id: f.id,
           organization_id: is_org ? f.folder_id : nil, # org id is the same :)
-          billing_account_id: '123456-7890AB-CDEF12',
+          #billing_account_id: '123456-7890AB-CDEF12',
           description: "Project found in file: #{opts_json_file}.Parent hash: #{parent_hash}\nAdded by seed_projects_from_projects_file as part rake db:seed v#{SeedVersion}",
       )
     end
@@ -92,12 +92,13 @@ Smaple project:
   },
 =end
   def self.parse_organization_info(hash, opts={})
-    #puts :TODO_ORG_⛏️
+    opts_verbose = opts.fetch :verbose, false
+
     #pp hash['name'] # "organizations/44433984155"
     org_id = hash['name'].split('/').second
     existing_org = Folder.find_by_folder_id(org_id)
     if existing_org
-      puts "🎯 Org already exists! #{existing_org}" # cache hit emoji
+      puts "🎯 Org already exists! #{existing_org}" if opts_verbose # cache hit emoji
       o = existing_org
     else
       o = Folder.create(
@@ -112,11 +113,25 @@ Smaple project:
       )
       puts "👍 Org just created: #{o}"
     end
-    puts "Folder Org is: #{o.inspect}"
+    puts "Folder Org is: #{o.inspect}" if opts_verbose
   end
 
+=begin
+example:
+{"createTime"=>"2022-09-19T13:34:39.089Z",
+ "displayName"=>"Pulumi",
+ "lifecycleState"=>"ACTIVE",
+ "name"=>"folders/1054494897637",
+ "parent"=>"organizations/4879804362  "}
+=end
+
   def self.parse_folder_info(hash, opts={})
-    puts :TODO_FOLDER_⛏️
+    #puts :TODO_FOLDER_⛏️
     pp hash
+    #  "name"=>"folders/1054494897637",
+    folder_type = hash['name'].split('/').first # should be 'folders' or 'organizations' 
+    folder_id = hash['name'].split('/').second
+    parent = hash['name'] # could be an Org or a Folder, eg "organizations/824879804362"}
+    puts folder_id
   end
 end

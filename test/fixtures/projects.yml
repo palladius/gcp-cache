@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  project_id: MyString
+  project_id: MyFixtureProject
   project_number: MyString
   organization_id: MyString
   parent_id: MyString
@@ -12,7 +12,7 @@ one:
   project_creation_time: 2022-12-27 16:10:58
 
 two:
-  project_id: MyString
+  project_id: my-other-project
   project_number: MyString
   organization_id: MyString
   parent_id: MyString
