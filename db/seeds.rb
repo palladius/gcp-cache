@@ -6,10 +6,15 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-SeedVersion = "1.2_221227"
+SeedVersion = "1.3_221228"
 
 def seed_random_stuff()
     fake_projects = [] 
+
+    Label.create(
+        gcp_key: 'SeedVersion',
+        gcp_value: SeedVersion,
+    )
 
     (1..5).each do |ix|
         p = Project.create(
@@ -147,6 +152,17 @@ def seed_from_bq_assets(dir=nil)
     # return unless  json_buridone.is_a? Array 
 end
 
+def seed_from_gcloud_dumps
+    Dir["db/fixtures/gcloud/project*.json"].each do |bq_json_file|
+        json_buridone = JSON.parse(File.read(bq_json_file))
+        puts json_buridone.class
+        next unless json_buridone.is_a? Array 
+        # we do have an array
+        json_buridone.each do |gcloud_project_dict|
+            Folder.parse_project_info(gcloud_project_dict) # rescue nil
+        end
+    end
+end
 
 
 
@@ -154,7 +170,7 @@ end
 
 # TODO(ricc): restore the other two
 # TODO(ricc): query all assets :)
-seed_random_stuff
-seed_from_org_folder_projects_graph
-seed_from_bq_assets
-#seed_from_gcloud_dumps
+#seed_random_stuff
+#seed_from_org_folder_projects_graph
+#seed_from_bq_assets
+seed_from_gcloud_dumps

@@ -10,6 +10,10 @@ source .envrc ||
 
 
 echo "Finding projects for org: $ORGANIZATION_ID"
-gcloud projects list --filter=parent.id:"$ORGANIZATION_ID" --format json | tee db/fixtures/gcloud/projects.json
-
+gcloud projects list --filter=parent.id:"$ORGANIZATION_ID" --format json | 
+    tee db/fixtures/gcloud/projects-$(date +%Y%m%d-%H%M%S).json
+# Note this is NOT exhaustive since it only shows the folder children of orgnode.
+gcloud resource-manager folders list --folder="$ORGANIZATION_ID" --format=json | 
+    tee db/fixtures/gcloud/folders-of-$ORGANIZATION_ID-$(date +%Y%m%d-%H%M%S).json
 gcloud organizations list --format json | tee db/fixtures/gcloud/organizations.json
+
