@@ -73,7 +73,7 @@ def seed_projects_from_projects_file(json_file)
 
     json_buridone.each do |ph|
         puts "Parsing ProjectHash: #{ph}"
-        parse_project_info(ph, :json_file => json_file)
+        Folder.parse_project_info(ph, :json_file => json_file)
     end
 
     
@@ -144,25 +144,23 @@ def seed_from_gcloud_dumps
     # These files are created from `populate-asset-inventory-from-gcloud.sh`
     Dir["db/fixtures/gcloud/inventory-per-project*.json"].each do |gcloud_json_file|
         puts "🔬 Parsing Inventory from single project from file #{gcloud_json_file}"
-        json_buridone = JSON.parse(File.read(gcloud_json_file)) rescue nil 
-        if json_buridone.nil? 
-            puts "Error parsing.."
-        end
+        json_buridone = JSON.parse(File.read(gcloud_json_file)) rescue "Error: #{$!}" 
         next unless json_buridone.is_a? Array 
         json_buridone.each do |gcloud_inventory_stuff_dict|
-            #Folder.parse_folder_info(gcloud_folder_dict) # rescue nil
-            puts :todo
+            Folder.parse_asset_inventory_dict_from_gcloud(gcloud_inventory_stuff_dict) # seriously, Google? :(
+            #exit 42
+            #sleep(2)
+            # todo remove me
         end
     end
 end
 
 
 
-
 puts :main
 # TODO(ricc): restore the other two
 # TODO(ricc): query all assets :)
-#seed_random_stuff
-#seed_from_org_folder_projects_graph
-#seed_from_bq_assets
+seed_random_stuff
+seed_from_org_folder_projects_graph
+seed_from_bq_assets
 seed_from_gcloud_dumps

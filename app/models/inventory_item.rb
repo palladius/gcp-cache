@@ -1,6 +1,9 @@
 class InventoryItem < ApplicationRecord
     serialize :serialized_ancestors
 
+    validates :name, uniqueness: { scope: [:asset_type] }
+
+
     def ancestors
         serialized_ancestors rescue []
     end

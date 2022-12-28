@@ -25,7 +25,7 @@ ago</b>)
     <tr>
         <td><%= x.simplified_type %>
         <td><%= link_to x.simplified_name, x %>
-        <td><%= x.ancestors.count %>
+        <td><%= x.ancestors.count rescue '?' %>
         <td><%= x.organization.is_a?(Folder) ? link_to( x.organization,x.organization) : x.organization_id %>
     <% end %>
 </table>
