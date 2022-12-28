@@ -63,19 +63,45 @@ Smaple project:
     puts "👍 Project just created: #{p}"
   end
 
+
+=begin
+
+This is how my object looks like:
+{
+"ancestors": [
+  "projects/268290255727",
+  "organizations/824879804362"
+],
+"asset_type": "compute.googleapis.com/Route",
+"name": "//compute.googleapis.com/projects/metarepo/global/routes/default-route-012769675a080a1d",
+# thiss seems to be always null
+"resource": {
+  "data": null,
+  "discovery_document_uri": null,
+  "discovery_name": null,
+  "location": null,
+  "parent": null,
+  "resource_url": null,
+  "version": null
+},
+"update_time": "2020-10-29 10:06:55"
+}
+=end  
   # from Folder but could come from everywhere, gence i put it here.
   # TODO move to concern -> parser :)
   def self.parse_asset_inventoy_dict(aid) # rescue nil
     #puts "+++ Folder.parse_asset_inventoy_dict(asset_inventoy_dict)"
     puts "parse_asset_inventoy_dict: 📝TODO📝 I might want to manage this once I have a vision of ALL asset inventotry objects and maybe can put them al in a similar place."
-    return 
-    #puts aid.keys
-    puts "💛Ancestors💛: #{aid['ancestors']}"
-    puts "💛AssetType💛: #{aid['asset_type']}"
-    puts "💛Name💛: #{aid['name']}"
-    puts "💛update_time💛: #{aid['update_time']}"
-    #puts "NonNullResources: #{aid['resources']}"
+    
+    puts "🔑 Keys: #{aid.keys}" # aid.keys
+    puts "💛Ancestors: #{aid['ancestors']}"
+    puts "💛AssetType: #{aid['asset_type']}"
+    puts "💛Name: #{aid['name']}"
+    puts "💛update_time: #{aid['update_time']}"
+    non_nil_resources = aid['resource'].select{|k,v| not v.nil?}
+    puts "💛💛💛💛NonNullResource: #{non_nil_resources}" unless non_nil_resources == {}
     #pp aid
+    puts "^" * 80
     
   end
 

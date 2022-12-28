@@ -93,13 +93,18 @@ end
 
 def seed_from_bq_assets(dir=nil)
     #dir ||= 'db/fixtures/bq-exports/'
-    Dir["db/fixtures/bq-exports/*.json"].each do |bq_json_file|
+    Dir["db/fixtures/bq-exports/all-*.json"].each do |bq_json_file|
         json_buridone = JSON.parse(File.read(bq_json_file))
         puts json_buridone.class
         next unless json_buridone.is_a? Array 
         # we do have an array
-        json_buridone.each do |asset_inventoy_dict|
+        json_buridone.each_with_index do |asset_inventoy_dict, ix|
             Folder.parse_asset_inventoy_dict(asset_inventoy_dict) # rescue nil
+            if ix > 3
+                puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
+                return 
+
+            end
         end
     end
     # f = File.read(json_file)
@@ -142,5 +147,5 @@ end
 # TODO(ricc): query all assets :)
 #seed_random_stuff
 #seed_from_org_folder_projects_graph
-#seed_from_bq_assets
-seed_from_gcloud_dumps
+seed_from_bq_assets
+#seed_from_gcloud_dumps

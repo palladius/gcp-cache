@@ -24,7 +24,7 @@
             "organizations/824879804362"
         ],
         "asset_type": "storage.googleapis.com/Bucket",
-        "name": "//storage.googleapis.com/staging.test-dataflow-152318.appspot.com",
+        "name": "//storage.googleapis.com/staging.sobenme-df.appspot.com",
         "resource": {
             "data": null,
             "discovery_document_uri": null,
