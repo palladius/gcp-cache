@@ -11,3 +11,11 @@ FOLDER_ICON = ENV.fetch 'FOLDER_ICON', '?'
 ORG_ICON = ENV.fetch 'ORG_ICON', '?'
 LABEL_ICON = ENV.fetch 'LABEL_ICON', '🏷️'
 INVENTORY_ITEM_ICON = ENV.fetch 'INVENTORY_ITEM_ICON', '🧺️'
+
+UninterestingInventoryTypes =  [
+    "compute.googleapis.com/Firewall",
+    "compute.googleapis.com/Network",
+    "compute.googleapis.com/Route",
+    "compute.googleapis.com/Subnetwork",
+]
+    

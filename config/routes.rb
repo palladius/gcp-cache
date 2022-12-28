@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get "/inventory_items/stats", to: "inventory_items#stats" 
+
   resources :inventory_items
   resources :labels
   resources :folders
@@ -8,4 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "folders#index"
+
 end

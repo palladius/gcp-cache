@@ -6,7 +6,8 @@ class InventoryItem < ApplicationRecord
     end
 
     def simplified_type
-        asset_type.split("/").last
+        #asset_type.split("/").last
+        asset_type.gsub('.googleapis.com','')
     end
     def simplified_name
         name.split("/").last

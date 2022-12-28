@@ -1,8 +1,16 @@
 class InventoryItemsController < ApplicationController
   before_action :set_inventory_item, only: %i[ show edit update destroy ]
 
+
+
   # GET /inventory_items or /inventory_items.json
   def index
+    # Riccardo: ignoring the boring ones.
+    @inventory_items = InventoryItem.where.not(asset_type: UninterestingInventoryTypes)
+  end
+
+  def stats 
+    # Riccardo: getting them all
     @inventory_items = InventoryItem.all
   end
 
@@ -67,4 +75,13 @@ class InventoryItemsController < ApplicationController
     def inventory_item_params
       params.require(:inventory_item).permit(:serialized_ancestors, :description, :asset_type, :name, :gcp_update_time, :resource_location, :resource_discovery_name, :resource_parent)
     end
+
+    # def uninteresting_inventory_types
+    #   [
+    #     "compute.googleapis.com/Route",
+    #     "compute.googleapis.com/Firewall",
+    #     "compute.googleapis.com/Network",
+    #     "compute.googleapis.com/Subnetwork",
+    #   ]
+    # end
 end
