@@ -16,7 +16,7 @@ run-migrations-once-hopefully:
 	# repeat with --force if you make a mistake
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text \
 		lifecycle_state:string project_name:string gcp__creation_time:timestamp --force
-	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string lifecycle_state:string gcp_creation_time:datetime
+	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string lifecycle_state:string gcp_creation_time:datetime frog_type:string 
 	rails generate scaffold label gcp_key:string gcp_value:string
 	git restore app/helpers app/models/
 	echo Now take a quick look at VIEWS..

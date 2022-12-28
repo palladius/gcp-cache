@@ -126,12 +126,46 @@ example:
 =end
 
   def self.parse_folder_info(hash, opts={})
-    #puts :TODO_FOLDER_⛏️
-    pp hash
-    #  "name"=>"folders/1054494897637",
+    opts_create_parent_if_missing = opts.fetch :create_parent_if_missing, true
+
     folder_type = hash['name'].split('/').first # should be 'folders' or 'organizations' 
     folder_id = hash['name'].split('/').second
-    parent = hash['name'] # could be an Org or a Folder, eg "organizations/824879804362"}
+
+    parent_folder_type, parent_folder_id = hash['parent'].split('/') # this aint python.
+    parent = hash['name'] # could be an Org or a Folder, eg "organizations/824879804362"
     puts folder_id
+    existing_folder = Folder.find_by(type: folder_type, folder_id: folder_id)
+    puts "Exists? #{existing_folder}"
+    if existing_folder
+        puts "Existing! #{existing_folder}."
+        f = existing_folder
+    else
+      puts "Doesnt exist -> creating"
+      f = Folder.create(
+        frog_type: folder_type,
+        folder_id: folder_id,
+        description: "Created with parse_folder_info from a hash",
+        name: hash['displayName'],
+        parent_id: parent_folder_id,
+  
+#         "createTime"=>"2022-09-19T13:34:39.089Z",
+#  "lifecycleState"=>"ACTIVE",
+#  "name"=>"folders/1054494897637",
+      )
+      puts "New folder created: #{f.inspect}"
+    end
+
+    if opts_create_parent_if_missing
+      existing_parent =  Folder.find_by_fqdn(hash['parent'])
+      if existing_parent
+        puts "🎯 Parent Folder/Org (🐸) exists! #{existing_parent}"
+      else
+        f_parent = Folder.create(
+          type: hash['parent'].split('/').first,
+          folder_id: hash['parent'].split('/').second,
+          description: "Created as parent of a folder so very little info available",
+        )
+      end
+    end
   end
 end

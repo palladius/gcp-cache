@@ -33,7 +33,11 @@ class Folder < ApplicationRecord
     end
    
     def to_s
-        "#{self.emoji} #{most_representative_name}" 
+        "#{self.emoji} #{most_representative_name} # FQDN: #{fqdn}" 
+    end
+
+    def fqdn
+        "#{type}/#{folder_id}"
     end
 
 
@@ -82,5 +86,10 @@ class Folder < ApplicationRecord
         FOLDER_ICON
     end
 
+    # eg, "organizations/12345"
+    def self.find_by_fqdn(input_fqdn)
+        type,folder_id = input_fqdn.split('/')
+        find_by(type: type, folder_id: folder_id)
+    end
 
 end
