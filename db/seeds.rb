@@ -73,51 +73,7 @@ def seed_projects_from_projects_file(json_file)
 
     json_buridone.each do |ph|
         puts "Parsing ProjectHash: #{ph}"
-
-        parent_folder_or_org = 'todo'
-        # t.string "organization_id"
-        # t.string "parent_id"
-
-        ########################################
-        # part 1. Create the parent (folder or org)
-        parent_hash = ph['parent']
-        folder_id = ph['parent']['id']
-        folder_type = ph['parent']['type']
-        is_org = folder_type == 'organization'
-        existing_folder = Folder.find_by( folder_id: folder_id,)
-        puts "existing_folder: #{existing_folder}"
-#        f=Folder.new
-        if existing_folder.is_a? Folder 
-            # exists: then tweak
-            f=existing_folder
-        else
-            f = Folder.create(
-                folder_id: folder_id,
-                is_org: is_org,
-                description: "Folder created from Project JSON, so very poor in info: just folder id and type: #{parent_hash}.
-                        Parent hash: #{parent_hash}\nAdded by seed_projects_from_projects_file as part rake db:seed v#{SeedVersion}",
-
-            )
-        end
-        #)
-        #f.save
-        puts "Folder: #{f}"
-        # "parent"=>{"id"=>
-        # "885056483479", "type"=>"folder"}, 
-
-        p = Project.create(
-            project_id: ph['projectId'],
-            project_number: ph['projectNumber'],
-            project_name: ph['name'],
-            lifecycle_state: ph['lifecycleState'],
-            parent_id: f.id,
-            organization_id: is_org ? f.folder_id : nil, # org id is the same :)
-            #billing_account_id: '123456-7890AB-CDEF12',
-            description: "Project found in file: #{json_file}.Parent hash: #{parent_hash}\nAdded by seed_projects_from_projects_file as part rake db:seed v#{SeedVersion}",
-        )
-        puts "Prject: #{p}"
-        puts "---------------------------------------------------------------------------------"
-
+        parse_project_info(ph, :json_file => json_file)
     end
 
     
@@ -155,11 +111,25 @@ end
 def seed_from_gcloud_dumps
     Dir["db/fixtures/gcloud/project*.json"].each do |bq_json_file|
         json_buridone = JSON.parse(File.read(bq_json_file))
-        puts json_buridone.class
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each do |gcloud_project_dict|
             Folder.parse_project_info(gcloud_project_dict) # rescue nil
+        end
+    end
+    Dir["db/fixtures/gcloud/organizations*.json"].each do |bq_json_file|
+        json_buridone = JSON.parse(File.read(bq_json_file))
+        next unless json_buridone.is_a? Array 
+        # we do have an array
+        json_buridone.each do |gcloud_org_dict|
+            Folder.parse_organization_info(gcloud_org_dict) # rescue nil
+        end
+    end
+    Dir["db/fixtures/gcloud/folders*.json"].each do |bq_json_file|
+        json_buridone = JSON.parse(File.read(bq_json_file))
+        next unless json_buridone.is_a? Array 
+        json_buridone.each do |gcloud_folder_dict|
+            Folder.parse_folder_info(gcloud_folder_dict) # rescue nil
         end
     end
 end

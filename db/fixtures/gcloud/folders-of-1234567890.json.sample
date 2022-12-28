@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "createTime": "2022-09-19T13:34:39.089Z",
+    "displayName": "Pulumi",
+    "lifecycleState": "ACTIVE",
+    "name": "folders/1054494897637",
+    "parent": "organizations/824879804362"
+  },
+  {
+    "createTime": "2020-01-22T17:05:17.298Z",
+    "displayName": "TFR Terraformed by Ricc",
+    "lifecycleState": "ACTIVE",
+    "name": "folders/510416893777",
+    "parent": "organizations/824879804362"
+  }
+]
