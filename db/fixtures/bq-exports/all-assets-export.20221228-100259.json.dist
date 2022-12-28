@@ -1,0 +1,39 @@
+[
+    {
+        "ancestors": [
+            "projects/268290255727",
+            "organizations/824879804362"
+        ],
+        "asset_type": "compute.googleapis.com/Route",
+        "name": "//compute.googleapis.com/projects/metarepo/global/routes/default-route-012769675a080a1d",
+        "resource": {
+            "data": null,
+            "discovery_document_uri": null,
+            "discovery_name": null,
+            "location": null,
+            "parent": null,
+            "resource_url": null,
+            "version": null
+        },
+        "update_time": "2020-10-29 10:06:55"
+    },
+    {
+        "ancestors": [
+            "projects/831136101005",
+            "folders/885056483479",
+            "organizations/824879804362"
+        ],
+        "asset_type": "storage.googleapis.com/Bucket",
+        "name": "//storage.googleapis.com/staging.test-dataflow-152318.appspot.com",
+        "resource": {
+            "data": null,
+            "discovery_document_uri": null,
+            "discovery_name": null,
+            "location": null,
+            "parent": null,
+            "resource_url": null,
+            "version": null
+        },
+        "update_time": "2020-07-15 16:36:05"
+    }
+]

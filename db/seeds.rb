@@ -109,24 +109,24 @@ def seed_from_bq_assets(dir=nil)
 end
 
 def seed_from_gcloud_dumps
-    Dir["db/fixtures/gcloud/project*.json"].each do |bq_json_file|
-        json_buridone = JSON.parse(File.read(bq_json_file))
+    Dir["db/fixtures/gcloud/project*.json"].each do |gcloud_json_file|
+        json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each do |gcloud_project_dict|
             Folder.parse_project_info(gcloud_project_dict) # rescue nil
         end
     end
-    Dir["db/fixtures/gcloud/organizations*.json"].each do |bq_json_file|
-        json_buridone = JSON.parse(File.read(bq_json_file))
+    Dir["db/fixtures/gcloud/organizations*.json"].each do |gcloud_json_file|
+        json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         # we do have an array
         json_buridone.each do |gcloud_org_dict|
             Folder.parse_organization_info(gcloud_org_dict) # rescue nil
         end
     end
-    Dir["db/fixtures/gcloud/folders*.json"].each do |bq_json_file|
-        json_buridone = JSON.parse(File.read(bq_json_file))
+    Dir["db/fixtures/gcloud/folders*.json"].each do |gcloud_json_file|
+        json_buridone = JSON.parse(File.read(gcloud_json_file))
         next unless json_buridone.is_a? Array 
         json_buridone.each do |gcloud_folder_dict|
             Folder.parse_folder_info(gcloud_folder_dict) # rescue nil

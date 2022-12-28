@@ -31,3 +31,6 @@ watch-db:
 
 gcloud-generate-info:
 	./gcloud-generate-info.sh
+
+populate-asset-inventory-from-bq:
+	./populate-projects-and-folders-from-bigquery.sh
