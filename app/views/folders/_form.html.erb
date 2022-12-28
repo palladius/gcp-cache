@@ -47,6 +47,16 @@
   </div>
 
   <div>
+    <%= form.label :lifecycle_state, style: "display: block" %>
+    <%= form.text_field :lifecycle_state %>
+  </div>
+
+  <div>
+    <%= form.label :gcp_creation_time, style: "display: block" %>
+    <%= form.datetime_field :gcp_creation_time %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

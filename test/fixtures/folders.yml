@@ -8,6 +8,8 @@ one:
   description: MyText
   domain: MyString
   directory_customer_id: MyString
+  lifecycle_state: MyString
+  gcp_creation_time: 2022-12-28 07:32:36
 
 two:
   name: MyString
@@ -17,3 +19,5 @@ two:
   description: MyText
   domain: MyString
   directory_customer_id: MyString
+  lifecycle_state: MyString
+  gcp_creation_time: 2022-12-28 07:32:36

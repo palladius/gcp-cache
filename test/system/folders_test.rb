@@ -18,7 +18,9 @@ class FoldersTest < ApplicationSystemTestCase
     fill_in "Directory customer", with: @folder.directory_customer_id
     fill_in "Domain", with: @folder.domain
     fill_in "Folder", with: @folder.folder_id
+    fill_in "Gcp creation time", with: @folder.gcp_creation_time
     check "Is org" if @folder.is_org
+    fill_in "Lifecycle state", with: @folder.lifecycle_state
     fill_in "Name", with: @folder.name
     fill_in "Parent", with: @folder.parent_id
     click_on "Create Folder"
@@ -35,7 +37,9 @@ class FoldersTest < ApplicationSystemTestCase
     fill_in "Directory customer", with: @folder.directory_customer_id
     fill_in "Domain", with: @folder.domain
     fill_in "Folder", with: @folder.folder_id
+    fill_in "Gcp creation time", with: @folder.gcp_creation_time
     check "Is org" if @folder.is_org
+    fill_in "Lifecycle state", with: @folder.lifecycle_state
     fill_in "Name", with: @folder.name
     fill_in "Parent", with: @folder.parent_id
     click_on "Update Folder"
