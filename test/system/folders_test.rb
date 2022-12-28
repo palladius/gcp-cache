@@ -23,6 +23,7 @@ class FoldersTest < ApplicationSystemTestCase
     fill_in "Lifecycle state", with: @folder.lifecycle_state
     fill_in "Name", with: @folder.name
     fill_in "Parent", with: @folder.parent_id
+    fill_in "Type", with: @folder.type
     click_on "Create Folder"
 
     assert_text "Folder was successfully created"
@@ -42,6 +43,7 @@ class FoldersTest < ApplicationSystemTestCase
     fill_in "Lifecycle state", with: @folder.lifecycle_state
     fill_in "Name", with: @folder.name
     fill_in "Parent", with: @folder.parent_id
+    fill_in "Type", with: @folder.type
     click_on "Update Folder"
 
     assert_text "Folder was successfully updated"
