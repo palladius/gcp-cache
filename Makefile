@@ -7,7 +7,7 @@ run:
 	rails s
 
 migrate:
-	rake db:migrate db:seed 
+	rake db:migrate db:seed MAX_INDEX=100000 
 	rake db:fixtures:load FIXTURES=labels
 
 
