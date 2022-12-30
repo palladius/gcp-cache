@@ -37,3 +37,6 @@ gcloud-generate-info:
 
 populate-asset-inventory-from-bq:
 	./populate-projects-and-folders-from-bigquery.sh
+
+cleanup-empty-json-files:
+	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm

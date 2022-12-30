@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-SeedVersion = "1.3_221228"
+#
+SeedVersion = "1.4_221230"
+# Max how many counts
+MaxIndex = ENV.fetch 'MAX_INDEX', 10
 
 def seed_random_stuff()
     fake_projects = [] 
@@ -27,14 +30,14 @@ def seed_random_stuff()
     end
 
     root_folder = Folder.create(
-        name: 'my-root',
+        name: 'my-fake-root-folder',
         folder_id: '1000',
         is_org: true, 
         #parent_id:string
         description: "This is my first root folder, also a dir. Added by rake db:seed v#{SeedVersion}",
     )
     root_folder2 = Folder.create(
-        name: 'my-other-org',
+        name: 'my-other-fake-org',
         folder_id: '2000',
         is_org: true, 
         #parent_id:string
@@ -100,8 +103,8 @@ def seed_from_bq_assets(dir=nil)
         # we do have an array
         puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found"
         json_buridone.each_with_index do |asset_inventoy_dict, ix|
-            Folder.parse_asset_inventory_dict(asset_inventoy_dict) # rescue nil
-            if ix >= 2
+            InventoryItem.parse_asset_inventory_dict(asset_inventoy_dict) # rescue nil
+            if ix >= MaxIndex
                 puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
                 return 
 
@@ -146,11 +149,12 @@ def seed_from_gcloud_dumps
         puts "🔬 Parsing Inventory from single project from file #{gcloud_json_file}"
         json_buridone = JSON.parse(File.read(gcloud_json_file)) rescue "Error: #{$!}" 
         next unless json_buridone.is_a? Array 
-        json_buridone.each do |gcloud_inventory_stuff_dict|
-            Folder.parse_asset_inventory_dict_from_gcloud(gcloud_inventory_stuff_dict) # seriously, Google? :(
-            #exit 42
-            #sleep(2)
-            # todo remove me
+        json_buridone.each_with_index do |gcloud_inventory_stuff_dict, ix|
+            InventoryItem.parse_asset_inventory_dict_from_gcloud(gcloud_inventory_stuff_dict) # seriously, Google? :(
+            if ix >= MaxIndex
+                puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
+                return 
+            end
         end
     end
 end

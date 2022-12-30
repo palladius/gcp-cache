@@ -21,7 +21,7 @@ ago</b>)
         <th>Name
         <th>Ancestors
         <th>Organization
-  <% @inventory_items.each do |x| %>
+  <% @inventory_items.limit(100).each do |x| %>
     <tr>
         <td><%= x.simplified_type %>
         <td><%= link_to x.simplified_name, x %>

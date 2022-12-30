@@ -3,6 +3,7 @@ class InventoryItem < ApplicationRecord
 
     validates :name, uniqueness: { scope: [:asset_type] }
 
+    include AssetInventoryParser
 
     def ancestors
         serialized_ancestors rescue []

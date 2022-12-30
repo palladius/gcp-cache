@@ -19,6 +19,6 @@ echo "This script exports ALL asset inventory resources for a single project, in
 time gcloud asset search-all-resources \
   --scope="projects/$PROJECT_NUMBER" \
   --format json | 
-    tee db/fixtures/gcloud/inventory-per-project-$PROJECT_NUMBER-$(date +%Y%m%d-%H%M%S).json
+    tee db/fixtures/gcloud/inventory-for-$PROJECT_NUMBER-project-at-$(date +%Y%m%d-%H%M%S).json
 
 echo '👍 OK Finished this ENORMOUS calculus. Took some time.'
