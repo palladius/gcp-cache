@@ -107,7 +107,7 @@ This is how my object looks like:
       resource_location: aid['location'],
       created_at: aid['createTime'],
       resource_parent: aid['parentFullResourceName'],
-      project: ais['project'] rescue "TODO remove error #{$!}",
+      project: (aid['project'] rescue "TODO remove error #{$!}. Ais keys are: #{aid.keys}"),
       description: megaDescription, # there's too LITTLE in aid['description'],
     )
     puts "👍 Created ii2: #{ii}"   
