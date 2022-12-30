@@ -9,7 +9,7 @@
 #
 SeedVersion = "1.4_221230"
 # Max how many counts
-MaxIndex = ENV.fetch 'MAX_INDEX', 10
+MaxIndex = ENV.fetch('MAX_INDEX', '10' ).to_i
 
 def seed_random_stuff()
     fake_projects = [] 

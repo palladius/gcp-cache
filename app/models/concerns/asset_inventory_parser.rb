@@ -3,7 +3,7 @@
 module AssetInventoryParser     
     extend ActiveSupport::Concern
 
-    AssetInventoryParseVersion = '0.2'
+    AssetInventoryParseVersion = '0.2a'
 
 included do
 
@@ -34,29 +34,28 @@ This is how my object looks like:
 =end  
   # from Folder but could come from everywhere, gence i put it here.
   # TODO move to concern -> parser :)
-  def self.parse_asset_inventory_dict(aid) # rescue nil
-    #puts "+++ Folder.parse_asset_inventoy_dict(asset_inventoy_dict)"
-    #puts "parse_asset_inventory_dict: 📝TODO📝 I might want to manage this once I have a vision of ALL asset inventotry objects and maybe can put them al in a similar place."
-    
-    puts "🔑 Keys v1: #{aid.keys}" # aid.keys
-    puts "💛Ancestors: #{aid['ancestors']}"
-    puts "💛AssetType: #{aid['asset_type']}"
-    puts "💛Name: #{aid['name']}"
-    puts "💛update_time: #{aid['update_time']}"
-    non_nil_resources = aid['resource'].select{|k,v| not v.nil?}
-    puts "💛💛💛💛NonNullResource: #{non_nil_resources}" unless non_nil_resources == {}
-    #pp aid
+  def self.parse_asset_inventory_dict(aid, opts={}) # rescue nil    
+    opts_verbose = opts.fetch :verbose, false
+
+    if opts_verbose
+      puts "💛Keys 🔑 v1: #{aid.keys}" # aid.keys
+      puts "💛Ancestors: #{aid['ancestors']}"
+      puts "💛AssetType: #{aid['asset_type']}"
+      puts "💛Name: #{aid['name']}"
+      puts "💛update_time: #{aid['update_time']}"
+      non_nil_resources = aid['resource'].select{|k,v| not v.nil?}
+      puts "💛💛💛💛NonNullResource: #{non_nil_resources}" unless non_nil_resources == {}
+    end
     ii = InventoryItem.create(
-      description: "💛 Created by parse_asset_inventoy_dict v#{AssetInventoryParseVersion}",
+      description: "💛 Created by AssetInventoryParser.parse_asset_inventory_dict v#{AssetInventoryParseVersion}",
       serialized_ancestors: aid['ancestors'],
       asset_type:  aid['asset_type'],
       name: aid['name'],
       gcp_update_time: aid['update_time'],     
+      project: "TODO from AID.keys: #{aid.keys}",
       #TODO(riocc): add stuff which for now is always empty.. 
     )
-    puts "👍 Created ii: #{ii}"
-    puts "^" * 80
-    
+    puts "👍 Created aii1💛 (##{ii.id}): #{ii}" if ii.valid?
   end
 
 =begin
@@ -82,19 +81,23 @@ This is how my object looks like:
   def self.parse_asset_inventory_dict_from_gcloud(aid, opts={}) # rescue nil
     opts_verbose = opts.fetch :verbose, false
 
-    #puts "+++ slightly different Folder.parse_asset_inventoy_dict(asset_inventoy_dict)"
-    puts "🔑 Keys v2 💙: #{aid.keys}"  if opts_verbose
-    puts "💙Ancestors: #{aid['ancestors']}" if opts_verbose
-    puts "💙AssetType: #{aid['assetType']}" if opts_verbose
-    puts "💙Name: #{aid['name']}" if opts_verbose
-    puts "💙displayName: #{aid['displayName']}" if opts_verbose
-    puts "💙update_time: #{aid['update_time']}" if opts_verbose
+    if opts_verbose
+      puts "💙Keys 🔑 v2: #{aid.keys}"  
+      puts "💙Ancestors: #{aid['ancestors']}"
+      puts "💙AssetType: #{aid['assetType']}"
+      puts "💙Name: #{aid['name']}"
+      puts "💙displayName: #{aid['displayName']}"
+      puts "💙update_time: #{aid['update_time']}"
+    end
     improvised_ancestors = aid['ancestors'] ? 
       aid['ancestors'] :
       "carlessian/#{aid["parentAssetType"]}/carlessianTokenizer/#{aid["parentFullResourceName"]}"
     pp aid if opts_verbose
 
-    megaDescription = "💙 Since it seems that this strange object has way more info than model can get, Imma gonna getta add it as an inspect :) Not last, for the reason that i have a very meaningful DESCRIPTION field Imma goona use :) (parsin v#{AssetInventoryParseVersion}) #{aid.inspect}" 
+    megaDescription = "💙 Since it seems that this strange object has way more info than model can get, Imma gonna getta add it as an inspect :)
+     Not last, for the reason that i have a very meaningful DESCRIPTION field Imma goona use :) 
+     (parsed wwith AssetInventoryParser.parse_asset_inventory_dict_from_gcloud v#{AssetInventoryParseVersion}) 
+     #{aid.inspect}" 
     ii = InventoryItem.create(
       serialized_ancestors: [
         "riccardo/was-here" , 
@@ -110,7 +113,7 @@ This is how my object looks like:
       project: (aid['project'] rescue "TODO remove error #{$!}. Ais keys are: #{aid.keys}"),
       description: megaDescription, # there's too LITTLE in aid['description'],
     )
-    puts "👍 Created ii2: #{ii}"   
+    puts "👍 Created aii2💙 (##{ii.id}): #{ii}" if ii.valid?
   end
 
 end 
