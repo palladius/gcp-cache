@@ -18,6 +18,7 @@ class InventoryItemsTest < ApplicationSystemTestCase
     fill_in "Description", with: @inventory_item.description
     fill_in "Gcp update time", with: @inventory_item.gcp_update_time
     fill_in "Name", with: @inventory_item.name
+    fill_in "Project", with: @inventory_item.project
     fill_in "Resource discovery name", with: @inventory_item.resource_discovery_name
     fill_in "Resource location", with: @inventory_item.resource_location
     fill_in "Resource parent", with: @inventory_item.resource_parent
@@ -36,6 +37,7 @@ class InventoryItemsTest < ApplicationSystemTestCase
     fill_in "Description", with: @inventory_item.description
     fill_in "Gcp update time", with: @inventory_item.gcp_update_time
     fill_in "Name", with: @inventory_item.name
+    fill_in "Project", with: @inventory_item.project
     fill_in "Resource discovery name", with: @inventory_item.resource_discovery_name
     fill_in "Resource location", with: @inventory_item.resource_location
     fill_in "Resource parent", with: @inventory_item.resource_parent

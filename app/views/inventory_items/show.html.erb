@@ -2,12 +2,9 @@
 
 <%= render @inventory_item %>
 
-<%= render 'inventory_items/show_addon'  %>
-
 <div>
   <%= link_to "Edit this inventory item", edit_inventory_item_path(@inventory_item) %> |
   <%= link_to "Back to inventory items", inventory_items_path %>
 
   <%= button_to "Destroy this inventory item", @inventory_item, method: :delete %>
 </div>
-

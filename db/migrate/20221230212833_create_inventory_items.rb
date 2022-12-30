@@ -9,6 +9,7 @@ class CreateInventoryItems < ActiveRecord::Migration[7.0]
       t.string :resource_location
       t.string :resource_discovery_name
       t.string :resource_parent
+      t.string :project
 
       t.timestamps
     end

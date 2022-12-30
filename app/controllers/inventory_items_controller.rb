@@ -73,15 +73,7 @@ class InventoryItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inventory_item_params
-      params.require(:inventory_item).permit(:serialized_ancestors, :description, :asset_type, :name, :gcp_update_time, :resource_location, :resource_discovery_name, :resource_parent)
+      params.require(:inventory_item).permit(:serialized_ancestors, :description, :asset_type, :name, :gcp_update_time, :resource_location, :resource_discovery_name, :resource_parent, :project)
     end
-
-    # def uninteresting_inventory_types
-    #   [
-    #     "compute.googleapis.com/Route",
-    #     "compute.googleapis.com/Firewall",
-    #     "compute.googleapis.com/Network",
-    #     "compute.googleapis.com/Subnetwork",
-    #   ]
-    # end
+    
 end

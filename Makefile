@@ -20,8 +20,9 @@ run-migrations-once-hopefully:
 		lifecycle_state:string project_name:string gcp__creation_time:timestamp --force
 	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string lifecycle_state:string gcp_creation_time:datetime frog_type:string --force
 	rails generate scaffold label gcp_key:string gcp_value:string
-	rails g scaffold inventory_item serialized_ancestors:text description:text asset_type:string name:string gcp_update_time:timestamp resource_location:string resource_discovery_name:string resource_parent:string
+	rails g scaffold inventory_item serialized_ancestors:text description:text asset_type:string name:string gcp_update_time:timestamp resource_location:string resource_discovery_name:string resource_parent:string project:string
 	git restore app/helpers app/models/
+	git restore app/views/inventory_items/index.html.erb
 	echo Now take a quick look at VIEWS..
 
 db-show:

@@ -5,17 +5,19 @@ one:
   description: MyText
   asset_type: MyString
   name: MyString
-  gcp_update_time: 2022-12-28 10:43:26
+  gcp_update_time: 2022-12-30 22:28:33
   resource_location: MyString
   resource_discovery_name: MyString
   resource_parent: MyString
+  project: MyString
 
 two:
   serialized_ancestors: MyText
   description: MyText
   asset_type: MyString
   name: MyString
-  gcp_update_time: 2022-12-28 10:43:26
+  gcp_update_time: 2022-12-30 22:28:33
   resource_location: MyString
   resource_discovery_name: MyString
   resource_parent: MyString
+  project: MyString
