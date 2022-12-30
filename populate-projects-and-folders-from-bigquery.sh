@@ -26,7 +26,7 @@ FROM \`${ASSET_INVENTORY_TABLES}*\`
 WHERE asset_type like 'cloudresourcemanager.googleapis.com/%'
 -- GROUP BY 1
 
-LIMIT 10000
+LIMIT 100000
 END_OF_BQ_TEXT
 
 # I tried CSV but it doesnt work :/ too many nested things i would have to 
