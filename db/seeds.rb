@@ -221,6 +221,8 @@ end
 t0 = Time.now
 puts "DB:SEED start at #{Time.now}."
 # TODO(ricc): query all assets :)
+puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
+exit 42
 seed_random_stuff
 seed_from_org_folder_projects_graph
 seed_from_bq_assets
