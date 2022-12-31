@@ -46,6 +46,8 @@ class Project < ApplicationRecord
 
     validates :project_id,     uniqueness: true, presence: true
     validates :project_number, uniqueness: true
+    # polymorphic association
+    has_many :labels, as: :labellable
 
     # alias :baid, :billing_accoung_id
     def baid 

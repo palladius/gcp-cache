@@ -22,8 +22,8 @@ def seed_random_stuff()
     fake_projects = [] 
 
     Label.create(
-        gcp_key: 'SeedVersion',
-        gcp_value: SeedVersion,
+        gcp_k: 'SeedVersion',
+        gcp_val: SeedVersion,
     )
 
     (1..5).each do |ix|

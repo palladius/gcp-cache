@@ -20,4 +20,4 @@ UninterestingInventoryTypes =  [
 ]
     
 # config.filter_parameters += ["credit_card.code"]
-Rails.application.config.filter_parameters -= ["gcp_key"]
+#Rails.application.config.filter_parameters -= ["gcp_key"]

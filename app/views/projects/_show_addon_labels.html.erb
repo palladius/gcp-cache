@@ -1,0 +1,9 @@
+<!-- This addon is creted in case I overwrite the index.html again :) 
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= LABEL_ICON %>Labels for Project 2</h1>
+
+<% @project.labels.each do |label| %>
+    ️🏷️  <%= render_label label %><br/>
+<% end %>
