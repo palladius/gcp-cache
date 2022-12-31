@@ -12,13 +12,23 @@
   <% end %>
 
   <div>
-    <%= form.label :gcp_key, style: "display: block" %>
-    <%= form.text_field :gcp_key %>
+    <%= form.label :gcp_k, style: "display: block" %>
+    <%= form.text_field :gcp_k %>
   </div>
 
   <div>
-    <%= form.label :gcp_value, style: "display: block" %>
-    <%= form.text_field :gcp_value %>
+    <%= form.label :gcp_val, style: "display: block" %>
+    <%= form.text_field :gcp_val %>
+  </div>
+
+  <div>
+    <%= form.label :labellable_id, style: "display: block" %>
+    <%= form.number_field :labellable_id %>
+  </div>
+
+  <div>
+    <%= form.label :labellable_type, style: "display: block" %>
+    <%= form.text_field :labellable_type %>
   </div>
 
   <div>

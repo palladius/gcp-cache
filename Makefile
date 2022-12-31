@@ -19,7 +19,7 @@ run-migrations-once-hopefully:
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text \
 		lifecycle_state:string project_name:string gcp__creation_time:timestamp --force
 	rails generate scaffold folder name:string folder_id:string is_org:boolean parent_id:string description:text domain:string  directory_customer_id:string lifecycle_state:string gcp_creation_time:datetime frog_type:string --force
-	rails generate scaffold label gcp_k:string gcp_val:string
+	rails generate scaffold label gcp_k:string gcp_val:string labellable_id:integer labellable_type:string
 	rails g scaffold inventory_item serialized_ancestors:text description:text asset_type:string name:string gcp_update_time:timestamp resource_location:string resource_discovery_name:string resource_parent:string project:string
 	git restore app/helpers app/models/
 	git restore app/views/inventory_items/index.html.erb

@@ -17,7 +17,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create label" do
     assert_difference("Label.count") do
-      post labels_url, params: { label: { gcp_key: @label.gcp_key, gcp_value: @label.gcp_value } }
+      post labels_url, params: { label: { gcp_k: @label.gcp_k, gcp_val: @label.gcp_val, labellable_id: @label.labellable_id, labellable_type: @label.labellable_type } }
     end
 
     assert_redirected_to label_url(Label.last)
@@ -34,7 +34,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update label" do
-    patch label_url(@label), params: { label: { gcp_key: @label.gcp_key, gcp_value: @label.gcp_value } }
+    patch label_url(@label), params: { label: { gcp_k: @label.gcp_k, gcp_val: @label.gcp_val, labellable_id: @label.labellable_id, labellable_type: @label.labellable_type } }
     assert_redirected_to label_url(@label)
   end
 

@@ -14,8 +14,10 @@ class LabelsTest < ApplicationSystemTestCase
     visit labels_url
     click_on "New label"
 
-    fill_in "Gcp key", with: @label.gcp_key
-    fill_in "Gcp value", with: @label.gcp_value
+    fill_in "Gcp k", with: @label.gcp_k
+    fill_in "Gcp val", with: @label.gcp_val
+    fill_in "Labellable", with: @label.labellable_id
+    fill_in "Labellable type", with: @label.labellable_type
     click_on "Create Label"
 
     assert_text "Label was successfully created"
@@ -26,8 +28,10 @@ class LabelsTest < ApplicationSystemTestCase
     visit label_url(@label)
     click_on "Edit this label", match: :first
 
-    fill_in "Gcp key", with: @label.gcp_key
-    fill_in "Gcp value", with: @label.gcp_value
+    fill_in "Gcp k", with: @label.gcp_k
+    fill_in "Gcp val", with: @label.gcp_val
+    fill_in "Labellable", with: @label.labellable_id
+    fill_in "Labellable type", with: @label.labellable_type
     click_on "Update Label"
 
     assert_text "Label was successfully updated"
