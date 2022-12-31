@@ -57,7 +57,7 @@ class Project < ApplicationRecord
         self.parent_id = parent_folder.folder_id 
         self.organization_id = parent_folder.folder_id # where recurively finding for parent. Wait for acts_as_tree to find it :) 
         self.description = "[debug] Setting parent to #{parent_folder}" 
-        puts "* Is this valid? #{self.valid?}"
+        #puts "* Is this valid? #{self.valid?}"
         self.save
         # TODO: also set Organization_id
         #self.organization_id = parent_folder.id where recurively finding for parent. Wait for acts_as_tree to find it :) 

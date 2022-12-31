@@ -19,3 +19,5 @@ UninterestingInventoryTypes =  [
     "compute.googleapis.com/Subnetwork",
 ]
     
+# config.filter_parameters += ["credit_card.code"]
+Rails.application.config.filter_parameters -= ["gcp_key"]

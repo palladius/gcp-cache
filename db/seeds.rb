@@ -75,56 +75,41 @@ end
 
 # gets an array of projects 
 # from gcloud XXX 
-def seed_projects_from_projects_file(json_file)
-    puts "OBSOLETE! Use the new my_method magic caller instead!"
-    f = File.read(json_file)
-    json_buridone = JSON.parse(f)
-    puts json_buridone.class
-    return unless  json_buridone.is_a? Array 
+# def seed_projects_from_projects_file(json_file)
+#     puts "OBSOLETE! Use the new my_method magic caller instead!"
+#     f = File.read(json_file)
+#     json_buridone = JSON.parse(f)
+#     puts json_buridone.class
+#     return unless  json_buridone.is_a? Array 
 
-    json_buridone.each do |ph|
-        puts "Parsing ProjectHash: #{ph}"
-        Folder.parse_project_info(ph, :json_file => json_file)
-    end
-end
+#     json_buridone.each do |ph|
+#         puts "Parsing ProjectHash: #{ph}"
+#         Folder.parse_project_info(ph, :json_file => json_file)
+#     end
+# end
 
 def seed_from_org_folder_projects_graph(dir=nil)
     dir = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR', '' unless dir
     dir = File.expand_path dir
-    puts "Seeding from dir: #{dir}"
-    #puts Dir["#{dir}/**/*.json"]
+    #puts "Seeding from dir: #{dir}"
     Dir["#{dir}/**/projects*.json"].each do |projects_json_file|
-        seed_projects_from_projects_file(projects_json_file)
+        generic_parse_array_of_jsons_from_file_with_method(
+            projects_json_file, 
+            '(ex obsolete func call) Proj json from OrgFolder stuff', 
+            Folder.method(:parse_project_info))
     end
 
 
 end
 
 def seed_from_bq_assets(dir=nil)
-    #dir ||= 'db/fixtures/bq-exports/'
     Dir["db/fixtures/bq-exports/all-*.json"].each do |bq_json_file|
         generic_parse_array_of_jsons_from_file_with_method(
             bq_json_file, 
             'BQ JSON exports for all', 
             InventoryItem.method(:parse_asset_inventory_dict))
-        # json_buridone = JSON.parse(File.read(bq_json_file))
-        # puts json_buridone.class
-        # next unless json_buridone.is_a? Array 
-        # # we do have an array
-        # puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found"
-        # json_buridone.each_with_index do |asset_inventoy_dict, ix|
-        #     InventoryItem.parse_asset_inventory_dict(asset_inventoy_dict) # rescue nil
-        #     if ix >= MaxIndex
-        #         puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
-        #         return 
-
-        #     end
-        # end
+        # puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found" 
     end
-    # f = File.read(json_file)
-    # json_buridone = JSON.parse(f)
-    # puts json_buridone.class
-    # return unless  json_buridone.is_a? Array 
 end
 
 # https://stackoverflow.com/questions/30632724/how-to-pass-class-method-as-parameter
@@ -137,6 +122,10 @@ def generic_parse_array_of_jsons_from_file_with_method(json_file, description, m
         json_buridone.each_with_index do |single_json_construct, ix|
             #Folder.parse_organization_info(gcloud_org_dict) # rescue nil
             #puts "DEB sending to #{my_method} the construct: '''#{single_json_construct.inspect}'''"
+            if single_json_construct.has_key?('labels')
+                puts "File() with desc=#{description} has labels! #{single_json_construct['labels']}"
+                exit 42
+            end
             my_method.call(single_json_construct)
             if ix == 0 # only once
                 puts "TODO(ricc): if you want to create a magic parse, note this:"
@@ -160,38 +149,18 @@ end
 
 def seed_from_gcloud_dumps
     Dir["db/fixtures/gcloud/project*.json"].each do |gcloud_json_file|
-        # puts "🔬 Parsing Project file #{gcloud_json_file}"
-        # json_buridone = JSON.parse(File.read(gcloud_json_file))
-        # next unless json_buridone.is_a? Array 
-        # # we do have an array
-        # json_buridone.each do |gcloud_project_dict|
-        #     Folder.parse_project_info(gcloud_project_dict) # rescue nil
-        # end
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Project files from gcloud exports', 
             Folder.method(:parse_project_info))
     end
     Dir["db/fixtures/gcloud/organizations*.json"].each do |gcloud_json_file|
-        # puts "🔬 Parsing Org file #{gcloud_json_file}"
-        # json_buridone = JSON.parse(File.read(gcloud_json_file))
-        # next unless json_buridone.is_a? Array 
-        # # we do have an array
-        # json_buridone.each do |gcloud_org_dict|
-        #     Folder.parse_organization_info(gcloud_org_dict) # rescue nil
-        # end
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Org info from gcloud', 
             Folder.method(:parse_organization_info))
     end
     Dir["db/fixtures/gcloud/folders*.json"].each do |gcloud_json_file|
-        # puts "🔬 Parsing Folder file #{gcloud_json_file}"
-        # json_buridone = JSON.parse(File.read(gcloud_json_file))
-        # next unless json_buridone.is_a? Array 
-        # json_buridone.each do |gcloud_folder_dict|
-        #     Folder.parse_folder_info(gcloud_folder_dict) # rescue nil
-        # end
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Folder info from gcloud', 
@@ -199,16 +168,6 @@ def seed_from_gcloud_dumps
     end 
     # These files are created from `populate-asset-inventory-from-gcloud.sh`
     Dir["db/fixtures/gcloud/inventory-per-project*.json"].each do |gcloud_json_file|
-        # puts "🔬 Parsing Inventory from single project from file #{gcloud_json_file}"
-        # json_buridone = JSON.parse(File.read(gcloud_json_file)) rescue "Error: #{$!}" 
-        # next unless json_buridone.is_a? Array 
-        # json_buridone.each_with_index do |gcloud_inventory_stuff_dict, ix|
-        #     InventoryItem.parse_asset_inventory_dict_from_gcloud(gcloud_inventory_stuff_dict) # seriously, Google? :(
-        #     if ix >= MaxIndex
-        #         puts "Returning as i'm just testing and the file is HUMOUNGUSLY big"
-        #         return 
-        #     end
-        # end
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Inventory info from gcloud', 
@@ -222,7 +181,7 @@ t0 = Time.now
 puts "DB:SEED start at #{Time.now}."
 # TODO(ricc): query all assets :)
 puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
-exit 42
+#exit 42
 seed_random_stuff
 seed_from_org_folder_projects_graph
 seed_from_bq_assets

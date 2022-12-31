@@ -48,13 +48,10 @@ Smaple project:
  "projectNumber"=>"882043492617"}
 =end
   def self.parse_project_info(ph, opts={})
-    opts_json_file = opts.fetch :json_file, nil
+    opts_json_file = opts.fetch :json_file, 'JSON file non datur'
     opts_verbose = opts.fetch :verbose, false
-    #pp ph
 
     parent_folder_or_org = 'todo'
-    # t.string "organization_id"
-    # t.string "parent_id"
 
     ########################################
     # part 1. Create the parent (folder or org)
