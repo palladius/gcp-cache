@@ -30,13 +30,12 @@ included do
         opts_verbose = opts.fetch :verbose, false
         raise "haruspex_autoinfer(): Expecting a hash, got a #{hash.class}" unless hash.class == Hash
 
-        puts "pre reject: #{hash}"
+        #puts "pre reject: #{hash}"
         # remove non-mandatory keys :)
         # hash.except(:a, :b) # => { c: nil }
         hash=hash.except('labels') # reject! { |k| k == 'labels' }
-        puts "Post reject: #{hash}"
-        pp hash
-
+        #puts "Post reject: #{hash}"
+        #pp hash
         # this is the summa of all the knowledge I got from parsing EXISTING stuff. UYou need to maintain a better version..
 
         my_keys = hash.keys
@@ -59,9 +58,95 @@ included do
         end
         pp matching_methods if opts_verbose
         puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}"
-        exit 43
         raise "🐦 haruspex_autoinfer(): Unknown key-pair-ad-bal: #{my_keys}"
     end
+
+
+    def self.private_parse_single_json(json_file, single_json_construct, description, my_class, method_name, ix, opts)
+        opts_verbose = opts.fetch :verbose, false
+
+        # I need to check ONLY once and substitute with right thingy
+        my_method=my_class.method(method_name)
+
+        if single_json_construct.has_key?('labels')
+            puts "JSON construct ##{ix} from File('#{json_file}',desc=#{description}) DOES HAVE labels: #{single_json_construct['labels']}"
+        end
+        ret = my_method.call(single_json_construct)
+        #puts "TODO bring out: ret=#{ret}"
+        if ix == 0 # only once
+            #puts "🖖 ArraySize: #{json_buridone.count}" if opts_verbose
+            puts "🖖 Method: #{my_method.name}" if opts_verbose
+            puts "🖖 DESC: #{description}" if opts_verbose
+            puts "🖖 #{my_class.emoji} JSON 🗝 keys[#{my_method.name}] : #{single_json_construct.keys}"
+            #haruspexHashKeysFromTeaLeaves(single_json_construct, my_class, my_method, description, opts}
+            DbSeedMagicSignature[my_method.name.to_sym] = single_json_construct.keys
+        end
+        return ["mymethod=#{my_method}", ret]
+    end
+
+        # https://stackoverflow.com/questions/30632724/how-to-pass-class-method-as-parameter
+        # returns the LAST element parsed, hopefully :)
+        def self.generic_parse_array_of_jsons_from_file_with_method(json_file, description, my_class, method_name, opts={})
+            # opts part
+            opts_verbose = opts.fetch :verbose, true
+            ret = nil
+        
+            my_method=my_class.method(method_name) # Folder, :blah -> #<Method: Folder (call 'Folder.connection' to establish a connection).parse_folder_info(hash, opts=...) ./app/models/concerns/gcp_stuff_parser.rb:148>
+            puts "🔬 [DB🌱v#{SeedVersion}] Parsing #{description} file: #{json_file}"
+            json_buridone = JSON.parse(File.read(json_file))
+            if  json_buridone.is_a? Array 
+                if json_buridone.size == 0
+                    puts "Empty Array - skipping. Or maybe delete this file: #{json_file}"
+                    return 0
+                end
+                if method_name == :haruspex_autoinfer
+                    puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
+                    haruspex_return = my_class.haruspex_autoinfer(json_buridone[0])
+                    puts "haruspex_return = #{haruspex_return}"
+                    my_class = haruspex_return[0]
+                    method_name = haruspex_return[1]
+                    puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
+                end
+                # we do have an array of a generic construct which the method can parse
+                json_buridone.each_with_index do |single_json_construct, ix|
+                    ret = private_parse_single_json(json_file, single_json_construct, description, my_class, method_name, ix, opts)
+                    if ix >= MaxIndex
+                        puts "Returning from generic_parse_array_of_jsons_from_file_with_method (#{description}) after #{ix} calls, as i'm just testing and the file is HUMOUNGUSLY big (#{json_buridone.count})"
+                        return ["Array out of MaxIndex: returing last of array", ret]
+                    end    
+                end
+                puts "🖖 Finished parsing file of #{json_buridone.size} elements."
+                return ["Array finished normally", ret]
+                #puts "End of array TOGLIMI"
+            elsif json_buridone.is_a?(Hash)
+                #puts "TODO(ricc): get common code into another function and call it from here with ix=0"
+                #function_yet_to_be_written(json_buridone, 0)
+                single_json_construct = json_buridone
+
+                # TODO(ricc): DRY this if you can :) 
+                # if method_name == :haruspex_autoinfer
+                #     puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
+                #     haruspex_return = my_class.haruspex_autoinfer(json_buridone[0])
+                #     puts "haruspex_return = #{haruspex_return}"
+                #     my_class = haruspex_return[0]
+                #     method_name = haruspex_return[1]
+                #     puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
+                # end
+
+                my_class,method_name = my_class.haruspex_autoinfer(single_json_construct) if method_name == :haruspex_autoinfer
+
+                # ret = my_method.call(single_json_construct)
+                # DbSeedMagicSignature[my_method.name.to_sym] = single_json_construct.keys
+#                private_parse_single_json(json_file, description, my_class, method_name, opts={})
+                ret = private_parse_single_json(json_file, single_json_construct, description, my_class, method_name, 0, opts)
+                return ["Hash mono-element ok", ret]
+            else
+                puts "❌generic_parse_array_of_jsons_from_file_with_method: probably malformed json here: #{json_file}. Investigate and delete/regenerate. json_buridone.class = #{json_buridone.class}"
+                exit 49
+            end
+            return ret
+        end
+        
 
 end 
 

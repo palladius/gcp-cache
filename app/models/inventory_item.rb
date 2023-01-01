@@ -2,6 +2,8 @@ class InventoryItem < ApplicationRecord
     serialize :serialized_ancestors
 
     validates :name, uniqueness: { scope: [:asset_type] }
+    validates_uniqueness_of :resource_discovery_name
+
 
     include AssetInventoryParser
 

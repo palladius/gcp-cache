@@ -135,6 +135,7 @@ Smaple project:
       puts "👍 Org just created: #{o}"
     end
     puts "Folder Org is: #{o.inspect}" if opts_verbose
+    return o
   end
 
 =begin
