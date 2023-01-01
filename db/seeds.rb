@@ -1,13 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
+# normal one
+Rake.application["db:fixtures:load"].invoke
 
 #
-SeedVersion = "1.5_221230"
+SeedVersion = "1.6_230101"
 # Max how many counts
 MaxIndex = ENV.fetch('MAX_INDEX', '10' ).to_i
 DbSeedMagicSignature = {}
@@ -27,6 +23,18 @@ OrgFolderProjectsGraphFolder = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_FOLDER', nil
 def seed_random_stuff()
     fake_projects = [] 
 
+    #include FixtureFileHelpers
+
+    fixtures_dir = "#{Rails.root}/db/fixtures/manhouse/"
+    fixture_files = if ENV['FIXTURES']
+            ENV['FIXTURES'].split(',')
+        else
+            # The use of String#[] here is to support namespaced fixtures
+            Dir["#{fixtures_dir}/**/*.yml"].map {|f| f[(fixtures_dir.size + 1)..-5] }
+        end
+    ret = ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
+    puts "OK fixtures: #{ret}"
+    exit 42
     Label.create(
         gcp_k: 'SeedVersion',
         gcp_val: SeedVersion,

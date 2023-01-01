@@ -2,14 +2,14 @@
 
 one:
   gcp_k: test-env
-  gcp_value: test-dev
+  gcp_val: test-dev
 
 two:
   gcp_k: test-env
-  gcp_value: test-prod
+  gcp_val: test-prod
 
 riccardo:
   gcp_k: find-me-in
-  gcp_value: test-fixtures-labels.yml
+  gcp_val: test-fixtures-labels.yml
 #  labellable_id: 1
 #  labellable_type: MyString

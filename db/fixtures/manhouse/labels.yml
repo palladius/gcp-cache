@@ -1,0 +1,7 @@
+#rake db:fixtures:load FIXTURES_DIR=db/fixtures/manhouse/
+# https://brandonhilkert.com/blog/using-rails-fixtures-to-seed-a-database/
+# FIXTURES_DIR=$(pwd)/db/fixtures/manhouse/ rake db:fixtures:load
+test1:
+  gcp_k: RiccFixtureDir
+  gcp_val: db/fixtures/manhouse/labels.yml
+#  gcp_value: sobenme
