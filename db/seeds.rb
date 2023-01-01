@@ -11,6 +11,7 @@ SeedVersion = "1.5_221230"
 # Max how many counts
 MaxIndex = ENV.fetch('MAX_INDEX', '10' ).to_i
 DbSeedMagicSignature = {}
+# This is me copying from stdout #allavecchia :)
 DbSeedMagicSignature30dec22 = {
  :parse_asset_inventory_dict=>  ["ancestors", "asset_type", "name", "resource", "update_time"],
  :parse_project_info=> ["createTime", "lifecycleState", "name", "parent", "projectId", "projectNumber"],
@@ -108,26 +109,21 @@ def seed_from_org_folder_projects_graph(dir, opts={})
     #         )
     # end
     Dir["#{dir}/**/projects*.json"].each do |projects_json_file|
-        puts "+ Found file: #{projects_json_file}" if opts_verbose
+        #puts "+ Found file: #{projects_json_file}" if opts_verbose
         generic_parse_array_of_jsons_from_file_with_method( projects_json_file, '(ex obsolete func call) Proj json from OrgFolder stuff', ApplicationRecord, :haruspex_autoinfer )
     end
     # Magic Haruspec for Org
-    Dir["#{dir}/**/org-.json"].each do |projects_json_file|
-        puts "+ Found file: #{projects_json_file}" if opts_verbose
+    Dir["#{dir}/**/org*.json"].each do |projects_json_file|
+        puts "🗂️ + Found Org file: #{projects_json_file}" if opts_verbose
         generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its an Org.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
+        puts "Org end"
+        exit 42
     end
     Dir["#{dir}/**/folder*.json"].each do |projects_json_file|
-        puts "+ Found Folder file: #{projects_json_file}" if opts_verbose
+        #puts "+ Found Folder file: #{projects_json_file}" if opts_verbose
         generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'Folder json #haruspex', ApplicationRecord, :haruspex_autoinfer )
     end
-    # Dir["#{dir}/**/org-.json"].each do |projects_json_file|
-    #     puts "+ Found file: #{projects_json_file}" if opts_verbose
-    #     generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its a fodler.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
-    # end
-    # Dir["#{dir}/**/org-.json"].each do |projects_json_file|
-    #     puts "+ Found file: #{projects_json_file}" if opts_verbose
-    #     generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its a fodler.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
-    # end
+   
 end
 
 def seed_from_bq_assets(dir=nil)
@@ -184,8 +180,11 @@ def generic_parse_array_of_jsons_from_file_with_method(json_file, description, m
                 return 0
             end
         end
+    elsif json_buridone.is_a?(Hash)
+        puts "TODO(ricc): get common code into another function and call it from here with ix=0"
+        function_yet_to_be_written(json_buridone, 0)
     else
-        puts "❌generic_parse_array_of_jsons_from_file_with_method: probably malformed json here: #{json_file}. Investigate and delete/regenerate."
+        puts "❌generic_parse_array_of_jsons_from_file_with_method: probably malformed json here: #{json_file}. Investigate and delete/regenerate. json_buridone.class = #{json_buridone.class}"
         exit 49
     end
     return 0
@@ -227,9 +226,10 @@ def main()
     puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
     # project creates stuff in the .cache directory
     seed_from_org_folder_projects_graph(OrgFolderProjectsGraphFolder + "/.cache/") unless OrgFolderProjectsGraphFolder.nil?
-    exit 42
     seed_random_stuff
     seed_from_org_folder_projects_graph(ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR')
+    puts :END42
+    exit 42
     seed_from_bq_assets
     seed_from_gcloud_dumps
     puts "DB:SEED returned succesfully at #{Time.now}. Total time: #{Time.now - t0}sec. Miracle!"

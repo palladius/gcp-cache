@@ -29,6 +29,14 @@ included do
     def self.haruspex_autoinfer(hash, opts={})
         opts_verbose = opts.fetch :verbose, false
         raise "haruspex_autoinfer(): Expecting a hash, got a #{hash.class}" unless hash.class == Hash
+
+        puts "pre reject: #{hash}"
+        # remove non-mandatory keys :)
+        # hash.except(:a, :b) # => { c: nil }
+        hash=hash.except('labels') # reject! { |k| k == 'labels' }
+        puts "Post reject: #{hash}"
+        pp hash
+
         # this is the summa of all the knowledge I got from parsing EXISTING stuff. UYou need to maintain a better version..
 
         my_keys = hash.keys
@@ -50,7 +58,9 @@ included do
             end
         end
         pp matching_methods if opts_verbose
+        puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}"
         exit 43
+        raise "🐦 haruspex_autoinfer(): Unknown key-pair-ad-bal: #{my_keys}"
     end
 
 end 
