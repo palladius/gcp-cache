@@ -1,0 +1,21 @@
+root_folder_fixture:
+    name: 'my-fake-root-fixture'
+    folder_id: '42000'
+    is_org: true, 
+    #parent_id:string
+    description: "This is my first root foldercreated on db/Fixture/manhouse/ folder"
+    domain: fake.fixture.example.com
+    directory_customer_id: "F0111a1ke"
+    labels:
+        fixture: true 
+        dir: db/fixtures/manhouse/
+        file: folders.yml
+
+next-fixture-folder:
+    name: 'Fixtures sub-folder'
+    folder_id: '42100'
+    is_org: false
+    parent_id: '42000'
+    description: "This is my first sub folder under fixture fake root"
+    #domain: fake.fixture.example.com
+

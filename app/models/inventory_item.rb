@@ -4,6 +4,7 @@ class InventoryItem < ApplicationRecord
     validates :name, uniqueness: { scope: [:asset_type] }
     validates_uniqueness_of :resource_discovery_name
 
+    has_many :labels, as: :labellable
 
     include AssetInventoryParser
 

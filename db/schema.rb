@@ -43,11 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_070754) do
   create_table "labels", force: :cascade do |t|
     t.string "gcp_k"
     t.string "gcp_val"
-    t.bigint "labellable_id"
     t.string "labellable_type"
+    t.integer "labellable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["labellable_type", "labellable_id"], name: "index_labels_on_labellable_type_and_labellable_id"
+    t.index ["labellable_type", "labellable_id"], name: "index_labels_on_labellable"
   end
 
   create_table "projects", force: :cascade do |t|

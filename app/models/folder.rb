@@ -22,6 +22,7 @@ class Folder < ApplicationRecord
     # https://guides.rubyonrails.org/active_record_validations.html
     validates :folder_id, uniqueness: true, presence: true
     #validates :name,  presence: true
+    has_many :labels, as: :labellable
 
     # not self.emoji 
     def emoji

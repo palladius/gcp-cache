@@ -34,7 +34,7 @@ def seed_random_stuff()
         end
     ret = ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
     puts "OK fixtures: #{ret}"
-    exit 42
+    #exit 42
     Label.create(
         gcp_k: 'SeedVersion',
         gcp_val: SeedVersion,
@@ -101,11 +101,8 @@ def seed_from_org_folder_projects_graph(dir, opts={})
     Dir["#{dir}/**/org*.json"].each do |projects_json_file|
         puts "🗂️ + Found Org file: #{projects_json_file}" if opts_verbose
         x = ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its an Org.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
-        puts "Org end: #{x}"
-        #exit 42
     end
     Dir["#{dir}/**/folder*.json"].each do |projects_json_file|
-        #puts "+ Found Folder file: #{projects_json_file}" if opts_verbose
         ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'Folder json #haruspex', ApplicationRecord, :haruspex_autoinfer )
     end
    
@@ -113,10 +110,7 @@ end
 
 def seed_from_bq_assets(dir=nil)
     Dir["db/fixtures/bq-exports/all-*.json"].each do |bq_json_file|
-        ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method(
-            bq_json_file, 
-            'BQ JSON exports for all', 
-            InventoryItem, :parse_asset_inventory_dict)
+        ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method( bq_json_file, 'BQ JSON exports for all', InventoryItem, :parse_asset_inventory_dict) 
         # puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found" 
     end
 end

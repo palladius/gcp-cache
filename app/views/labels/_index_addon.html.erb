@@ -2,15 +2,32 @@
 
 There's another theory which states that this has already happened 😉
 -->
-<h1><%= LABEL_ICON %>Labels</h1>
-
-<table border='0' >
-  <% @labels.each do |label| %>
+<h1><%= LABEL_ICON %>Labels Table with Parent</h1>
+LabellableType needs to be <> 0
+<table border='1' >
+  <tr>
+        <td>labellable </td>
+        <td>gcp_k </td>
+        <td>gcp_val </td>
+      </tr>
+  <% @labels.each do |label| 
+    if label.labellable_type and label.labellable_id
+  %>
     <tr>
-        <td><%= label.gcp_k %>:
-        <td><%= label.gcp_val %>
-    <% end %>
+        <td>
+          <%= label.labellable_type %>
+          <%= label.labellable_id %>
+          <%= label.id %>
+          <%#= label.labellable %>
+        </td>
+        <td><%= link_to label.gcp_k, label %></td>
+        <td><%= label.gcp_val %></td>
+      </tr>
+    <% end
+    end %>
 </table>
+
+<h1><%= LABEL_ICON %>Labels (render)</h1>
 
   <% @labels.each do |label| %>
     <%= render_label label %><br/>

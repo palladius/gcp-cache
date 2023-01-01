@@ -5,3 +5,7 @@ test1:
   gcp_k: RiccFixtureDir
   gcp_val: db/fixtures/manhouse/labels.yml
 #  gcp_value: sobenme
+# not sure if this works.
+seedVersion2:
+  gcp_k: seedVersion2
+  gcp_val: "#{SeedVersion}"

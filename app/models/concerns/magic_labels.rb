@@ -22,16 +22,17 @@ included do
     #main
     raise "not a hash" unless hash.is_a?(Hash) 
     if hash.key?('labels')
-        puts "#{LABEL_ICON} TODO #{self.emoji} Object #{self} #{self.class} has labels! Let's add them!" if opts_debug
-        #puts "TODO self=#{self} #{self.class} hash has labels: #{hash['labels']}"
+        puts "#{LABEL_ICON} #{self.emoji} Object #{self} #{self.class} #{self.id} has labels! Let's add them!" #if opts_debug
         hash['labels'].each do |k,v|  
-            puts k
             l = Label.create(
                 :gcp_k => k,
                 :gcp_val => v,
                 :labellable => self,
+                #:labellable_type => self.class,
+                #:labellable_id => self.id,
             )
-            puts("👍 Label created: #{l} for #{self}") if opts_verbose
+            puts("👍 Label##{l.id} created for #{self}") # if opts_verbose
+            #exit 42
         end
     else
         puts "[DEB] NO LABELS - continuing" if opts_debug

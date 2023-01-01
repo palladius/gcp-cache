@@ -30,14 +30,11 @@ included do
         opts_verbose = opts.fetch :verbose, false
         raise "haruspex_autoinfer(): Expecting a hash, got a #{hash.class}" unless hash.class == Hash
 
-        #puts "pre reject: #{hash}"
-        # remove non-mandatory keys :)
-        # hash.except(:a, :b) # => { c: nil }
-        hash=hash.except('labels') # reject! { |k| k == 'labels' }
-        #puts "Post reject: #{hash}"
-        #pp hash
-        # this is the summa of all the knowledge I got from parsing EXISTING stuff. UYou need to maintain a better version..
-
+        # labels: appears saltuarily on any thing.
+        # additionalAttributes: Found in some InventoryItems - super interesting as its a VERY generic keyval. Super yummie.
+        # Should capture some day in the future.
+        hash=hash.except('labels', 'additionalAttributes')
+        
         my_keys = hash.keys
         # find best match for this hash..
         puts my_keys.join(', ') if opts_verbose
@@ -56,8 +53,8 @@ included do
                 return [ApplicationRecord, k]
             end
         end
-        pp matching_methods if opts_verbose
-        puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}"
+        pp(matching_methods) if opts_verbose
+        puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}" 
         raise "🐦 haruspex_autoinfer(): Unknown key-pair-ad-bal: #{my_keys}"
     end
 
@@ -69,7 +66,7 @@ included do
         my_method=my_class.method(method_name)
 
         if single_json_construct.has_key?('labels')
-            puts "JSON construct ##{ix} from File('#{json_file}',desc=#{description}) DOES HAVE labels: #{single_json_construct['labels']}"
+            puts "JSON construct ##{ix} from File('#{json_file}',desc=#{description}) DOES HAVE labels: #{single_json_construct['labels']}" if opts_verbose
         end
         ret = my_method.call(single_json_construct)
         #puts "TODO bring out: ret=#{ret}"
@@ -100,9 +97,9 @@ included do
                     return 0
                 end
                 if method_name == :haruspex_autoinfer
-                    puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
+                    #puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
                     haruspex_return = my_class.haruspex_autoinfer(json_buridone[0])
-                    puts "haruspex_return = #{haruspex_return}"
+                    #puts "haruspex_return = #{haruspex_return}"
                     my_class = haruspex_return[0]
                     method_name = haruspex_return[1]
                     puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
@@ -117,27 +114,9 @@ included do
                 end
                 puts "🖖 Finished parsing file of #{json_buridone.size} elements."
                 return ["Array finished normally", ret]
-                #puts "End of array TOGLIMI"
             elsif json_buridone.is_a?(Hash)
-                #puts "TODO(ricc): get common code into another function and call it from here with ix=0"
-                #function_yet_to_be_written(json_buridone, 0)
                 single_json_construct = json_buridone
-
-                # TODO(ricc): DRY this if you can :) 
-                # if method_name == :haruspex_autoinfer
-                #     puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
-                #     haruspex_return = my_class.haruspex_autoinfer(json_buridone[0])
-                #     puts "haruspex_return = #{haruspex_return}"
-                #     my_class = haruspex_return[0]
-                #     method_name = haruspex_return[1]
-                #     puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
-                # end
-
                 my_class,method_name = my_class.haruspex_autoinfer(single_json_construct) if method_name == :haruspex_autoinfer
-
-                # ret = my_method.call(single_json_construct)
-                # DbSeedMagicSignature[my_method.name.to_sym] = single_json_construct.keys
-#                private_parse_single_json(json_file, description, my_class, method_name, opts={})
                 ret = private_parse_single_json(json_file, single_json_construct, description, my_class, method_name, 0, opts)
                 return ["Hash mono-element ok", ret]
             else

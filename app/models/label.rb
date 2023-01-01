@@ -1,8 +1,9 @@
 class Label < ApplicationRecord
     #validates :gcp_key, uniqueness: true, presence: true
     validates :gcp_k, uniqueness: { scope: [:gcp_val] }
+    
     belongs_to :labellable, polymorphic: true
-
+    
 
     def labellable_shortname
         return 'nada' if labellable.nil?
