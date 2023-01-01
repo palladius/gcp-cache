@@ -3,11 +3,11 @@
 <h1>🗂️ Organizations</h1>
 
 
-
 <div id="folders">
-  <% @folders.each do |folder| %>
-    <p>
-      <%= render_folder(folder) %>
-    </p>
+  <table>
+    <%= render_org_as_tr(nil) %>
+    <% @folders.each do |folder| %>
+        <%= render_org_as_tr(folder) %>
   <% end %>
+  </table>
 </div>

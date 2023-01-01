@@ -1,6 +1,7 @@
 
 # normal one
-Rake.application["db:fixtures:load"].invoke
+#Rake.application["db:fixtures:load"].invoke
+Rake.application["db:fixtures"].invoke
 
 #
 SeedVersion = "1.6_230101"

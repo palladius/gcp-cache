@@ -35,6 +35,10 @@ class Folder < ApplicationRecord
         return id if id.to_s.length > 0
         return "oid=#{self.object_id}"
     end
+
+    def children 
+        Folder.find_by_parent_id( self.id)
+    end
    
     def to_s(verbose=true)
         verbose ? 

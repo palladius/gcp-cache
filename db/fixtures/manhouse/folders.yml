@@ -10,6 +10,7 @@ root_folder_fixture:
         fixture: true 
         dir: db/fixtures/manhouse/
         file: folders.yml
+        desc: "This is a fake fixture Org"
 
 next-fixture-folder:
     name: 'Fixtures sub-folder'
@@ -18,4 +19,8 @@ next-fixture-folder:
     parent_id: '42000'
     description: "This is my first sub folder under fixture fake root"
     #domain: fake.fixture.example.com
-
+    labels:
+        fixture: true 
+        dir: db/fixtures/manhouse/
+        file: folders.yml
+        desc: "This is a fake fixture Folder (child of Org)"
