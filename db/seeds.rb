@@ -18,6 +18,11 @@ DbSeedMagicSignature30dec22 = {
  :parse_folder_info=> ["createTime", "displayName", "lifecycleState", "name", "parent"],
  :parse_asset_inventory_dict_from_gcloud=> ["assetType", "createTime", "description", "displayName", "location", "name", "parentAssetType", "parentFullResourceName", "project", "updateTime"]
 }
+
+#ORG_FOLDER_PROJECTS_GRAPH_FOLDER
+OrgFolderProjectsGraphFolder = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_FOLDER', nil 
+
+# This seeds random elements programmatically 
 def seed_random_stuff()
     fake_projects = [] 
 
@@ -88,18 +93,41 @@ end
 #     end
 # end
 
-def seed_from_org_folder_projects_graph(dir=nil)
-    dir = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR', '' unless dir
+def seed_from_org_folder_projects_graph(dir, opts={})
+    opts_verbose = opts.fetch :verbose, true 
+    #dir = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR', '' unless dir
     dir = File.expand_path dir
-    #puts "Seeding from dir: #{dir}"
+    puts "seed_from_org_folder_projects_graph(): Seeding from dir: #{dir}" if opts_verbose
+    # Dir["#{dir}/**/projects*.json"].each do |projects_json_file|
+    #     puts "+ Found file: #{projects_json_file}" if opts_verbose
+    #     generic_parse_array_of_jsons_from_file_with_method(
+    #         projects_json_file, 
+    #         '(ex obsolete func call) Proj json from OrgFolder stuff', 
+    #         Folder, 
+    #         :parse_project_info,
+    #         )
+    # end
     Dir["#{dir}/**/projects*.json"].each do |projects_json_file|
-        generic_parse_array_of_jsons_from_file_with_method(
-            projects_json_file, 
-            '(ex obsolete func call) Proj json from OrgFolder stuff', 
-            Folder.method(:parse_project_info))
+        puts "+ Found file: #{projects_json_file}" if opts_verbose
+        generic_parse_array_of_jsons_from_file_with_method( projects_json_file, '(ex obsolete func call) Proj json from OrgFolder stuff', ApplicationRecord, :haruspex_autoinfer )
     end
-
-
+    # Magic Haruspec for Org
+    Dir["#{dir}/**/org-.json"].each do |projects_json_file|
+        puts "+ Found file: #{projects_json_file}" if opts_verbose
+        generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its an Org.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
+    end
+    Dir["#{dir}/**/folder*.json"].each do |projects_json_file|
+        puts "+ Found Folder file: #{projects_json_file}" if opts_verbose
+        generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'Folder json #haruspex', ApplicationRecord, :haruspex_autoinfer )
+    end
+    # Dir["#{dir}/**/org-.json"].each do |projects_json_file|
+    #     puts "+ Found file: #{projects_json_file}" if opts_verbose
+    #     generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its a fodler.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
+    # end
+    # Dir["#{dir}/**/org-.json"].each do |projects_json_file|
+    #     puts "+ Found file: #{projects_json_file}" if opts_verbose
+    #     generic_parse_array_of_jsons_from_file_with_method( projects_json_file, 'I presume its a fodler.. #haruspex', ApplicationRecord, :haruspex_autoinfer )
+    # end
 end
 
 def seed_from_bq_assets(dir=nil)
@@ -107,32 +135,48 @@ def seed_from_bq_assets(dir=nil)
         generic_parse_array_of_jsons_from_file_with_method(
             bq_json_file, 
             'BQ JSON exports for all', 
-            InventoryItem.method(:parse_asset_inventory_dict))
+            InventoryItem, :parse_asset_inventory_dict)
         # puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found" 
     end
 end
 
 # https://stackoverflow.com/questions/30632724/how-to-pass-class-method-as-parameter
-def generic_parse_array_of_jsons_from_file_with_method(json_file, description, my_method, opts={})
+def generic_parse_array_of_jsons_from_file_with_method(json_file, description, my_class, method_name, opts={})
     # opts part
+    opts_verbose = opts.fetch :verbose, true
+
+    my_method=my_class.method(method_name) # Folder, :blah -> #<Method: Folder (call 'Folder.connection' to establish a connection).parse_folder_info(hash, opts=...) ./app/models/concerns/gcp_stuff_parser.rb:148>
     puts "🔬 [DB🌱v#{SeedVersion}] Parsing #{description} file: #{json_file}"
     json_buridone = JSON.parse(File.read(json_file))
     if  json_buridone.is_a? Array 
+        if json_buridone.size == 0
+            puts "Empty Array - skipping. Or maybe delete this file: #{json_file}"
+            return 0
+        end
+        # I need to check ONLY once and substitute with right thingy
+        if method_name == :haruspex_autoinfer
+            puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
+            ret = my_class.haruspex_autoinfer(json_buridone[0])
+            puts "ret = #{ret}"
+            my_class = ret[0]
+            method_name = ret[1]
+            puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
+            #exit 42
+        end
         # we do have an array of a generic construct which the method can parse
         json_buridone.each_with_index do |single_json_construct, ix|
             #Folder.parse_organization_info(gcloud_org_dict) # rescue nil
             #puts "DEB sending to #{my_method} the construct: '''#{single_json_construct.inspect}'''"
             if single_json_construct.has_key?('labels')
-                puts "File() with desc=#{description} has labels! #{single_json_construct['labels']}"
-                exit 42
+                puts "JSON construct ##{ix} from File('#{json_file}',desc=#{description}) DOES HAVE labels: #{single_json_construct['labels']}"
             end
             my_method.call(single_json_construct)
             if ix == 0 # only once
-                puts "TODO(ricc): if you want to create a magic parse, note this:"
-                puts "🖖 ArraySize: #{json_buridone.count}"
-                puts "🖖 Method: #{my_method.name}"
-                puts "🖖 DESC: #{description}"
-                puts "🖖 json keys: #{single_json_construct.keys}"
+                puts "🖖 ArraySize: #{json_buridone.count}" if opts_verbose
+                puts "🖖 Method: #{my_method.name}" if opts_verbose
+                puts "🖖 DESC: #{description}" if opts_verbose
+                puts "🖖 #{my_class.emoji} JSON 🗝 keys[#{my_method.name}] : #{single_json_construct.keys}"
+                #haruspexHashKeysFromTeaLeaves(single_json_construct, my_class, my_method, description, opts}
                 DbSeedMagicSignature[my_method.name.to_sym] = single_json_construct.keys
             end
             if ix >= MaxIndex
@@ -152,39 +196,44 @@ def seed_from_gcloud_dumps
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Project files from gcloud exports', 
-            Folder.method(:parse_project_info))
+            Folder, :parse_project_info)
     end
     Dir["db/fixtures/gcloud/organizations*.json"].each do |gcloud_json_file|
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Org info from gcloud', 
-            Folder.method(:parse_organization_info))
+            Folder, :parse_organization_info)
     end
     Dir["db/fixtures/gcloud/folders*.json"].each do |gcloud_json_file|
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Folder info from gcloud', 
-            Folder.method(:parse_folder_info))
+            Folder, :parse_folder_info)
     end 
     # These files are created from `populate-asset-inventory-from-gcloud.sh`
     Dir["db/fixtures/gcloud/inventory-per-project*.json"].each do |gcloud_json_file|
         generic_parse_array_of_jsons_from_file_with_method(
             gcloud_json_file, 
             'Inventory info from gcloud', 
-            InventoryItem.method(:parse_asset_inventory_dict_from_gcloud))
+            InventoryItem, :parse_asset_inventory_dict_from_gcloud)
     end
 end
 
 
+def main()
+    t0 = Time.now
+    puts "DB:SEED start at #{Time.now}."
+    # TODO(ricc): query all assets :)
+    puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
+    # project creates stuff in the .cache directory
+    seed_from_org_folder_projects_graph(OrgFolderProjectsGraphFolder + "/.cache/") unless OrgFolderProjectsGraphFolder.nil?
+    exit 42
+    seed_random_stuff
+    seed_from_org_folder_projects_graph(ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR')
+    seed_from_bq_assets
+    seed_from_gcloud_dumps
+    puts "DB:SEED returned succesfully at #{Time.now}. Total time: #{Time.now - t0}sec. Miracle!"
+    pp DbSeedMagicSignature #.inspect
+end
 
-t0 = Time.now
-puts "DB:SEED start at #{Time.now}."
-# TODO(ricc): query all assets :)
-puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
-#exit 42
-seed_random_stuff
-seed_from_org_folder_projects_graph
-seed_from_bq_assets
-seed_from_gcloud_dumps
-puts "DB:SEED returned succesfully at #{Time.now}. Total time: #{Time.now - t0}sec. Miracle!"
-pp DbSeedMagicSignature #.inspect
+main()

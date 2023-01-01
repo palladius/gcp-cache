@@ -55,6 +55,8 @@ This is how my object looks like:
       project: "TODO from AID.keys: #{aid.keys}",
       #TODO(riocc): add stuff which for now is always empty.. 
     )
+    ii.add_labels_if_they_exist(aid)
+
     puts "👍 Created aii1💛 (##{ii.id}): #{ii}" if ii.valid?
   end
 
@@ -113,6 +115,7 @@ This is how my object looks like:
       project: (aid['project'] rescue "TODO remove error #{$!}. Ais keys are: #{aid.keys}"),
       description: megaDescription, # there's too LITTLE in aid['description'],
     )
+    ii.add_labels_if_they_exist(aid)
     puts "👍 Created aii2💙 (##{ii.id}): #{ii}" if ii.valid?
   end
 

@@ -89,4 +89,7 @@ class Project < ApplicationRecord
     def self.class_emoji 
         PROJECT_ICON
     end
+    def self.emoji 
+        PROJECT_ICON
+    end
 end

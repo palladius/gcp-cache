@@ -4,10 +4,14 @@ There's another theory which states that this has already happened 😉
 -->
 <h1><%= LABEL_ICON %>Labels</h1>
 
-<table border='1' >
+<table border='0' >
   <% @labels.each do |label| %>
     <tr>
         <td><%= label.gcp_k %>:
         <td><%= label.gcp_val %>
     <% end %>
 </table>
+
+  <% @labels.each do |label| %>
+    <%= render_label label %><br/>
+    <% end %>

@@ -2,6 +2,8 @@
 
 <%= render @label %>
 
+<%= render "labels/show_addon" %>
+
 <div>
   <%= link_to "Edit this label", edit_label_path(@label) %> |
   <%= link_to "Back to labels", labels_path %>

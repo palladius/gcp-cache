@@ -41,3 +41,6 @@ populate-asset-inventory-from-bq:
 
 cleanup-empty-json-files:
 	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
+
+seed-from-riccardo-other-script:
+	ORG_FOLDER_PROJECTS_GRAPH_FOLDER="~/git/org-folder-projects-graph-deleteme/" rake db:seed

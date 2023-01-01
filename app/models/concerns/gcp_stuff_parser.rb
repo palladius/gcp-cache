@@ -74,6 +74,7 @@ Smaple project:
                     Parent hash: #{parent_hash}\nAdded by seed_projects_from_projects_file as part rake db:seed v#{SeedVersion}",
 
         )
+        puts "👍 Folder just created: #{f}"
     end
     puts "Folder: #{f}" if opts_verbose
 
@@ -92,8 +93,9 @@ Smaple project:
           #billing_account_id: '123456-7890AB-CDEF12',
           description: "Project found in file: #{opts_json_file}.Parent hash: #{parent_hash}\nAdded by seed_projects_from_projects_file as part rake db:seed v#{SeedVersion}",
       )
+      puts "👍 Project just created: #{p}"
     end
-    puts "👍 Project just created: #{p}"
+    f.add_labels_if_they_exist(ph)
   end
 
 
@@ -129,6 +131,7 @@ Smaple project:
         lifecycle_state: hash['lifecycleState'],
         directory_customer_id: hash['owner']['directoryCustomerId'],
       )
+      o.add_labels_if_they_exist(hash)
       puts "👍 Org just created: #{o}"
     end
     puts "Folder Org is: #{o.inspect}" if opts_verbose
@@ -153,7 +156,6 @@ example:
     parent = hash['name'] # could be an Org or a Folder, eg "organizations/824879804362"
     puts folder_id
     existing_folder = Folder.find_by(frog_type: folder_type, folder_id: folder_id)
-    #puts "Exists? #{existing_folder}"
     if existing_folder
         puts "Existing! #{existing_folder}."
         f = existing_folder
@@ -168,6 +170,8 @@ example:
         gcp_creation_time: hash['createTime'],
         lifecycle_state: hash['lifecycleState'],
         )
+      f.add_labels_if_they_exist(hash)
+
       puts "👍 New folder created: #{f}"
     end
 
@@ -186,10 +190,11 @@ example:
     end
   end
 
+
 end # /included
 
 class_methods do
-
+  # nothing for now..
 end #/class_methods
 
 end

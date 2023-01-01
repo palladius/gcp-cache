@@ -14,6 +14,9 @@ JSON representation of folder according to this gcloud command:
 
 class Folder < ApplicationRecord
     extend ActsAsTree::TreeView
+
+    include MagicLabels
+
     acts_as_tree order: "name"
 
     # https://guides.rubyonrails.org/active_record_validations.html
@@ -32,8 +35,10 @@ class Folder < ApplicationRecord
         return "oid=#{self.object_id}"
     end
    
-    def to_s
-        "#{self.emoji} #{most_representative_name} # FQDN: #{fqdn}" 
+    def to_s(verbose=true)
+        verbose ? 
+            "#{self.emoji} #{most_representative_name} # FQDN: #{fqdn}" :
+            "#{self.emoji} #{most_representative_name}" 
     end
 
     def fqdn
@@ -83,6 +88,10 @@ class Folder < ApplicationRecord
     end   
 
     def self.class_emoji 
+        self.emoji
+    end
+    # 🗂️ Organizations
+    def self.emoji 
         FOLDER_ICON
     end
 
@@ -91,5 +100,9 @@ class Folder < ApplicationRecord
         frog_type,folder_id = input_fqdn.split('/')
         find_by(frog_type: frog_type, folder_id: folder_id)
     end
+
+    # def self.add_labels_if_they_exist(x)
+    #     puts :TODO_FOLDER
+    # end
 
 end

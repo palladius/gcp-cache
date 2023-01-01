@@ -2,18 +2,23 @@
 
 There's another theory which states that this has already happened 😉
 -->
+<% @latest_inventory_item = InventoryItem.order(:gcp_update_time).last %>
+
 <h1><%= INVENTORY_ITEM_ICON %>Inventory Items</h1>
 
-<% @latest_inventory_item = InventoryItem.order(:gcp_update_time).last %>
-Latest, newest Inventory Item (which also tells you how behind your import job is :P): <br/>
+<% if @latest_inventory_item %>
+    Latest, newest Inventory Item (which also tells you how behind your import job is :P): <br/>
 
-<%= render_inventory_item(@latest_inventory_item)  %> <br/>
+    <%= render_inventory_item(@latest_inventory_item)  %> <br/>
 
-⏲ Created on: 
-<%= @latest_inventory_item.gcp_update_time %>
-(<b>
-<%= time_ago_in_words @latest_inventory_item.gcp_update_time %>
-ago</b>)
+    ⏲ Created on: 
+    <%= @latest_inventory_item.gcp_update_time %>
+    (<b>
+    <%= time_ago_in_words @latest_inventory_item.gcp_update_time %>
+    ago</b>)
+<% else %>
+    Sorry, no last inventory item available. 
+<% end %>
 
 <table border='1' >
     <tr>

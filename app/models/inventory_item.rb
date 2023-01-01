@@ -24,7 +24,16 @@ class InventoryItem < ApplicationRecord
         Folder.find_by_folder_id(organization_id) # rescue nil
     end
 
-    def to_s
-        "#{simplified_type} :#{INVENTORY_ITEM_ICON} : #{simplified_name}"
+    def to_s(verbose=true)
+        verbose ? 
+            "#{simplified_type} :#{INVENTORY_ITEM_ICON} : #{simplified_name}" : 
+            "#{simplified_name}" 
     end
+    def self.class_emoji 
+        self.emoji 
+    end
+    def self.emoji 
+        '🧺️'
+    end
+    
 end
