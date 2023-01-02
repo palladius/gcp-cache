@@ -3,7 +3,7 @@
 module AssetInventoryParser     
     extend ActiveSupport::Concern
 
-    AssetInventoryParseVersion = '0.2a'
+    AssetInventoryParseVersion ||= '0.2a'
 
 included do
 

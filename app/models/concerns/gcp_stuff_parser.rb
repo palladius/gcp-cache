@@ -18,7 +18,7 @@ module GcpStuffParser
     # end
 
 
-    ParseVersion = '1.0'
+    ParseVersion ||= '1.1'
 
 included do
 

@@ -2,14 +2,18 @@
 
 one:
   gcp_k: test-env
-  gcp_val: test-dev
+  gcp_val: test-dev-p2
+  labellable_id: two
+  labellable_type: Project
 
 two:
   gcp_k: test-env
-  gcp_val: test-prod
+  gcp_val: test-prod-p1
+  labellable_id: one
+  labellable_type: Project
 
 riccardo:
   gcp_k: find-me-in
   gcp_val: test-fixtures-labels.yml
-#  labellable_id: 1
-#  labellable_type: MyString
+  labellable_id: one
+  labellable_type: Folder

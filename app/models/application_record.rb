@@ -8,7 +8,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   # you have to override me :)
   def emoji 
-    '❓'
+    #'❓'
+    self.emoji
   end
 
    #create(attributes = nil, options = {}, &block) public

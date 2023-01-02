@@ -90,6 +90,7 @@ class Project < ApplicationRecord
         PROJECT_ICON
     end
     def self.emoji 
+        #'PPP' # 
         PROJECT_ICON
     end
 end

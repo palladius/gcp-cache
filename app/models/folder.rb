@@ -20,7 +20,11 @@ class Folder < ApplicationRecord
     acts_as_tree order: "name"
 
     # https://guides.rubyonrails.org/active_record_validations.html
-    validates :folder_id, uniqueness: true, presence: true
+    # numerical
+    validates :folder_id, 
+        uniqueness: true, 
+        presence: true,
+        format: { with: /\A\d+\z/ }
     #validates :name,  presence: true
     has_many :labels, as: :labellable
 

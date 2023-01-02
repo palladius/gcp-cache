@@ -5,6 +5,6 @@ module LabelsHelper
         first_part = link_to(label, label) 
         second_part = link_to(" @ #{label.labellable.to_s(false)}",label.labellable) rescue 'ERR'
 
-        return (first_part + second_part).html_safe
+        return (render_valid(label) + first_part + second_part).html_safe
     end
 end

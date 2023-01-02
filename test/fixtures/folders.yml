@@ -7,19 +7,33 @@ one:
   parent_id: MyString
   description: MyText
   domain: MyString
-  directory_customer_id: MyString
-  lifecycle_state: MyString
+  #directory_customer_id: MyString
+  lifecycle_state: A_MANHOUSE
   gcp_creation_time: 2022-12-28 09:05:46
   frog_type: MyString
 
 two:
   name: MyString
-  folder_id: MyString
-  is_org: false
+  folder_id: 1235467890
+  is_org: true
   parent_id: MyString
   description: MyText
-  domain: MyString
-  directory_customer_id: MyString
-  lifecycle_state: MyString
+  domain: two.example.com
+  directory_customer_id: a1a2a3a4a5
+  lifecycle_state: MANHOUSE
+  gcp_creation_time: 2022-12-28 09:05:46
+  frog_type: MyString
+
+
+
+three-invalid:
+  name: ThisShouldBeInvalid
+  folder_id: A1235467890
+  is_org: true
+  parent_id: MyString
+  description: Non numeric Folder id.
+  domain: invalid.example.com
+  directory_customer_id: 1nval1d
+  lifecycle_state: MANHOUSE
   gcp_creation_time: 2022-12-28 09:05:46
   frog_type: MyString

@@ -2,7 +2,7 @@
 module HaruspexMagicParser     
     extend ActiveSupport::Concern
 
-    HaruspexMagicParserVersion = '0.0.1'
+    HaruspexMagicParserVersion ||= '0.0.2'
 
     DbSeedMagicSignature30dec22 = {
         :parse_asset_inventory_dict=>  ["ancestors", "asset_type", "name", "resource", "update_time"],
@@ -11,13 +11,13 @@ module HaruspexMagicParser
         :parse_folder_info=> ["createTime", "displayName", "lifecycleState", "name", "parent"],
         :parse_asset_inventory_dict_from_gcloud=> ["assetType", "createTime", "description", "displayName", "location", "name", "parentAssetType", "parentFullResourceName", "project", "updateTime"]
     }
-    DbSeedMagicSignature30dec22 = {
-        :parse_asset_inventory_dict =>  ["ancestors", "asset_type", "name", "resource", "update_time"],
-        :parse_project_info=> ["createTime", "lifecycleState", "name", "parent", "projectId", "projectNumber"],
-        :parse_organization_info=> ["creationTime", "displayName", "lifecycleState", "name", "owner"],
-        :parse_folder_info=> ["createTime", "displayName", "lifecycleState", "name", "parent"],
-        :parse_asset_inventory_dict_from_gcloud=> ["assetType", "createTime", "description", "displayName", "location", "name", "parentAssetType", "parentFullResourceName", "project", "updateTime"]
-    }
+    # DbSeedMagicSignature30dec22 = {
+    #     :parse_asset_inventory_dict =>  ["ancestors", "asset_type", "name", "resource", "update_time"],
+    #     :parse_project_info=> ["createTime", "lifecycleState", "name", "parent", "projectId", "projectNumber"],
+    #     :parse_organization_info=> ["creationTime", "displayName", "lifecycleState", "name", "owner"],
+    #     :parse_folder_info=> ["createTime", "displayName", "lifecycleState", "name", "parent"],
+    #     :parse_asset_inventory_dict_from_gcloud=> ["assetType", "createTime", "description", "displayName", "location", "name", "parentAssetType", "parentFullResourceName", "project", "updateTime"]
+    # }
     #asset_inventory_parser.rb:
 
 included do
@@ -97,12 +97,11 @@ included do
                     return 0
                 end
                 if method_name == :haruspex_autoinfer
-                    #puts 'generic_parse_array_of_jsons_from_file_with_method TODO' 
                     haruspex_return = my_class.haruspex_autoinfer(json_buridone[0])
-                    #puts "haruspex_return = #{haruspex_return}"
-                    my_class = haruspex_return[0]
-                    method_name = haruspex_return[1]
-                    puts "💣 Nuclear Launch [AUTO]detected! Harsupex seems to have work. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
+                    my_class,method_name = haruspex_return
+                    # my_class = haruspex_return[0]
+                    # method_name = haruspex_return[1]
+                    puts "💣 Nuclear Launch [AUTO]detected! Haruspex seems to have worked. Calling now: #{my_class}::#{method_name} for an array of #{json_buridone.size} elements!"
                 end
                 # we do have an array of a generic construct which the method can parse
                 json_buridone.each_with_index do |single_json_construct, ix|

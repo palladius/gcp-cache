@@ -6,6 +6,7 @@ There's another theory which states that this has already happened 😉
 LabellableType needs to be <> 0
 <table border='1' >
   <tr>
+        <td>valid</td>
         <td>labellable </td>
         <td>gcp_k </td>
         <td>gcp_val </td>
@@ -14,6 +15,8 @@ LabellableType needs to be <> 0
     if label.labellable_type and label.labellable_id
   %>
     <tr>
+        <td>
+          <%= render_valid(label) %>
         <td>
           <%= label.labellable_type %>
           <%= label.labellable_id %>

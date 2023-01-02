@@ -13,7 +13,6 @@ included do
     #     exit 78
     # end
 
-
   def add_labels_if_they_exist(hash, opts={})
     #options
     opts_debug = opts.fetch :debug, false

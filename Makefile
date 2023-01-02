@@ -6,9 +6,12 @@ run:
 	rake assets:precompile || yarn build
 	rails s
 
+#rake db:fixtures:load FIXTURES=labels # this DESTROYS! dont call it!!!
 migrate:
-	rake db:migrate db:seed MAX_INDEX=100000 
-	rake db:fixtures:load FIXTURES=labels
+	rake db:migrate db:seed MAX_INDEX=100000  
+
+mini-migrate:
+	rake db:migrate db:seed MAX_INDEX=10
 
 
 db-drop-and-then-regenerate-YES-IM-SURE: delete-database-YES-IM-SURE migrate
