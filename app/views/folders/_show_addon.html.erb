@@ -2,18 +2,21 @@
 
 There's another theory which states that this has already happened 😉
 -->
-<h1><%= FOLDER_ICON %>Folder addon</h1>
+<h1>Folder addon (  <%= @folder.to_s(false) %>)</h1>
 
-  <%= @folder %>
 
 
 <h2>Parent</h2>
 
-  <%= @folder.parent %>
+  
+<% if @folder.parent %>
+  <p>Parent not found, probably an Org</p>
+ <% else %>
+ <%= render_folder( @folder.parent) if @folder.parent %>
+<% end %>
 
-  <%# @folders.each do |folder| %>
-      - <%#= render_folder folder %><br/>
-  <%# end %>
 <h2>Children</h2>
 
-<%= @folder.children %>
+<% @folder.children.each do |f| %>
+  <%= render_folder f %><br/>
+<% end %>

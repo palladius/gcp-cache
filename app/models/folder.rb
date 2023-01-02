@@ -37,7 +37,8 @@ class Folder < ApplicationRecord
     end
 
     def children 
-        Folder.find_by_parent_id( self.id)
+#        Folder.find_by_parent_id( self.id) # always return first :/
+        Folder.where(:parent_id => self.id) # always return first :/
     end
    
     def to_s(verbose=true)
@@ -106,8 +107,5 @@ class Folder < ApplicationRecord
         find_by(frog_type: frog_type, folder_id: folder_id)
     end
 
-    # def self.add_labels_if_they_exist(x)
-    #     puts :TODO_FOLDER
-    # end
 
 end

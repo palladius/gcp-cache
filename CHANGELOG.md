@@ -3,6 +3,7 @@
 This is the list of markdown-friendly list of changes to the app:
 
 ```bash
+2023-01-02 v0.8 Now added the add_labels() to all GCP constcuts.
 2023-01-01 v0.7 Haruspec auto-JSON detection  is working!
 2022-12-30 v0.6 Starting the muti-label support with polymorphic Rails associations.
 2022-12-30 v0.5 Refactored some Model stuff intto two concerns.. to make code more manageasble. Also found new ways to dig projects with gcloud and json :) More complexity coming soon!

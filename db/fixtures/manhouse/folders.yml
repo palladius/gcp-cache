@@ -1,7 +1,7 @@
 root_folder_fixture:
     name: 'my-fake-root-fixture'
     folder_id: '42000'
-    is_org: true, 
+    is_org: true
     #parent_id:string
     description: "This is my first root foldercreated on db/Fixture/manhouse/ folder"
     domain: fake.fixture.example.com

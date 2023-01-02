@@ -1,7 +1,9 @@
 
 # normal one
-#Rake.application["db:fixtures:load"].invoke
-Rake.application["db:fixtures"].invoke
+# TODO(ricc) REMOVE> Only way for me to import this: :/
+# NameError: uninitialized constant ActiveRecord::FixtureSet
+Rake.application["db:fixtures:load"].invoke
+#Rake.application["db:fixtures"].invoke
 
 #
 SeedVersion = "1.6_230101"
@@ -21,7 +23,7 @@ DbSeedMagicSignature30dec22 = {
 OrgFolderProjectsGraphFolder = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_FOLDER', nil 
 
 # This seeds random elements programmatically 
-def seed_random_stuff()
+def seed_generic_stuff_programmatically()
     fake_projects = [] 
 
     #include FixtureFileHelpers
@@ -40,7 +42,6 @@ def seed_random_stuff()
         gcp_k: 'SeedVersion',
         gcp_val: SeedVersion,
     )
-
     (1..5).each do |ix|
         p = Project.create(
             project_id: "fake-riccardo-project-#{ix}",
@@ -48,6 +49,10 @@ def seed_random_stuff()
             billing_account_id: '123456-7890AB-CDEF12',
             description: "Project # #{ix}.\nAdded by rake db:seed v#{SeedVersion}",
         )
+        p.add_labels({
+            "type": "party-of-five",
+            "pid#{ix}": "random-tagging-fake-riccardo-project-#{ix}",
+        })
         fake_projects << p
     end
 
@@ -57,7 +62,16 @@ def seed_random_stuff()
         is_org: true, 
         #parent_id:string
         description: "This is my first root folder, also a dir. Added by rake db:seed v#{SeedVersion}",
+        # serialized_labels: {
+        #     "aaa": "bbb",
+        #     "ccc": "ddd",
+        # },
+        # labelz:
     )
+    root_folder.add_labels({
+            "type": "hash",
+            "fid": "one-thousand",
+        })
     root_folder2 = Folder.create(
         name: 'my-other-fake-org',
         folder_id: '2000',
@@ -74,6 +88,7 @@ def seed_random_stuff()
                 parent_id: my_root.id,
                 description: "Child of #{my_root}. Added by rake db:seed v#{SeedVersion}",
             )
+            child_n.add_labels([['fid', "0#{i}00"]])
             if i ==2
                 Folder.create(
                 name: "my-l2-grandchild2-1",
@@ -144,20 +159,26 @@ def seed_from_gcloud_dumps
     end
 end
 
+SeedFromLocalFixtures = true 
+SeedFromLocalGclouds = false 
+#SeedFromExternalOrgFolderProjectsGraphFolder = true 
 
 def main()
     t0 = Time.now
     puts "DB:SEED start at #{Time.now}."
-    # TODO(ricc): query all assets :)
-    puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
-    # project creates stuff in the .cache directory
+    
+    seed_generic_stuff_programmatically() if SeedFromLocalFixtures
+    
+    #puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
     seed_from_org_folder_projects_graph(OrgFolderProjectsGraphFolder + "/.cache/") unless OrgFolderProjectsGraphFolder.nil?
-    seed_random_stuff
     seed_from_org_folder_projects_graph(ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR')
-    seed_from_bq_assets
-    seed_from_gcloud_dumps
+    seed_from_bq_assets() if SeedFromLocalGclouds
+    seed_from_gcloud_dumps() if SeedFromLocalGclouds
+    #pp DbSeedMagicSignature #.inspect
+    File.write('.DbSeedMagicSignature.yaml', DbSeedMagicSignature.to_yaml)
+    puts "File written: .DbSeedMagicSignature.yaml"
     puts "DB:SEED returned succesfully at #{Time.now}. Total time: #{Time.now - t0}sec. Miracle!"
-    pp DbSeedMagicSignature #.inspect
+
 end
 
 main()

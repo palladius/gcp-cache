@@ -55,6 +55,12 @@ This is how my object looks like:
       project: "TODO from AID.keys: #{aid.keys}",
       #TODO(riocc): add stuff which for now is always empty.. 
     )
+    # if aid.key?('labels') and not ii.valid?
+    #   pp aid
+    #   puts ii 
+    #   puts ii.error_messages
+    #   raise "invalid Inventory - lets fix this" 
+    # end
     ii.add_labels_if_they_exist(aid)
 
     puts "👍 Created aii1💛 (##{ii.id}): #{ii}" if ii.valid?
