@@ -37,7 +37,7 @@ def seed_generic_stuff_programmatically()
         end
     ret = ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
     puts "OK fixtures: #{ret}"
-    #exit 42
+
     Label.create(
         gcp_k: 'SeedVersion',
         gcp_val: SeedVersion,

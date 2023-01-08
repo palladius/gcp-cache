@@ -1,14 +1,17 @@
 #!/bin/bash
 
+
 _fatal() {
     echo "ERROR $@"
     exit 41
 }
-source .envrc ||
+. .envrc ||
     _fatal 'Not .envrc to slurp. Exiting.'
 
-echo "Here we assume you've already added your Asset Inventory resources to BQ and you configured .envrc to point to the right tables: $ASSET_INVENTORY_TABLES."
-echo "ASSET_INVENTORY_TABLES: $ASSET_INVENTORY_TABLES"
+direnv allow .
+
+echo "🔭 Here we assume you've already added your Asset Inventory resources to BQ and you configured .envrc to point to the right tables: $ASSET_INVENTORY_TABLES."
+echo "🔭 ASSET_INVENTORY_TABLES: $ASSET_INVENTORY_TABLES"
 
 cat <<END_OF_BQ_TEXT >.tmp
 -------------- -------------- -------------- -------------- --------------
