@@ -4,10 +4,15 @@
 
 
 <div id="folders">
-  <table>
-    <%= render_org_as_tr(nil) %>
-    <% @folders.each do |folder| %>
+  <table class="table" >
+    <thead class="thead-light" >
+      <%= render_org_as_tr(nil) %>
+    </thead>
+    <tbody>
+      <% @folders.each do |folder| %>
         <%= render_org_as_tr(folder) %>
-  <% end %>
+      <% end %>
+    </tbody>
+
   </table>
 </div>

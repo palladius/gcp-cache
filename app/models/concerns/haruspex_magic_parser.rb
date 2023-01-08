@@ -1,5 +1,5 @@
 # automatically parses with right function based on keys of hash being parsed.
-module HaruspexMagicParser     
+module HaruspexMagicParser
     extend ActiveSupport::Concern
 
     HaruspexMagicParserVersion ||= '0.0.2'
@@ -22,10 +22,10 @@ module HaruspexMagicParser
 
 included do
 
-    # This is the summa of Riccardo ability to write good, unreadable code :) 
+    # This is the summa of Riccardo ability to write good, unreadable code :)
     # We're autoinferring what function to call based on the hash keys shape.
     # This would be much easier if the keys stayed the same :)
-    # Should return a copule Class and Method :) 
+    # Should return a copule Class and Method :)
     def self.haruspex_autoinfer(hash, opts={})
         opts_verbose = opts.fetch :verbose, false
         raise "haruspex_autoinfer(): Expecting a hash, got a #{hash.class}" unless hash.class == Hash
@@ -34,12 +34,12 @@ included do
         # additionalAttributes: Found in some InventoryItems - super interesting as its a VERY generic keyval. Super yummie.
         # Should capture some day in the future.
         hash=hash.except('labels', 'additionalAttributes')
-        
+
         my_keys = hash.keys
         # find best match for this hash..
         puts my_keys.join(', ') if opts_verbose
         matching_methods = {}
-        DbSeedMagicSignature30dec22.each do |k,v| 
+        DbSeedMagicSignature30dec22.each do |k,v|
             matching_methods[k] = {}
             # https://stackoverflow.com/questions/7387937/how-to-determine-if-one-array-contains-all-elements-of-another-array
             matching_methods[k][:all] = my_keys.all? { |e| v.include?(e) }
@@ -54,7 +54,7 @@ included do
             end
         end
         pp(matching_methods) if opts_verbose
-        puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}" 
+        puts "I failed miserably to autoinfer this couple of keys: Sorry! #{my_keys}"
         raise "🐦 haruspex_autoinfer(): Unknown key-pair-ad-bal: #{my_keys}"
     end
 
@@ -87,11 +87,11 @@ included do
             # opts part
             opts_verbose = opts.fetch :verbose, true
             ret = nil
-        
+
             my_method=my_class.method(method_name) # Folder, :blah -> #<Method: Folder (call 'Folder.connection' to establish a connection).parse_folder_info(hash, opts=...) ./app/models/concerns/gcp_stuff_parser.rb:148>
             puts "🔬 [DB🌱v#{SeedVersion}] Parsing #{description} file: #{json_file}"
             json_buridone = JSON.parse(File.read(json_file))
-            if  json_buridone.is_a? Array 
+            if  json_buridone.is_a? Array
                 if json_buridone.size == 0
                     puts "Empty Array - skipping. Or maybe delete this file: #{json_file}"
                     return 0
@@ -109,7 +109,7 @@ included do
                     if ix >= MaxIndex
                         puts "Returning from generic_parse_array_of_jsons_from_file_with_method (#{description}) after #{ix} calls, as i'm just testing and the file is HUMOUNGUSLY big (#{json_buridone.count})"
                         return ["Array out of MaxIndex: returing last of array", ret]
-                    end    
+                    end
                 end
                 puts "🖖 Finished parsing file of #{json_buridone.size} elements."
                 return ["Array finished normally", ret]
@@ -119,13 +119,13 @@ included do
                 ret = private_parse_single_json(json_file, single_json_construct, description, my_class, method_name, 0, opts)
                 return ["Hash mono-element ok", ret]
             else
-                puts "❌generic_parse_array_of_jsons_from_file_with_method: probably malformed json here: #{json_file}. Investigate and delete/regenerate. json_buridone.class = #{json_buridone.class}"
-                exit 49
+                raise "❌generic_parse_array_of_jsons_from_file_with_method: probably malformed json here: #{json_file}. Investigate and delete/regenerate. json_buridone.class = #{json_buridone.class}"
+                #exit 49
             end
             return ret
         end
-        
 
-end 
+
+end
 
 end
