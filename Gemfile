@@ -82,3 +82,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "ruby-lsp", "~> 0.3.7", :group => :development

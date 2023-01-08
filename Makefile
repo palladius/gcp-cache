@@ -8,7 +8,7 @@ run:
 
 #rake db:fixtures:load FIXTURES=labels # this DESTROYS! dont call it!!!
 migrate:
-	rake db:migrate db:seed MAX_INDEX=100000  
+	rake db:migrate db:seed MAX_INDEX=100000
 
 mini-migrate:
 	rake db:migrate db:seed MAX_INDEX=10
@@ -16,7 +16,7 @@ mini-migrate:
 
 db-drop-and-then-regenerate-YES-IM-SURE: delete-database-YES-IM-SURE migrate
 delete-database-YES-IM-SURE:
-	rake db:drop 
+	rake db:drop
 run-migrations-once-hopefully:
 	# repeat with --force if you make a mistake
 	rails generate scaffold project project_id:string project_number:string organization_id:string parent_id:string billing_account_id:string description:text \
@@ -47,3 +47,6 @@ cleanup-empty-json-files:
 
 seed-from-riccardo-other-script:
 	ORG_FOLDER_PROJECTS_GRAPH_FOLDER="~/git/org-folder-projects-graph-deleteme/" rake db:seed
+
+clean:
+	./cleanup-empty-files.sh

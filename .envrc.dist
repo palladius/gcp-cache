@@ -10,8 +10,8 @@ export CODE_URL="http://github.com/palladius/gcp-cache"
 export APP_NAME="🌩 GCP Cache (dist)"
 export APP_DESCRIPTION="A lightning-fast cache for your GCP Orgs, Folders, Projects and GCP entities"
 export ORG_FOLDER_PROJECTS_GRAPH_DIR="./db/fixtures/org-folder-projects-graph/projects/"
-# If you installed and ran this amazing script Riccardo has created, just update the folder: https://github.com/palladius/org-folder-projects-graph 
-export ORG_FOLDER_PROJECTS_GRAPH_EXTERNAL_FOLDER="~/path/to/org-folder-projects-graph-deleteme/" 
+# If you installed and ran this amazing script Riccardo has created, just update the folder: https://github.com/palladius/org-folder-projects-graph
+export ORG_FOLDER_PROJECTS_GRAPH_EXTERNAL_FOLDER="~/path/to/org-folder-projects-graph-deleteme/"
 
 export PROJECT_ICON='🍕'
 export FOLDER_ICON='📂'
@@ -21,10 +21,10 @@ export ORG_ICON='🗂'
 export ASSET_INVENTORY_TABLES='my-project.my-dataset.my_tables_'
 export ORGANIZATION_ID="1234567890"
 # A project where to use gcloud to extract ALL assets you're interested to.
-# When it works, will move to  the iteration :) IO need numerical part for immediate use 
+# When it works, will move to  the iteration :) IO need numerical part for immediate use
 # of Asset aPI.
 export PROJECT_NUMBER="123456789012"
 export INTERESTING_PROJECT_NUMBERS="123456789012,1234567890123,12345678901234"
 
-#### v1.1 2022-12-XX ####
+#### v1.1 2022-12-29 ####
 
