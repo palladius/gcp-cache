@@ -1,8 +1,7 @@
 module FoldersHelper
 
     def render_folder(folder)
-        link_to folder, folder
-        # add parent if ..
+        (render_valid(folder) + link_to( folder, folder)).html_safe
     end
 
 end
