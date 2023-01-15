@@ -9,9 +9,16 @@
 
 <h2>📈 Some Stats</h2>
 
-# Projects: <b><%=@projects.count%></b><br/>
-# Orgs: <b><%=@orgs.count%></b><br/>
-# folders: <b><%=@folders.count%></b><br/>
-# labels: <b><%=@labels.count rescue $! %></b><br/>
-# inventory_items: <b><%=@inventory_items.count%></b><br/>
+<h4>🛢 DB Entities</h4>
+
+#Projects: <b><%=@projects.count%></b><br/>
+#Orgs: <b><%=@orgs.count%></b><br/>
+#folders: <b><%=@folders.count%></b><br/>
+#labels: <b><%=@labels.count rescue $! %></b><br/>
+#inventory_items: <b><%=@inventory_items.count%></b><br/>
+
+<h4>🚂 Rails config</h4>
+
+DB Type: <b><%=  ActiveRecord::Base.connection.adapter_name %></b><br/>
+ENV:<b> <%= Rails.env %></b><br/>
 

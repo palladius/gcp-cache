@@ -2,7 +2,7 @@
 # normal one
 # TODO(ricc) REMOVE> Only way for me to import this: :/
 # NameError: uninitialized constant ActiveRecord::FixtureSet
-Rake.application["db:fixtures:load"].invoke
+#Rake.application["db:fixtures:load"].invoke
 #Rake.application["db:fixtures"].invoke
 
 #
@@ -19,8 +19,10 @@ DbSeedMagicSignature30dec22 = {
  :parse_asset_inventory_dict_from_gcloud=> ["assetType", "createTime", "description", "displayName", "location", "name", "parentAssetType", "parentFullResourceName", "project", "updateTime"]
 }
 
-#ORG_FOLDER_PROJECTS_GRAPH_FOLDER
+#if ORG_FOLDER_PROJECTS_GRAPH_FOLDER is defined, i ONLY do that. Maybe some day i can change this, but as of now its a rare condition and i want to troubleshoot it easily./
 OrgFolderProjectsGraphFolder = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_FOLDER', nil
+SeedFromLocalFixtures =  OrgFolderProjectsGraphFolder==nil # true
+SeedFromLocalGclouds =  OrgFolderProjectsGraphFolder==nil # true
 
 # This seeds random elements programmatically
 def seed_generic_stuff_programmatically()
@@ -35,8 +37,12 @@ def seed_generic_stuff_programmatically()
             # The use of String#[] here is to support namespaced fixtures
             Dir["#{fixtures_dir}/**/*.yml"].map {|f| f[(fixtures_dir.size + 1)..-5] }
         end
-    ret = ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
-    puts "OK fixtures: #{ret}"
+
+    # possibly gives error :)
+    begin
+        ret = ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files) rescue "NOPE. Some error here."
+        puts "OK fixtures: #{ret}"
+    end
 
     Label.create(
         gcp_k: 'SeedVersion',
@@ -159,9 +165,7 @@ def seed_from_gcloud_dumps
     end
 end
 
-SeedFromLocalFixtures = true
-SeedFromLocalGclouds = true
-#SeedFromExternalOrgFolderProjectsGraphFolder = true
+
 
 def main()
     t0 = Time.now
