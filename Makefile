@@ -1,6 +1,7 @@
 
 SHELL := /bin/bash
 
+
 run:
 	#https://stackoverflow.com/questions/72448485/the-asset-application-js-is-not-present-in-the-asset-pipeline-in-rails-7
 	rake assets:precompile || yarn build
@@ -53,3 +54,8 @@ clean:
 
 install-debian-ubuntu:
 	sudo apt-get install sqlite3 libsqlite3-dev 
+	# If you have no yarn: https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
+	#sudo apt remove cmdtest
+	#sudo apt remove yarn
+	#Install yarn globally using npm
+	#sudo npm install -g yarn

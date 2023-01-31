@@ -8,7 +8,7 @@
 #
 SeedVersion = "1.6_230101"
 # Max how many counts
-MaxIndex = ENV.fetch('MAX_INDEX', '10' ).to_i
+MaxIndex = ENV.fetch('MAX_INDEX', '100' ).to_i
 DbSeedMagicSignature = {}
 # This is me copying from stdout #allavecchia :)
 DbSeedMagicSignature30dec22 = {

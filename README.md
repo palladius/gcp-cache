@@ -17,7 +17,15 @@ Built with:
 
 * `cp .envrc.dist .envrc`
 * edit away
-* rails s
+* make run # rails s after precompiling assets, you know, CSSs...
+
+## How to add data
+
+1. Install the awesome https://github.com/palladius/org-folder-projects-graph and make sure its in the right path (../org-folder-projects-graph/) and run the org thingy on a few Orgs you own. That will create JSONs in your ../org-folder-projects-graph/.cache/.
+2. Run `./gcloud-generate-info.sh`
+3. Run `./populate-stuff-from-gcloud.sh`
+4. Look in awe: `find db -name \*.json | xargs ls -al` , its all your stuff! Some files will be empty, I know.
+5. Re-run `rake db:seed`. It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me
 
 # Deployment
 
