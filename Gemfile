@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.5"
+#ruby "2.7.5"
+
+ruby "~> 3"
 
 ################################################
 # Riccardo Start
@@ -9,9 +11,6 @@ ruby "2.7.5"
 gem 'dotenv-rails'
 #gem 'acts_as_tree' # https://github.com/amerine/acts_as_tree
 gem 'acts_as_tree', '~> 2.4'
-
-gem "stimulus-rails"
-
 # /Riccardo end
 ################################################
 
@@ -22,7 +21,11 @@ gem "rails", "~> 7.0.4"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# This works: gem install sqlite3 -v 1.6.0
+gem "sqlite3", "~> 1.6.0"
+#WAS: gem "sqlite3", "~> 1.4" and broke on Derek
+# gem 'sqlite3', '~> 1.3.13'
+
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

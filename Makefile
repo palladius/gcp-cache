@@ -50,3 +50,6 @@ seed-from-riccardo-other-script:
 
 clean:
 	./cleanup-empty-files.sh
+
+install-debian-ubuntu:
+	sudo apt-get install sqlite3 libsqlite3-dev 
