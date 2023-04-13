@@ -26,4 +26,8 @@
 DB Type: <b><%=  ActiveRecord::Base.connection.adapter_name %></b><br/>
 ENV: <b><%= Rails.env %></b><br/>
 PROJECT_ID:<b><%= ENV.fetch 'PROJECT_ID', :boh %></b><br/>
-DATABASE_URL:<b>HIDDEN<%= ENV.fetch 'DATABASE_URL', :boh %></b> (risky! Removeme when it works)<br/>
+DATABASE_URL:<b>HIDDEN<%#= ENV.fetch 'DATABASE_URL', :boh %></b> (risky! Removeme when it works)<br/>
+
+Adapter and DBName (safer): <%= ActiveRecord::Base.configurations.configs_for(env_name: Rails.env ).first.adapter %> //
+  <b><%= ActiveRecord::Base.configurations.configs_for(env_name: Rails.env ).first.database %></b>
+<br/>
