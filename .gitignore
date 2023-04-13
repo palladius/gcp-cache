@@ -45,3 +45,4 @@ db/fixtures/bq-exports/assets-export20221227-190529.json
 db/fixtures/gcloud/organizations.json
 db/fixtures/gcloud/projects.json
 .DbSeedMagicSignature.yaml
+.echodo_history

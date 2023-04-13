@@ -38,19 +38,20 @@ watch-db:
 	watch make db-show
 
 gcloud-generate-info:
-	./gcloud-generate-info.sh
+	bin/gcloud-generate-info.sh
 
 populate-asset-inventory-from-bq:
-	./populate-projects-and-folders-from-bigquery.sh
+	bin/populate-projects-and-folders-from-bigquery.sh
 
 cleanup-empty-json-files:
 	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
 
 seed-from-riccardo-other-script:
+	# this is available if you download this: 
 	ORG_FOLDER_PROJECTS_GRAPH_FOLDER="~/git/org-folder-projects-graph/" rake db:seed
 
 clean:
-	./cleanup-empty-files.sh
+	bin/cleanup-empty-files.sh
 
 install-debian-ubuntu:
 	sudo apt-get install sqlite3 libsqlite3-dev 
