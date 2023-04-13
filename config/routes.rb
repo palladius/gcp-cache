@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :billing_accounts
 
   get "/inventory_items/stats", to: "inventory_items#stats"
 

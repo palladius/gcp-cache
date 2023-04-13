@@ -29,6 +29,9 @@ run-migrations-once-hopefully:
 	rails g scaffold inventory_item serialized_ancestors:text description:text asset_type:string name:string gcp_update_time:timestamp resource_location:string resource_discovery_name:string resource_parent:string project:string
 	git restore app/helpers app/models/
 	git restore app/views/inventory_items/index.html.erb
+
+	rails g scaffold billing_account description:text display_name:string master_billing_account:string name:string open:boolean baid:string
+
 	echo Now take a quick look at VIEWS..
 
 db-show:

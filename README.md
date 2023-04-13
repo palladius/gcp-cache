@@ -123,6 +123,16 @@ This is me documenting how all the *ambaradan* works. Currently there are some b
   },
   "location": string
   }
+
+  Billing Accounts:
+
+    {
+    "displayName": "Google Cloud Platform - fake Billing Account",
+    "masterBillingAccount": "", # Usually empty
+    "name": "billingAccounts/01AAAA-424242-C1EFC0",
+    "open": true
+  }
+
 ```
 
 Actually I implemented a Schema autodetect :)

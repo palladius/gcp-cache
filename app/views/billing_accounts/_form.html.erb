@@ -1,0 +1,47 @@
+<%= form_with(model: billing_account) do |form| %>
+  <% if billing_account.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(billing_account.errors.count, "error") %> prohibited this billing_account from being saved:</h2>
+
+      <ul>
+        <% billing_account.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :display_name, style: "display: block" %>
+    <%= form.text_field :display_name %>
+  </div>
+
+  <div>
+    <%= form.label :master_billing_account, style: "display: block" %>
+    <%= form.text_field :master_billing_account %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :open, style: "display: block" %>
+    <%= form.check_box :open %>
+  </div>
+
+  <div>
+    <%= form.label :baid, style: "display: block" %>
+    <%= form.text_field :baid %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

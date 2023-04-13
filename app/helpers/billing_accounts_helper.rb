@@ -1,0 +1,2 @@
+module BillingAccountsHelper
+end
