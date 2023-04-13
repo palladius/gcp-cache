@@ -4,11 +4,11 @@
 
 [query]
 --use_legacy_sql=false
---max_rows=100
---maximum_bytes_billed=10000000
+--max_rows=1042
+--maximum_bytes_billed=100000000
 
-[load]
---destination_kms_key=projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey
+#[load]
+#--destination_kms_key=projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey
 
 
 # This is explained here:
