@@ -12,6 +12,8 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
+#  url: <%= ENV["DATABASE_URL_DEVELOPMENT"] %>
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,8 +23,8 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["PROD_DATABASE_URL"] %>
+  #adapter: postgresql
+  #encoding: unicode
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV["DATABASE_URL_PRODUCTION"] %>
 #  descrizione: PROD DB todo change user/pass cos its been exposed

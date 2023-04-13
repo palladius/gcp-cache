@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_31_070754) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.string "folder_id"
@@ -44,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_070754) do
     t.string "gcp_k"
     t.string "gcp_val"
     t.string "labellable_type"
-    t.integer "labellable_id"
+    t.bigint "labellable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["labellable_type", "labellable_id"], name: "index_labels_on_labellable"

@@ -28,7 +28,12 @@ export INTERESTING_PROJECT_NUMBERS="123456789012,1234567890123,12345678901234"
 
 #### v1.1 2022-12-29 ####
 # See https://guides.rubyonrails.org/v5.1/configuring.html
-export DATABASE_URL="TODO"
+# Change to MySQL or PostgreS - note that Gemfile is ONLY configured for SQLITE and POSTGRES
+export DATABASE_URL_DEVELOPMENT="sqlite3:db/development.sqlite3"  # 🪶🛢 SQLite for DEV
+export DATABASE_URL_PRODUCTION="sqlite3:db/production.sqlite3"  # 🪶🛢 SQLite
+#export DATABASE_URL="sqlite3:db/production.sqlite3" # 🐬🛢 MySQL
+#export DATABASE_URL="sqlite3:db/production.sqlite3" # 🐘🛢 PostgreS
+
 
 #### v1.2 2023-04-13 ####
 export PROJECT_ID="the-same-as-above-but-in-string"

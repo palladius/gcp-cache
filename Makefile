@@ -7,7 +7,7 @@ show-data:
 run:
 	#https://stackoverflow.com/questions/72448485/the-asset-application-js-is-not-present-in-the-asset-pipeline-in-rails-7
 	rake assets:precompile || yarn build
-	rails s
+	DATABASE_URL="$(DATABASE_URL_DEVELOPMENT)" rails s
 
 #rake db:fixtures:load FIXTURES=labels # this DESTROYS! dont call it!!!
 migrate:
@@ -49,14 +49,14 @@ populate-asset-inventory-from-bq:
 #	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
 
 seed-from-riccardo-other-script:
-	# this is available if you download this: 
+	# this is available if you download this:
 	ORG_FOLDER_PROJECTS_GRAPH_FOLDER="~/git/org-folder-projects-graph/" rake db:seed
 
 clean:
 	bin/cleanup-empty-files.sh
 
 install-debian-ubuntu:
-	sudo apt-get install sqlite3 libsqlite3-dev 
+	sudo apt-get install sqlite3 libsqlite3-dev
 	# If you have no yarn: https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
 	#sudo apt remove cmdtest
 	#sudo apt remove yarn
@@ -68,3 +68,6 @@ install-debian-ubuntu:
 run-prod:
 	bin/rails credentials:edit
 	RAILS_ENV=production rails s -p 8080
+
+reset-authentication:
+	rm config/master.key config/credentials.yml.enc
