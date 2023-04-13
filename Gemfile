@@ -11,6 +11,7 @@ ruby "~> 3"
 gem 'dotenv-rails'
 #gem 'acts_as_tree' # https://github.com/amerine/acts_as_tree
 gem 'acts_as_tree', '~> 2.4'
+gem 'pg' # for prod
 # /Riccardo end
 ################################################
 

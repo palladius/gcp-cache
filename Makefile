@@ -62,3 +62,9 @@ install-debian-ubuntu:
 	#sudo apt remove yarn
 	#Install yarn globally using npm
 	#sudo npm install -g yarn
+	# for PostgreS
+	sudo apt install postgresql postgresql-contrib libpq-dev
+
+run-prod:
+	bin/rails credentials:edit
+	RAILS_ENV=production rails s -p 8080

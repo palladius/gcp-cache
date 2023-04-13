@@ -135,6 +135,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.1-x86_64-linux)
       racc (~> 1.4)
+    pg (1.4.6)
     prettier_print (1.2.0)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -233,6 +234,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder
   jsbundling-rails
+  pg
   puma (~> 5.0)
   rails (~> 7.0.4)
   ruby-lsp (~> 0.3.7)
