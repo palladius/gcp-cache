@@ -31,11 +31,17 @@ You might want to install this code to slurp your Org.
 
 This software works 'perfectly' with it (meaning "it works on my machine").
 
+### Phase 1. Populate local JSONs for the big Haduken
+
 1. Install the awesome https://github.com/palladius/org-folder-projects-graph and make sure its in the right path (../org-folder-projects-graph/) and run the org thingy on a few Orgs you own. That will create JSONs in your `../org-folder-projects-graph/.cache/`.
-2. Run `bin/gcloud-generate-info.sh`
-3. Run `bin/populate-stuff-from-gcloud.sh`
-4. Look in awe: `make show-data` , it's all your stuff! Some files will be empty, I know.
-5. Re-run `rake db:seed` or better `make seed-from-riccardo-other-script`. It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me? You should.
+1. Run `bin/gcloud-generate-info.sh`
+1. Run `bin/populate-stuff-from-gcloud.sh`
+1. Run BQ to parse Inventory from AssetInventory if you set it up in the past (I did): `make populate-asset-inventory-from-bq`. Not sure this will work for you but I hope.
+Look in awe: `make show-data` , it's all your stuff! Some files will be empty, I know.
+
+### Phase 2: The big Haduken
+
+1. Re-run  `make seed-from-riccardo-other-script` (a form of the familiar `rake db:seed`  which sets correctly certain ENVs - this is what you change in case your installation is different path than mine). It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me? You should.
 
 See if you get any data with `make show-data`. Sample result:
 

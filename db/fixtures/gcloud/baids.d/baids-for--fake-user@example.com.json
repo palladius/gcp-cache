@@ -1,0 +1,14 @@
+[
+  {
+    "displayName": "Fake Closed Billing Account",
+    "masterBillingAccount": "",
+    "name": "billingAccounts/01D001-123456-424242",
+    "open": false
+  },
+  {
+    "displayName": "Google Cloud Platform - fake Billing Account",
+    "masterBillingAccount": "",
+    "name": "billingAccounts/01AAAA-424242-C1EFC0",
+    "open": true
+  }
+]
