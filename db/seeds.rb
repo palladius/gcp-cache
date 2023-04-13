@@ -183,9 +183,6 @@ def main()
     seed_generic_stuff_programmatically() if SeedFromLocalFixtures
 
     seed_from_billing_accounts() if SeedFromBillingAccounts
-    puts 'remove me when it works'
-    exit 42
-
     #puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
     seed_from_org_folder_projects_graph(OrgFolderProjectsGraphFolder + "/.cache/") unless OrgFolderProjectsGraphFolder.nil?
     seed_from_org_folder_projects_graph(ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_DIR')

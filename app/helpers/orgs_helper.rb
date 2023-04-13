@@ -40,7 +40,8 @@ module OrgsHelper
 
 
     def render_org(folder)
-        link_to "🗂️ Org(#{folder.name})", "/orgs/#{folder.id}"
+#        link_to "🗂️ Org(#{folder.name})", "/orgs/#{folder.id}"
+        link_to "🗂️ #{folder.name}", "/orgs/#{folder.id}"
     end
 
 
@@ -59,8 +60,8 @@ module OrgsHelper
         <!-- < t h scope='row' >2 < / t h > -->
         <td>#{render_valid folder}
         <td>#{link_to folder.id, "/folders/#{folder.id}"}
-        <td><b>#{folder.folder_id}</b>
-            <td>#{folder.domain}
+        <td>#{folder.folder_id}
+            <td><b>#{folder.domain}</b>
             <td>#{folder.directory_customer_id}
             <td>#{ render_org folder }
         </tr>".html_safe
