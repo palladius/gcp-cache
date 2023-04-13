@@ -2,8 +2,7 @@
 SHELL := /bin/bash
 
 show-data:
-	@echo '👀 Showing data in your local folder..'
-	find db/fixtures/ -name '*.json'
+	bin/show-data.sh
 
 run:
 	#https://stackoverflow.com/questions/72448485/the-asset-application-js-is-not-present-in-the-asset-pipeline-in-rails-7

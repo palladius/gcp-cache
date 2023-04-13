@@ -111,5 +111,14 @@ class Folder < ApplicationRecord
         find_by(frog_type: frog_type, folder_id: folder_id)
     end
 
+    def self.count_orgs
+        self.where(:is_org => true).count
+    end
+    def self.count_folders
+        self.where(:is_org => false).count
+    end
+
+    
+
 
 end

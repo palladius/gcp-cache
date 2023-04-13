@@ -38,15 +38,22 @@ See if you get any data with `make show-data`. Sample result:
 ```bash
 $ make show-data
 👀 Showing data in your local folder..
-find db/fixtures/ -name '*.json'
-db/fixtures/bq-exports/assets-export.20230413.json
-db/fixtures/gcloud/folders-of-824879804362-20230413-174052.json
-db/fixtures/gcloud/organizations.json
-db/fixtures/gcloud/projects-20230413-171841.json
-db/fixtures/gcloud/folders-of-824879804362-20230413-171842.json
-db/fixtures/gcloud/projects-20230413-174050.json
-db/fixtures/gcloud/gcloud-projects-list-20230131-172133.json
-db/fixtures/org-folder-projects-graph/projects/projects-childrenof-887288965373.json
+100      db/fixtures/bq-exports/assets-export.20230413.json
+6        db/fixtures/gcloud/folders-of-824879804362-20230413-174052.json
+7        db/fixtures/gcloud/organizations.json
+5        db/fixtures/gcloud/projects-20230413-171841.json
+6        db/fixtures/gcloud/folders-of-824879804362-20230413-171842.json
+5        db/fixtures/gcloud/projects-20230413-174050.json
+7069     db/fixtures/gcloud/gcloud-projects-list-20230131-172133.json
+1        db/fixtures/org-folder-projects-graph/projects/projects-childrenof-887288965373.json
+
+👀 Lets now ask Rails DB:
+Loading development environment (Rails 7.0.4.2)
+Switch to inspect mode.
+"🍕 #{Project.count} Projects 📂 #{Folder.count_folders} Folders 🗂️  #{Folder.count_orgs} Orgs"
+"🍕 529 Projects 📂 108 Folders 🗂️  22 Orgs"
+
+👀 DONE 
 ```
 
 ### What does `org-folder-projects-graph` do anyway?
