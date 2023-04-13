@@ -34,7 +34,7 @@ This software works 'perfectly' with it (meaning "it works on my machine").
 1. Install the awesome https://github.com/palladius/org-folder-projects-graph and make sure its in the right path (../org-folder-projects-graph/) and run the org thingy on a few Orgs you own. That will create JSONs in your `../org-folder-projects-graph/.cache/`.
 2. Run `bin/gcloud-generate-info.sh` 
 3. Run `bin/populate-stuff-from-gcloud.sh`
-4. Look in awe: `find db -name \*.json | xargs ls -al` , its all your stuff! Some files will be empty, I know.
+4. Look in awe: `make show-data` , it's all your stuff! Some files will be empty, I know.
 5. Re-run `rake db:seed` or better `make seed-from-riccardo-other-script`. It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me? You should.
 
 See if you get any data with `make show-data`. Sample result:
@@ -78,6 +78,8 @@ Plus, the script will create a bunch of JSONs in .cache/ which this script reuse
 
 Genius!
 
+and yes, this explains the logo too.
+
 # Deployment
 
 TODO(ricc): skaffold and CB and CD.
@@ -98,11 +100,12 @@ I'd like to make this project re-creatable as much as possible, so I'll keep in 
 This is me documenting how all the *ambaradan* works. Currently there are some bugs so some imports do NOt work. sorry.
 
 * `Projects` - DONE
-* `Folders and Orgs` - I'd like to have a similar format to project so i get a SINGLE table and its easy to do parental control :) . Let me see how the two DBs look like and diff them intelligently.
+* `Folders and Orgs` - Now both are conveyed in the `Folder` model. The view/controller discriminates in query/view for the Org, but lets remember that while Orgs are specials, folders cant exist without orgs (so you can visualize Org alone which have more stuff, but when you visualize folders you cant leave the orgs behind or trees become silly forests). 
 * See https://github.com/palladius/org-folder-projects-graph to get them out :)
 * asset_inventory_items: I'll skip on data.
 
 ```json
+# JSON representation of a Folder/Org (I believe)
 {
  "version": string,
   "discoveryDocumentUri": string,
