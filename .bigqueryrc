@@ -1,0 +1,15 @@
+--apilog=stdout
+--format=prettyjson
+--location=US
+
+[query]
+--use_legacy_sql=false
+--max_rows=100
+--maximum_bytes_billed=10000000
+
+[load]
+--destination_kms_key=projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey
+
+
+# This is explained here:
+# https://cloud.google.com/bigquery/docs/bq-command-line-tool?hl=it

@@ -1,5 +1,7 @@
 # README
 
+ <img src='https://github.com/palladius/gcp-cache/raw/main/app/assets/images/PalladiusPacans_a_very_intertwined_network_of_pizza_slices_fold_014a6801-a8d0-4122-a8f9-4aa778cb089c.png' height='300' align='right' />
+
 Built with:
 
 * Rails `7.0.4`
