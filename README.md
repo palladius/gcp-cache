@@ -1,6 +1,6 @@
 # README
 
- <img src='https://github.com/palladius/gcp-cache/raw/main/app/assets/images/PalladiusPacans_a_very_intertwined_network_of_pizza_slices_fold_014a6801-a8d0-4122-a8f9-4aa778cb089c.png' height='300' align='right' />
+ <img src='https://github.com/palladius/gcp-cache/raw/main/app/assets/images/PalladiusPacans_a_very_intertwined_network_of_pizza_slices_fold_014a6801-a8d0-4122-a8f9-4aa778cb089c.png' height='400' align='right' />
 
 Built with:
 
@@ -10,7 +10,9 @@ Built with:
 * Database creation: TODO under `iac/`
 * Database initialization: TODO
 * ENV vars: `.envrc` with yours and `.envrc.dist` to copy yours from
-* No Services for now (job queues, cache servers, search engines, etc.)
+* Plays well with: https://github.com/palladius/org-folder-projects-graph
+
+No Services for now (job queues, cache servers, search engines, etc.)
 
 # install
 
