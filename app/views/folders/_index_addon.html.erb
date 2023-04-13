@@ -2,7 +2,9 @@
 
 There's another theory which states that this has already happened 😉
 -->
-<h1><%= FOLDER_ICON %>Folders</h1>
+<h1><%= FOLDER_ICON %><%=@folders.count%>(*) Folders</h1>
+
+<p>(*) Note: This counts both proper folders (<%=Folder.count_folders %>) and Organizations (<%=Folder.count_orgs %>) (which are root folders so they have all the dignity of folders).</p>
 
   <% @folders.each do |folder| %>
       - <%= render_folder folder %><br/>
