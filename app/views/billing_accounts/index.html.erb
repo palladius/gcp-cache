@@ -1,14 +1,3 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Billing accounts</h1>
-
-<div id="billing_accounts">
-  <% @billing_accounts.each do |billing_account| %>
-    <%= render billing_account %>
-    <p>
-      <%= link_to "Show this billing account", billing_account %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New billing account", new_billing_account_path %>
+<%= render 'billing_accounts/index_addon' %>

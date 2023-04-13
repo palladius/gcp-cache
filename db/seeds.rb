@@ -23,6 +23,7 @@ DbSeedMagicSignature30dec22 = {
 OrgFolderProjectsGraphFolder = ENV.fetch 'ORG_FOLDER_PROJECTS_GRAPH_FOLDER', nil
 SeedFromLocalFixtures =  OrgFolderProjectsGraphFolder==nil # true
 SeedFromLocalGclouds =  OrgFolderProjectsGraphFolder==nil # true
+SeedFromBillingAccounts = true
 
 # This seeds random elements programmatically
 def seed_generic_stuff_programmatically()
@@ -137,6 +138,14 @@ def seed_from_bq_assets(dir=nil)
     end
 end
 
+def seed_from_billing_accounts(dir=nil)
+    Dir["db/fixtures/gcloud/baids.d/baids-for--*.json"].each do |baid_json_file|
+        ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method(
+            baid_json_file, 'BAID JSON export from gcloud', BillingAccount, :parse_baid_dict)
+        # puts "👀 File '#{bq_json_file}': #{json_buridone.count} items found"
+    end
+end
+
 def seed_from_gcloud_dumps
     Dir["db/fixtures/gcloud/project*.json"].each do |gcloud_json_file|
         ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method(
@@ -172,6 +181,10 @@ def main()
     puts "DB:SEED start at #{Time.now}."
 
     seed_generic_stuff_programmatically() if SeedFromLocalFixtures
+
+    seed_from_billing_accounts() if SeedFromBillingAccounts
+    puts 'remove me when it works'
+    exit 42
 
     #puts "Riccardo, next step is to get TAGS. Try inspecting the latest projects in db/fixtures/gcloud/gcloud-projects-list-20221230-215526.json"
     seed_from_org_folder_projects_graph(OrgFolderProjectsGraphFolder + "/.cache/") unless OrgFolderProjectsGraphFolder.nil?

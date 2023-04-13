@@ -1,0 +1,9 @@
+<!-- This addon is creted in case I overwrite the index.html again :)
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= BillingAccount.emoji %>BAIDs</h1>
+
+  <%  @billing_accounts.each do |x| %>
+      <%= render_baid x %><br/>
+  <% end %>
