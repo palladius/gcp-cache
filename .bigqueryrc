@@ -1,10 +1,10 @@
 --apilog=stdout
 --format=prettyjson
---location=US
+#--location=US
 
 [query]
 --use_legacy_sql=false
---max_rows=1042
+--max_rows=4242
 --maximum_bytes_billed=100000000
 
 #[load]
