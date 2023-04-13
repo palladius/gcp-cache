@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     @labels = Label.all
     @inventory_items = InventoryItem.all
     @orgs = Folder.where(is_org: true) #.all
+    @billing_accounts_count = BillingAccount.all.count
     # Projects: <b><%=@projects.count%></b>
 # folders: <b><%=@folders.count%></b>
 # labels: <b><%=@labels.count%></b>

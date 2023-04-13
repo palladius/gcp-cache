@@ -19,10 +19,11 @@
 #folders: <b><%=@folders.count%></b><br/>
 #labels: <b><%=@labels.count rescue $! %></b><br/>
 #inventory_items: <b><%=@inventory_items.count%></b><br/>
+#BAIDs: <b><%=@billing_accounts_count %></b><br/>
 
 <h4>🚂 Rails config</h4>
 
 DB Type: <b><%=  ActiveRecord::Base.connection.adapter_name %></b><br/>
 ENV: <b><%= Rails.env %></b><br/>
 PROJECT_ID:<b><%= ENV.fetch 'PROJECT_ID', :boh %></b><br/>
-DATABASE_URL:<b><%= ENV.fetch 'DATABASE_URL', :boh %></b> (risky! Removeme when it works)<br/>
+DATABASE_URL:<b>HIDDEN<%#= ENV.fetch 'DATABASE_URL', :boh %></b> (risky! Removeme when it works)<br/>
