@@ -1,6 +1,9 @@
 
 SHELL := /bin/bash
 
+show-data:
+	@echo '👀 Showing data in your local folder..'
+	find db/fixtures/ -name '*.json'
 
 run:
 	#https://stackoverflow.com/questions/72448485/the-asset-application-js-is-not-present-in-the-asset-pipeline-in-rails-7
@@ -43,8 +46,8 @@ gcloud-generate-info:
 populate-asset-inventory-from-bq:
 	bin/populate-projects-and-folders-from-bigquery.sh
 
-cleanup-empty-json-files:
-	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
+#cleanup-empty-json-files:#
+#	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
 
 seed-from-riccardo-other-script:
 	# this is available if you download this: 

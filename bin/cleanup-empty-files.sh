@@ -17,4 +17,6 @@ find db/fixtures/ -size 0 -name \*json -print0 | xargs -0 rm
 # now lets validate json :)
 # npm i -g valid-json-cli
 
-which validjson && _delete_invalid_jsons
+which validjson && 
+    _delete_invalid_jsons ||
+        echo 'Oops validjson not found. Consider this: npm i -g valid-json-cli'
