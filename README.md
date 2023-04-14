@@ -85,6 +85,16 @@ Genius!
 
 and yes, this explains the logo too.
 
+# Run
+
+If you want to use automagic Makefile commands, please make sure to use direnv first to load all ENV correctly.
+DB depends on it, and wont work without - sorry.
+
+```bash
+ricc@ricc-macbookpro3:🏡~/git/gcp-cache$ direnv allow
+ricc@ricc-macbookpro3:🏡~/git/gcp-cache$ make run
+```
+
 # Deployment
 
 TODO(ricc): skaffold and CB and CD.
