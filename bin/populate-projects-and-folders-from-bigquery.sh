@@ -8,6 +8,12 @@ _fatal() {
 . .envrc ||
     _fatal 'Not .envrc to slurp. Exiting.'
 
+# remove seconds so i dont have A LOT of them..
+TODAY_DATE=$(date +%Y%m%d-%H%M)
+MAX_ROWS='15000'
+
+set -e
+
 direnv allow .
 
 echo "🔭 Here we assume you've already added your Asset Inventory resources to BQ and you configured .envrc to point to the right tables: $ASSET_INVENTORY_TABLES."
@@ -35,6 +41,11 @@ END_OF_BQ_TEXT
 # I tried CSV but it doesnt work :/ too many nested things i would have to
 # one for all, ancestors which for most resources returns TWO objects.
 # not using timestamp and just YYYYMMDD as its likely not to change much so easier on the rake db:seed part. $(date +%Y%m%d-%H%M%S).json
-cat .tmp |bq query  --use_legacy_sql=false --format json > ./db/fixtures/bq-exports/assets-export.$(date +%Y%m%d).json
+cat .tmp |bq query  --use_legacy_sql=false --format json --max_rows "$MAX_ROWS" > ./db/fixtures/bq-exports/assets-export.$TODAY_DATE.json
 
-echo "👍 Done: $?"
+echo "👍 BQ JSON written: $?"
+
+echo -en "👍 JSON length:"
+    jq length ./db/fixtures/bq-exports/assets-export.$TODAY_DATE.json
+
+

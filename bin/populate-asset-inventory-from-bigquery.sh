@@ -7,7 +7,9 @@ _fatal() {
 source .envrc ||
     _fatal 'Not .envrc to slurp. Exiting.'
 
-MAX_ROWS='5000'
+MAX_ROWS='15000'
+TODAY_DATE=$(date +%Y%m%d-%H%M)
+set -e
 
 #echo "ASSET_INVENTORY_TABLES: $ASSET_INVENTORY_TABLES"
 
@@ -23,6 +25,9 @@ END_OF_BQ_TEXT
 
 # I tried CSV but it doesnt work :/ too many nested things i would have to
 # one for all, ancestors which for most resources returns TWO objects.
-cat .tmp |bq query  --use_legacy_sql=false --max_rows "$MAX_ROWS" --format json | tee ./db/fixtures/bq-exports/all-assets-export.$(date +%Y%m%d-%H%M%S).json
+cat .tmp |bq query  --use_legacy_sql=false --max_rows "$MAX_ROWS" --format json |
+  tee ./db/fixtures/bq-exports/all-assets-export.$TODAY_DATE.json
+
+jq length ./db/fixtures/bq-exports/all-assets-export.$TODAY_DATE.json
 
 echo "👍 Done: $?"

@@ -1,5 +1,5 @@
---apilog=stdout
---format=prettyjson
+#--apilog=stdout
+#--format=prettyjson
 #--location=US
 
 [query]
