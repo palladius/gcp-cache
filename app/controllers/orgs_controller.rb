@@ -10,7 +10,9 @@ class OrgsController < ApplicationController
 
   # GET /orgs or /orgs.json
   def index
-    @folders = Folder.where(is_org: true) #.all
+    @folders = Folder.where(is_org: true, active: true) #.all
+    #@folders = Folder.where(active: true)
+
   end
 
   # GET /orgs/1 or /orgs/1.json
