@@ -33,6 +33,9 @@ run-migrations-once-hopefully:
 	rails g scaffold billing_account description:text display_name:string master_billing_account:string name:string open:boolean baid:string
 
 	echo Now take a quick look at VIEWS..
+	# migrations
+	echo on 14apr23 I moved everythong to PostgreS so I cant play the game of recreating the models anymore Ill do the rails way via small migrations.
+	rails generate migration add_active_to_folders active:boolean
 
 db-show:
 	echo Project.count | rails c

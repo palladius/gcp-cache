@@ -48,7 +48,7 @@ module OrgsHelper
     # bootstrap https://getbootstrap.com/docs/4.0/content/tables/
     def render_org_as_tr(folder)
         return '<tr>
-          <th scope="col">Valid
+        <th scope="col">Valid / Active
           <th scope="col">#Id
           <th scope="col">FolderId
           <th scope="col">Domain
@@ -58,7 +58,7 @@ module OrgsHelper
 
         "<tr>
         <!-- < t h scope='row' >2 < / t h > -->
-        <td>#{render_valid folder}
+        <td>#{render_valid folder} / #{render_active folder}
         <td>#{link_to folder.id, "/folders/#{folder.id}"}
         <td>#{folder.folder_id}
             <td><b>#{folder.domain}</b>

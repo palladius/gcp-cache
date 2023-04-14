@@ -3,6 +3,8 @@
 This is the list of markdown-friendly list of changes to the app:
 
 ```bash
+2023-04-14 v1.1.1 added Valid to Folders..
+-- moved from biadic version to triadic --
 2023-04-14 v1.01 fixed JS (hopefully) and also fixed prod execution (make run-prod works!)
 2023-04-13 v1.01 DB CHANGE: added BAID! Woohoo!
 2023-04-13 v0.11 Minor view/model changes. Mostly powered bin/ scripts and Makefile for observability. Added PGSQL to Gemfile
