@@ -41,7 +41,7 @@ class Folder < ApplicationRecord
     end
 
     def children 
-#        Folder.find_by_parent_id( self.id) # always return first :/
+#        puts "bug! not self.id but self.folder_id"
         Folder.where(:parent_id => self.id) # always return first :/
     end
    
@@ -116,6 +116,9 @@ class Folder < ApplicationRecord
     end
     def self.count_folders
         self.where(:is_org => false).count
+    end
+    def self.all_orgs 
+        self.where(:is_org => true)
     end
 
     

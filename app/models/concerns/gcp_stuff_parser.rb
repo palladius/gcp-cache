@@ -18,7 +18,7 @@ module GcpStuffParser
     # end
 
 
-    ParseVersion ||= '1.1'
+    ParseVersion ||= '1.2_14mar23'
 
 included do
 
@@ -50,6 +50,7 @@ Smaple project:
   def self.parse_project_info(ph, opts={})
     opts_json_file = opts.fetch :json_file, 'JSON file non datur'
     opts_verbose = opts.fetch :verbose, false
+    opts_create_poorly_informed_org_anyway = opts.fetch :verbose, false
 
     parent_folder_or_org = 'todo'
 
@@ -66,6 +67,7 @@ Smaple project:
         puts "Folder exists! #{existing_folder}" if opts_verbose
         f=existing_folder
     else
+      if (opts_create_poorly_informed_org_anyway or (not is_org)) # create_anway OR folder
         puts "Folder DOESNT exist, creating it: #{existing_folder}"
         f = Folder.create(
             folder_id: folder_id,
@@ -75,6 +77,9 @@ Smaple project:
 
         )
         puts "👍 Folder just created: #{f}"
+      else
+        puts "👍 I refuse to create the Org, since it will be created withotu dasher domain and otgher use stuff: #{f}"
+      end
     end
     puts "Folder: #{f}" if opts_verbose
 

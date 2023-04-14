@@ -59,8 +59,11 @@ module OrgsHelper
         <!-- < t h scope='row' >2 < / t h > -->
         <td>#{render_valid folder} / #{render_active folder}
         <td>#{link_to folder.id, "/folders/#{folder.id}"}
+            #{ link_to "✏️", edit_folder_path(folder) }
         
-        <td>#{folder.folder_id} <br/>
+        <td>
+        #{folder.folder_id} <br/>
+            
         <b>#{folder.directory_customer_id}</b>
 
         <td><b>#{folder.domain}</b> <br/>
