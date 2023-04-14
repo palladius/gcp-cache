@@ -69,7 +69,8 @@ install-debian-ubuntu:
 	sudo apt install postgresql postgresql-contrib libpq-dev
 
 run-prod:
-	bin/rails credentials:edit
+	echo 'The first time you shall run: bin/rails credentials:edit'
+	RAILS_ENV=production rake assets:precompile || yarn build
 	RAILS_ENV=production rails s -p 8080
 
 reset-authentication:

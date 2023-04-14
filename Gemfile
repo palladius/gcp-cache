@@ -90,4 +90,9 @@ group :test do
   gem "webdrivers"
 end
 
+# problems with sprockets / asset pipeline? https://guides.rubyonrails.org/asset_pipeline.html
+group :production do
+  gem 'mini_racer'
+end
+
 gem "ruby-lsp", "~> 0.3.7", :group => :development

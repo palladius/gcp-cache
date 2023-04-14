@@ -1,14 +1,14 @@
-<!-- This addon is creted in case I overwrite the index.html again :) 
+<!-- This addon is created in case I overwrite the index.html again :)
 
 There's another theory which states that this has already happened 😉
 -->
-<h1>Folder addon (  <%= @folder.to_s(false) %>)</h1>
+<!--
+<h1> <%= Folder.emoji%> Folder addon (  <%= @folder.to_s(false) %>)</h1>
 
-
+This H2 doesnt work much...
 
 <h2>Parent</h2>
 
-  
 <% if @folder.parent %>
   <p>Parent not found, probably an Org</p>
  <% else %>
@@ -20,3 +20,23 @@ There's another theory which states that this has already happened 😉
 <% @folder.children.each do |f| %>
   <%= render_folder f %><br/>
 <% end %>
+
+-->
+<h1> <%= Folder.emoji%> Folder addon 2023 for <%= @folder.to_s(false) %></h1>
+
+Let's explore projects and folders having this folder/org as a parent:
+
+<h2>Sub-Projects (it works!)</h2>
+
+Let's try to enumerate all projects with this parent or org:  <%= @folder.folder_id %><br/>
+
+<% Project.where(organization_id: @folder.folder_id).each do |project| %>
+  - <%= render_project(project) %><br/>
+<% end %>
+
+<h2>Sub-Folders</h2>
+
+<% Folder.where(parent_id: @folder.folder_id).each do |folder| %>
+  - <%= render_folder(folder) %><br/>
+<% end %>
+
