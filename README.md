@@ -40,7 +40,7 @@ Look in awe: `make show-data` , it's all your stuff! Some files will be empty, I
 
 ### Phase 2: The big Haduken
 
-1. Re-run  `make seed-from-riccardo-other-script` (a form of the familiar `rake db:seed`  which sets correctly certain ENVs - this is what you change in case your installation is different path than mine). It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me? You should.
+1. Run `make seed-from-riccardo-other-script` (a form of the familiar `rake db:seed`  which sets correctly certain ENVs - this is what you change in case your installation is different path than mine). It will look for the cache dir in (1) and stuff in here populated by (2)/(3). Awesome. Dont believe me? You should.
 
 See if you get any data with `make show-data`. Sample result:
 
