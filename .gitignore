@@ -46,3 +46,4 @@ db/fixtures/gcloud/organizations.json
 db/fixtures/gcloud/projects.json
 .DbSeedMagicSignature.yaml
 .echodo_history
+config/credentials.yml.enc

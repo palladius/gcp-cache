@@ -50,20 +50,23 @@ module OrgsHelper
         return '<tr>
         <th scope="col">Valid / Active
           <th scope="col">#Id
-          <th scope="col">FolderId
-          <th scope="col">Domain
-          <th scope="col">directoryCustomerId
-          <th scope="col">Org Info
+          <th scope="col">FolderId // 
+          <th scope="col">Domain // Org Info
+          <th scope="col">Desc
         </tr>'.html_safe if folder.nil?
 
         "<tr>
         <!-- < t h scope='row' >2 < / t h > -->
         <td>#{render_valid folder} / #{render_active folder}
         <td>#{link_to folder.id, "/folders/#{folder.id}"}
-        <td>#{folder.folder_id}
-            <td><b>#{folder.domain}</b>
-            <td>#{folder.directory_customer_id}
-            <td>#{ render_org folder }
+        
+        <td>#{folder.folder_id} <br/>
+        <b>#{folder.directory_customer_id}</b>
+
+        <td><b>#{folder.domain}</b> <br/>
+            #{ render_org folder }
+            
+        <td>#{ folder.description }
         </tr>".html_safe
     end
 

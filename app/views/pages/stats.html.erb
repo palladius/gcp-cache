@@ -11,6 +11,13 @@
 
 <h2>📈 Some Stats</h2>
 
+Un po' di notule
+
+* I need to learn how to attach important generic info to an asset (folder / org/ project).
+ `gcloud organizations get-iam-policy 426276118631 --format json ``
+ Maybe a polymorphic association? For instance I want to see the IAM info.
+ with super important timestamp so I know if i need to refresh it.
+
 
 <h4>🛢 DB Entities</h4>
 
@@ -31,3 +38,4 @@ DATABASE_URL:<b>HIDDEN<%#= ENV.fetch 'DATABASE_URL', :boh %></b> (risky! Removem
 Adapter and DBName (safer): <%= ActiveRecord::Base.configurations.configs_for(env_name: Rails.env ).first.adapter %> //
   <b><%= ActiveRecord::Base.configurations.configs_for(env_name: Rails.env ).first.database %></b>
 <br/>
+
