@@ -34,9 +34,8 @@ This software works 'perfectly' with it (meaning "it works on my machine").
 ### Phase 1. Populate local JSONs for the big Haduken
 
 1. Install the awesome https://github.com/palladius/org-folder-projects-graph and make sure its in the right path (../org-folder-projects-graph/) and run the org thingy on a few Orgs you own. That will create JSONs in your `../org-folder-projects-graph/.cache/`.
-1. Run `bin/gcloud-generate-info.sh`
-1. Run `bin/populate-stuff-from-gcloud.sh`
-1. Run BQ to parse Inventory from AssetInventory if you set it up in the past (I did): `make populate-asset-inventory-from-bq`. Not sure this will work for you but I hope.
+2. Run `make populate`. It will do A LOT of sweet things.
+
 Look in awe: `make show-data` , it's all your stuff! Some files will be empty, I know.
 
 ### Phase 2: The big Haduken

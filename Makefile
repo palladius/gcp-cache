@@ -48,6 +48,15 @@ gcloud-generate-info:
 populate-asset-inventory-from-bq:
 	bin/populate-projects-and-folders-from-bigquery.sh
 
+populate: #gcloud-generate-info populate-asset-inventory-from-bq
+	echo Doing all the population I can do:
+	bin/populate-asset-inventory-from-bigquery.sh
+	bin/populate-billing-accounts.sh
+	bin/populate-stuff-from-gcloud.sh
+	bin/populate-asset-inventory-from-gcloud-for-project-number.sh
+	bin/populate-projects-and-folders-from-bigquery.sh
+	bin/gcloud-generate-info.sh
+
 #cleanup-empty-json-files:#
 #	find db/fixtures/ -name \*.json -size 0 -print0 | xargs -0 rm
 
@@ -75,3 +84,4 @@ run-prod:
 
 reset-authentication:
 	rm config/master.key config/credentials.yml.enc
+
