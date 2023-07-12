@@ -25,6 +25,7 @@ export ORGANIZATION_ID="1234567890"
 # of Asset aPI.
 export PROJECT_NUMBER="123456789012"
 export INTERESTING_PROJECT_NUMBERS="123456789012,1234567890123,12345678901234"
+export INTERESTING_PROJECT_IDS="your-fav-project1,your-fav-project2,your-fav-project2,your-other-project"
 
 #### v1.1 2022-12-29 ####
 # See https://guides.rubyonrails.org/v5.1/configuring.html

@@ -176,6 +176,22 @@ module VmParser
     Dir.glob("db/fixtures/gce_vms/*.json").each { |file| parseJsonFile(file) }
   end
 
+  # Generate all files based on gcloud and these projects: INTERESTING_PROJECT_IDS
+  def self.autogenerate(interesting_projects = nil)
+    interesting_projects ||= ENV.fetch("INTERESTING_PROJECT_IDS").split(",")
+    puts "AutoGenerate() interesting_projects: #{interesting_projects}"
+    unless interesting_projects.is_a?(Array)
+      raise "interesting_projects is not an array!"
+    end
+    interesting_projects.each do |project_id|
+      filename =
+        "db/fixtures/gce_vms/gcloud_instances_list.project_id=#{project_id}.json"
+      ret =
+        `gcloud --project #{project_id} compute instances list --format json | tee '#{filename}'`
+      puts "Correctly(?) created #{filename}..."
+    end
+  end
+
   # should parse a list of
   def self.parseJsonFile(json_file)
     n_parsed = 0
@@ -195,11 +211,28 @@ module VmParser
     # Extracting project id and number, needed for project search vs creation
     project_id = hash["machineType"].split("/")[6]
     # "email": "134140879415@project.gserviceaccount.com",
-    project_number = hash["serviceAccounts"][0]["email"].split("@")[0]
+    # if hash["serviceAccounts"].nil?
+    #   #puts hash
+    #   puts hash["serviceAccounts"]
+    #   #puts hash["serviceAccounts"][0]
+    #   #puts hash["serviceAccounts"][0]["email"]
+    #   raise "project_number not found, look better: #{hash["serviceAccounts"]}"
+    # end
+    project_number =
+      begin
+        hash["serviceAccounts"][0]["email"].split("@")[0].to_i
+      rescue StandardError
+        42
+      end
 
     # Additional 'useless' things to ease redability and add to debug puts :)
     name = hash["name"]
-    pub_ip = hash["networkInterfaces"][0]["accessConfigs"][0]["natIP"]
+    pub_ip =
+      begin
+        hash["networkInterfaces"][0]["accessConfigs"][0]["natIP"]
+      rescue StandardError
+        nil
+      end
     # "machineType": "https://www.googleapis.com/compute/v1/projects/foobarbaz/zones/us-central1-a/machineTypes/e2-small",
     project =
       Project.find_or_create_by(
