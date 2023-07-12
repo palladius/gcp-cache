@@ -17,7 +17,7 @@ class VmsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vm" do
     assert_difference("Vm.count") do
-      post vms_url, params: { vm: { description: @vm.description, disk1_name: @vm.disk1_name, disk1_size_gb: @vm.disk1_size_gb, external_ip: @vm.external_ip, internal_ip: @vm.internal_ip, internal_notes: @vm.internal_notes, is_preemptible: @vm.is_preemptible, machine_type: @vm.machine_type, name: @vm.name, self_link: @vm.self_link, status: @vm.status, zone: @vm.zone } }
+      post vms_url, params: { vm: { description: @vm.description, disk1_name: @vm.disk1_name, disk1_size_gb: @vm.disk1_size_gb, external_ip: @vm.external_ip, internal_ip: @vm.internal_ip, internal_notes: @vm.internal_notes, is_preemptible: @vm.is_preemptible, machine_type: @vm.machine_type, name: @vm.name, project_id: @vm.project_id, self_link: @vm.self_link, status: @vm.status, zone: @vm.zone } }
     end
 
     assert_redirected_to vm_url(Vm.last)
@@ -34,7 +34,7 @@ class VmsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vm" do
-    patch vm_url(@vm), params: { vm: { description: @vm.description, disk1_name: @vm.disk1_name, disk1_size_gb: @vm.disk1_size_gb, external_ip: @vm.external_ip, internal_ip: @vm.internal_ip, internal_notes: @vm.internal_notes, is_preemptible: @vm.is_preemptible, machine_type: @vm.machine_type, name: @vm.name, self_link: @vm.self_link, status: @vm.status, zone: @vm.zone } }
+    patch vm_url(@vm), params: { vm: { description: @vm.description, disk1_name: @vm.disk1_name, disk1_size_gb: @vm.disk1_size_gb, external_ip: @vm.external_ip, internal_ip: @vm.internal_ip, internal_notes: @vm.internal_notes, is_preemptible: @vm.is_preemptible, machine_type: @vm.machine_type, name: @vm.name, project_id: @vm.project_id, self_link: @vm.self_link, status: @vm.status, zone: @vm.zone } }
     assert_redirected_to vm_url(@vm)
   end
 

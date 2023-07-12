@@ -23,6 +23,7 @@ class VmsTest < ApplicationSystemTestCase
     check "Is preemptible" if @vm.is_preemptible
     fill_in "Machine type", with: @vm.machine_type
     fill_in "Name", with: @vm.name
+    fill_in "Project", with: @vm.project_id
     fill_in "Self link", with: @vm.self_link
     fill_in "Status", with: @vm.status
     fill_in "Zone", with: @vm.zone
@@ -45,6 +46,7 @@ class VmsTest < ApplicationSystemTestCase
     check "Is preemptible" if @vm.is_preemptible
     fill_in "Machine type", with: @vm.machine_type
     fill_in "Name", with: @vm.name
+    fill_in "Project", with: @vm.project_id
     fill_in "Self link", with: @vm.self_link
     fill_in "Status", with: @vm.status
     fill_in "Zone", with: @vm.zone

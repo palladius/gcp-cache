@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_074601) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_12_061206) do
   create_table "billing_accounts", force: :cascade do |t|
     t.text "description"
     t.string "display_name"
@@ -76,4 +76,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_074601) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "vms", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "internal_notes"
+    t.string "machine_type"
+    t.string "internal_ip"
+    t.string "external_ip"
+    t.string "self_link"
+    t.string "zone"
+    t.integer "disk1_size_gb"
+    t.string "disk1_name"
+    t.string "status"
+    t.boolean "is_preemptible"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_vms_on_project_id"
+  end
+
+  add_foreign_key "vms", "projects"
 end

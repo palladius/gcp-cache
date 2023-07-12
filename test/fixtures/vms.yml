@@ -13,6 +13,7 @@ one:
   disk1_name: MyString
   status: MyString
   is_preemptible: false
+  project: one
 
 two:
   name: MyString
@@ -27,3 +28,4 @@ two:
   disk1_name: MyString
   status: MyString
   is_preemptible: false
+  project: two

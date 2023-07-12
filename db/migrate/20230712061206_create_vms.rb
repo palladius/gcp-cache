@@ -13,6 +13,7 @@ class CreateVms < ActiveRecord::Migration[7.0]
       t.string :disk1_name
       t.string :status
       t.boolean :is_preemptible
+      t.references :project, null: false, foreign_key: true
 
       t.timestamps
     end

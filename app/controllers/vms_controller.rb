@@ -65,6 +65,6 @@ class VmsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vm_params
-      params.require(:vm).permit(:name, :description, :internal_notes, :machine_type, :internal_ip, :external_ip, :self_link, :zone, :disk1_size_gb, :disk1_name, :status, :is_preemptible)
+      params.require(:vm).permit(:name, :description, :internal_notes, :machine_type, :internal_ip, :external_ip, :self_link, :zone, :disk1_size_gb, :disk1_name, :status, :is_preemptible, :project_id)
     end
 end

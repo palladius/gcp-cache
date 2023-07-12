@@ -183,6 +183,8 @@ normal visualization shows this:
 
     NAME, ZONE, MACHINE_TYPE, PREEMPTIBLE  INTERNAL_IP     EXTERNAL_IP, STATUS
 
-$ rails g scaffold vm name:string description:text internal_notes:text machine_type:string internal_ip:string external_ip:string self_link:string zone:string disk1_size_gb:integer disk1_name:string status:string is_preemptible:boolean
+* command:
+
+    rails g scaffold vm name:string description:text internal_notes:text machine_type:string internal_ip:string external_ip:string self_link:string zone:string disk1_size_gb:integer disk1_name:string status:string is_preemptible:boolean project:references --force
 
 eg: gcloud --project XXXX compute instances list --format json | tee .gcloud.instances.list.project=XXXX.json
