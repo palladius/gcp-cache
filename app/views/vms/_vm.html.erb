@@ -1,7 +1,26 @@
 <div id="<%= dom_id vm %>">
   <p>
+    <div class="small d-inline p-2 bg-primary text-white"><%= vm.ssh_command %></div>
+  TODO: copy paste when click.
+  </p>
+  <p>
     <strong>Name:</strong>
-    <%= vm.name %>
+    <span class="d-inline p-2 bg-success text-white">
+      <%= vm.name %></span>
+
+  </p>
+  <p>
+    <strong>External ip:</strong>
+    <span class="d-inline p-2 bg-secondary text-white"><%= vm.external_ip %></span>
+  </p>
+
+ <p>
+    <strong>Short Machine type:</strong>
+    <span class="d-inline p-2 bg-dark text-white"><%= vm.short_machine_type %></span>
+  </p>
+ <p>
+    <strong>Short Zone:</strong>
+    <span class="d-inline p-2 bg-primary text-white"><%= vm.short_zone %></span>
   </p>
 
   <p>
@@ -24,10 +43,6 @@
     <%= vm.internal_ip %>
   </p>
 
-  <p>
-    <strong>External ip:</strong>
-    <%= vm.external_ip %>
-  </p>
 
   <p>
     <strong>Self link:</strong>

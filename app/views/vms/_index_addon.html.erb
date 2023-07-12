@@ -1,0 +1,39 @@
+<!-- This addon is creted in case I overwrite the index.html again :)
+
+There's another theory which states that this has already happened 😉
+-->
+<h1><%= Vm.icon rescue :iconerr %>VMs</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">VM Name</th>
+      <th scope="col">IP</th>
+      <th scope="col">Zone</th>
+      <th scope="col">Project</th>
+      <th scope="col">MachineType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vms.each_with_index do |vm,ix| %>
+    <tr>
+      <th scope="row"><%= vm.id %>
+         <%= link_to "📝", edit_vm_path(vm) %>
+         <%= button_to "💣", vm, method: :delete %>
+      </th>
+      <td class='bold' ><%= link_to vm.name, vm %></td>
+      <td><%= vm.external_ip %></td>
+      <td class='small' ><%= vm.short_zone %></td>
+      <td><%= link_to "#{Project.emoji} #{vm.project.project_id}", vm.project %></td>
+      <td class='small' ><%= vm.short_machine_type %></td>
+    </tr>
+      <%#= render_vm(x) rescue :Err  %><br/>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to "New vm", new_vm_path %>

@@ -43,54 +43,58 @@ One id exists only within THIS Database and not in the real world, GCP ids are c
 =end
 
 class Project < ApplicationRecord
+  validates :project_id, uniqueness: true, presence: true
+  validates :project_number, uniqueness: true
+  # polymorphic association
+  has_many :labels, as: :labellable
 
-    validates :project_id,     uniqueness: true, presence: true
-    validates :project_number, uniqueness: true
-    # polymorphic association
-    has_many :labels, as: :labellable
+  # alias :baid, :billing_accoung_id
+  def baid
+    @billing_accoung_id || "XXXXXX-XXXXXX-XXXXXX"
+  end
 
-    # alias :baid, :billing_accoung_id
-    def baid
-        @billing_accoung_id || 'XXXXXX-XXXXXX-XXXXXX'
+  def setParent(parent_folder)
+    unless parent_folder.is_a?(Folder)
+      raise "Unknown Parent! #{parent_folder.class}"
     end
+    self.parent_id = parent_folder.folder_id
+    self.organization_id = parent_folder.folder_id # where recurively finding for parent. Wait for acts_as_tree to find it :)
+    self.description = "[debug] Setting parent to #{parent_folder}"
+    #puts "* Is this valid? #{self.valid?}"
+    self.save
+    # TODO: also set Organization_id
+    #self.organization_id = parent_folder.id where recurively finding for parent. Wait for acts_as_tree to find it :)
+  end
 
-    def setParent(parent_folder)
-        raise "Unknown Parent! #{parent_folder.class}" unless  parent_folder.is_a?(Folder)
-        self.parent_id = parent_folder.folder_id
-        self.organization_id = parent_folder.folder_id # where recurively finding for parent. Wait for acts_as_tree to find it :)
-        self.description = "[debug] Setting parent to #{parent_folder}"
-        #puts "* Is this valid? #{self.valid?}"
-        self.save
-        # TODO: also set Organization_id
-        #self.organization_id = parent_folder.id where recurively finding for parent. Wait for acts_as_tree to find it :)
+  def active?
+    begin
+      @lifecycle_state == "ACTIVE"
+    rescue StandardError
+      true
     end
+  end
 
-    def active?
-        @lifecycle_state == 'ACTIVE' rescue true
-    end
+  def active_icon
+    active? ? "✅" : "❌" # checkmark vs crossmark
+  end
 
-    def active_icon
-      active? ? '✅' : '❌' # checkmark vs crossmark
-    end
+  # "projects/268290255727",
+  def fqdn
+    "projects/#{project_number}"
+  end
 
-    # "projects/268290255727",
-    def fqdn
-        "projects/#{project_number}"
-    end
+  def to_s(verbose = false)
+    return self.project_id unless verbose
+    son_of = self.parent_id.nil? ? "" : "🚸SonOf(#{parent_id})"
+    "#{active_icon}#{project_id} (#{project_number}) # #{baid}#{son_of}"
+  end
 
-
-    def to_s(verbose=false)
-        return self.project_id unless verbose
-        son_of = self.parent_id.nil? ? '' : "🚸SonOf(#{parent_id})"
-        "#{active_icon}#{project_id} (#{project_number}) # #{baid}#{son_of}"
-    end
-
-
-    def self.class_emoji
-        PROJECT_ICON
-    end
-    def self.emoji
-        #'PPP' #
-        PROJECT_ICON
-    end
+  def self.class_emoji
+    PROJECT_ICON
+  end
+  def self.emoji
+    #'PPP' #
+    "⬢"
+  end
 end
+#  ⬢
