@@ -88,3 +88,6 @@ run-prod:
 reset-authentication:
 	rm config/master.key config/credentials.yml.enc
 
+# this will default local env
+run-on-train:
+	DATABASE_URL='db/development.sqlite3' rails s

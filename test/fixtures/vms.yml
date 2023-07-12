@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  internal_notes: MyText
+  machine_type: MyString
+  internal_ip: MyString
+  external_ip: MyString
+  self_link: MyString
+  zone: MyString
+  disk1_size_gb: 1
+  disk1_name: MyString
+  status: MyString
+  is_preemptible: false
+
+two:
+  name: MyString
+  description: MyText
+  internal_notes: MyText
+  machine_type: MyString
+  internal_ip: MyString
+  external_ip: MyString
+  self_link: MyString
+  zone: MyString
+  disk1_size_gb: 1
+  disk1_name: MyString
+  status: MyString
+  is_preemptible: false

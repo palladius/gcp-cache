@@ -50,8 +50,9 @@ module OrgsHelper
         return '<tr>
         <th scope="col">Valid / Active
           <th scope="col">#Id
-          <th scope="col">FolderId // 
+          <th scope="col">FolderId //
           <th scope="col">Domain // Org Info
+          <th scope="col">Children
           <th scope="col">Desc
         </tr>'.html_safe if folder.nil?
 
@@ -60,17 +61,26 @@ module OrgsHelper
         <td>#{render_valid folder} / #{render_active folder}
         <td>#{link_to folder.id, "/folders/#{folder.id}"}
             #{ link_to "✏️", edit_folder_path(folder) }
-        
-        <td>
-        #{folder.folder_id} <br/>
-            
-        <b>#{folder.directory_customer_id}</b>
+
+        <td>#{folder.folder_id} <br/>
+            <b>#{folder.directory_customer_id}</b>
 
         <td><b>#{folder.domain}</b> <br/>
             #{ render_org folder }
-            
+
+        <td>#{ render_children_count_for_folder folder }
         <td>#{ folder.description }
+
         </tr>".html_safe
+    end
+
+    def render_children_count_for_folder(folder)
+        ret = ''
+        folder_count = folder.sub_folders.count
+        project_count = folder.sub_projects.count
+        ret +=  "#{folder_count}&nbsp;📂" if folder_count > 0
+        ret +=  "#{project_count }&nbsp;🍕" if project_count > 0
+        ret
     end
 
 end

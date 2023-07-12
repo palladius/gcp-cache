@@ -1,5 +1,5 @@
 =begin
- 
+
 
 JSON representation of folder according to this gcloud command:
   {
@@ -21,34 +21,53 @@ class Folder < ApplicationRecord
 
     # https://guides.rubyonrails.org/active_record_validations.html
     # numerical
-    validates :folder_id, 
-        uniqueness: true, 
+    validates :folder_id,
+        uniqueness: true,
         presence: true,
         format: { with: /\A\d+\z/ }
     #validates :name,  presence: true
     has_many :labels, as: :labellable
 
-    # not self.emoji 
+    # not self.emoji
     def emoji
         is_org ? ORG_ICON : FOLDER_ICON rescue '?!?'
     end
 
     def most_representative_name
         return name if name.to_s.length > 0
-        return folder_id if folder_id.to_s.length > 0
+        return "🤷 " + folder_id if folder_id.to_s.length > 0
         return id if id.to_s.length > 0
         return "oid=#{self.object_id}"
     end
 
-    def children 
-#        puts "bug! not self.id but self.folder_id"
-        Folder.where(:parent_id => self.id) # always return first :/
+#     def children
+# #        puts "bug! not self.id but self.folder_id"
+#         Folder.where(:parent_id => self.id) # always return first :/
+#     end
+
+    def sub_folders # children23
+        Folder.where(:parent_id => self.folder_id.to_s) # always return first :/
     end
-   
-    def to_s(verbose=true)
-        verbose ? 
+    def sub_projects
+       Project.where(organization_id: self.folder_id)
+    end
+
+    # find parent
+    def parent
+        return nil if parent_id.to_s == ''
+        Folder.find_by_folder_id(self.parent_id.to_s)
+    end
+
+    def self.parent_ids
+      self.all.map{|x| x.parent_id}
+    end
+
+
+
+    def to_s(verbose=false)
+        verbose ?
             "#{self.emoji} #{most_representative_name} # FQDN: #{fqdn}" :
-            "#{self.emoji} #{most_representative_name}" 
+            "#{self.emoji} #{most_representative_name}"
     end
 
     def fqdn
@@ -58,7 +77,7 @@ class Folder < ApplicationRecord
 
 =begin
  Final view should look lik this:
- 
+
  🌲 824879804362 # 'palladi.us'
 ├─ 🍕 da-cicd-tests (882043492617)
 ├─ 🍕 metarepo (268290255727)
@@ -95,13 +114,13 @@ class Folder < ApplicationRecord
             ret +=  child_folder.carlessian_tree_view(depth+1, opts)
         end
         ret
-    end   
+    end
 
-    def self.class_emoji 
+    def self.class_emoji
         self.emoji
     end
     # 🗂️ Organizations
-    def self.emoji 
+    def self.emoji
         FOLDER_ICON
     end
 
@@ -117,11 +136,11 @@ class Folder < ApplicationRecord
     def self.count_folders
         self.where(:is_org => false).count
     end
-    def self.all_orgs 
+    def self.all_orgs
         self.where(:is_org => true)
     end
 
-    
+
 
 
 end

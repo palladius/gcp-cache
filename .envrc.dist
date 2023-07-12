@@ -34,9 +34,9 @@ export DATABASE_URL_PRODUCTION="sqlite3:db/production.sqlite3"  # 🪶🛢 SQLit
 #export DATABASE_URL="sqlite3:db/production.sqlite3" # 🐬🛢 MySQL
 #export DATABASE_URL="sqlite3:db/production.sqlite3" # 🐘🛢 PostgreS
 
-
 #### v1.2 2023-04-13 ####
 export PROJECT_ID="the-same-as-above-but-in-string"
 # Increase once you become more comfortable with the script.. add a few zeroes when you move out of sqlite ;)
 # note: this is not used yet - still emebedded in the bi/ scripts.
 export BIGQUERY_MAX_ROWS='420'
+export ENABLE_EXPERIMENTAL_FEATURES='false'

@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_14_074601) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "billing_accounts", force: :cascade do |t|
     t.text "description"
     t.string "display_name"
@@ -59,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_074601) do
     t.string "gcp_k"
     t.string "gcp_val"
     t.string "labellable_type"
-    t.bigint "labellable_id"
+    t.integer "labellable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["labellable_type", "labellable_id"], name: "index_labels_on_labellable"

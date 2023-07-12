@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Vms</h1>
+
+<div id="vms">
+  <% @vms.each do |vm| %>
+    <%= render vm %>
+    <p>
+      <%= link_to "Show this vm", vm %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New vm", new_vm_path %>

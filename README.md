@@ -175,3 +175,14 @@ ricc@ricc-macbookpro3:🏡~/git/gcp-cache$ cat .DbSeedMagicSignature.yaml
 
 * add **Labels** support
 * Add **Firebase** support (free for all documents vs strict Ruby/MySQL schema).
+
+## Adding GCE VMs
+
+add manuy labels.. and tags (1 word)
+normal visualization shows this:
+
+    NAME, ZONE, MACHINE_TYPE, PREEMPTIBLE  INTERNAL_IP     EXTERNAL_IP, STATUS
+
+$ rails g scaffold vm name:string description:text internal_notes:text machine_type:string internal_ip:string external_ip:string self_link:string zone:string disk1_size_gb:integer disk1_name:string status:string is_preemptible:boolean
+
+eg: gcloud --project XXXX compute instances list --format json | tee .gcloud.instances.list.project=XXXX.json

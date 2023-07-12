@@ -28,3 +28,5 @@ UninterestingInventoryTypes =  [
 
 # config.filter_parameters += ["credit_card.code"]
 #Rails.application.config.filter_parameters -= ["gcp_key"]
+# true, TRUE and True will give true otherwise false.
+ENV_ENABLE_EXPERIMENTAL_FEATURES = ENV.fetch('ENABLE_EXPERIMENTAL_FEATURES', 'Nisba').upcase == 'TRUE'

@@ -1,0 +1,77 @@
+<%= form_with(model: vm) do |form| %>
+  <% if vm.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(vm.errors.count, "error") %> prohibited this vm from being saved:</h2>
+
+      <ul>
+        <% vm.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :internal_notes, style: "display: block" %>
+    <%= form.text_area :internal_notes %>
+  </div>
+
+  <div>
+    <%= form.label :machine_type, style: "display: block" %>
+    <%= form.text_field :machine_type %>
+  </div>
+
+  <div>
+    <%= form.label :internal_ip, style: "display: block" %>
+    <%= form.text_field :internal_ip %>
+  </div>
+
+  <div>
+    <%= form.label :external_ip, style: "display: block" %>
+    <%= form.text_field :external_ip %>
+  </div>
+
+  <div>
+    <%= form.label :self_link, style: "display: block" %>
+    <%= form.text_field :self_link %>
+  </div>
+
+  <div>
+    <%= form.label :zone, style: "display: block" %>
+    <%= form.text_field :zone %>
+  </div>
+
+  <div>
+    <%= form.label :disk1_size_gb, style: "display: block" %>
+    <%= form.number_field :disk1_size_gb %>
+  </div>
+
+  <div>
+    <%= form.label :disk1_name, style: "display: block" %>
+    <%= form.text_field :disk1_name %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :is_preemptible, style: "display: block" %>
+    <%= form.check_box :is_preemptible %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

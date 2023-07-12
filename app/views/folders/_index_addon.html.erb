@@ -1,4 +1,4 @@
-<!-- This addon is creted in case I overwrite the index.html again :) 
+<!-- This addon is creted in case I overwrite the index.html again :)
 
 There's another theory which states that this has already happened 😉
 -->
@@ -7,5 +7,6 @@ There's another theory which states that this has already happened 😉
 <p>(*) Note: This counts both proper folders (<%=Folder.count_folders %>) and Organizations (<%=Folder.count_orgs %>) (which are root folders so they have all the dignity of folders).</p>
 
   <% @folders.each do |folder| %>
-      - <%= render_folder folder %><br/>
+      -  <%=  link_to "✏️", edit_folder_path(folder)%>
+      <%= render_folder(folder) %> (child of <%= render_parent_folder_by_folder_id(folder.parent_id) %>)<br/>
   <% end %>
