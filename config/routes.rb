@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/inventory_items/stats", to: "inventory_items#stats"
 
   get "/pages/stats", to: "pages#stats"
+  get "/pages/index", to: "pages#index"
 
   resources :inventory_items
   resources :labels
@@ -15,6 +16,5 @@ Rails.application.routes.draw do
   resources :orgs
 
   # Defines the root path route ("/")
-  root "pages#stats" # "folders#index"
-
+  root "pages#index" # "folders#index"
 end

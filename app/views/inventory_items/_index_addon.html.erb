@@ -1,4 +1,4 @@
-<!-- This addon is creted in case I overwrite the index.html again :) 
+<!-- This addon is creted in case I overwrite the index.html again :)
 
 There's another theory which states that this has already happened 😉
 -->
@@ -6,18 +6,21 @@ There's another theory which states that this has already happened 😉
 
 <h1><%= INVENTORY_ITEM_ICON %>Inventory Items</h1>
 
+<%= link_to "New Inventory Item", new_inventory_item_path %>
+
+
 <% if @latest_inventory_item %>
     Latest, newest Inventory Item (which also tells you how behind your import job is :P): <br/>
 
     <%= render_inventory_item(@latest_inventory_item)  %> <br/>
 
-    ⏲ Created on: 
+    ⏲ Created on:
     <%= @latest_inventory_item.gcp_update_time %>
     (<b>
-    <%= time_ago_in_words @latest_inventory_item.gcp_update_time %>
+    <%= time_ago_in_words( @latest_inventory_item.gcp_update_time) rescue '?⌚️?' %>
     ago</b>)
 <% else %>
-    Sorry, no last inventory item available. 
+    Sorry, no last inventory item available.
 <% end %>
 
 <table border='1' >
