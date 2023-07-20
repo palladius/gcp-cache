@@ -2,7 +2,7 @@ class InventoryItem < ApplicationRecord
   serialize :serialized_ancestors
 
   validates :name, uniqueness: { scope: [:asset_type] }
-  validates_uniqueness_of :resource_discovery_name
+  #  validates_uniqueness_of :resource_discovery_name # not true this is the class! eg, "discoveryName" => "ProjectBillingInfo",
 
   has_many :labels, as: :labellable
 
@@ -37,7 +37,7 @@ class InventoryItem < ApplicationRecord
 
   def to_s(verbose = true)
     if verbose
-      "#{simplified_type} :#{INVENTORY_ITEM_ICON} : #{simplified_name}"
+      "#{simplified_type} :#{INVENTORY_ITEM_ICON}: #{simplified_name}"
     else
       "#{simplified_name}"
     end

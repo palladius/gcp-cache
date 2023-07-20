@@ -18,5 +18,9 @@ module GcpCache
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    #
+    ## ricc: https://stackoverflow.com/questions/17951037/how-to-require-some-lib-files-from-anywhere
+    config.autoload_paths += %W[#{config.root}/lib]
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end
