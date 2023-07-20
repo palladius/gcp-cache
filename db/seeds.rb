@@ -263,13 +263,23 @@ def seed_from_gcloud_dumps
       :parse_asset_inventory_dict_from_gcloud
     )
   end
+
+  Dir["db/fixtures/gcloud/asset_inventory.d/assets-for.project=*.json"]
+    .reverse
+    .each do |gcloud_json_file|
+    puts "Ricc 👙J ul23: 🏊  parsing: '#{gcloud_json_file}' "
+    # This is broken!
+
+    require "#{Rails.root}/lib/asset_inventory_parser"
+    include AssetInventoryParser
+    parseAssetInventoryGcloudJsonIntoUInventoryItem(gcloud_json_file)
+  end
 end
 
 InterestingAssetTypes = %w[
   bigtableadmin.googleapis.com/Cluster
   bigtableadmin.googleapis.com/Instance
   cloudbilling.googleapis.com/BillingAccount
-  cloudbilling.googleapis.com/ProjectBillingInfo
   clouddeploy.googleapis.com/DeliveryPipeline
   cloudfunctions.googleapis.com/CloudFunction
   cloudfunctions.googleapis.com/Function
@@ -332,28 +342,10 @@ def main()
   t0 = Time.now
   puts "DB:SEED start at #{Time.now}."
 
-  if true # SeedFromLocalGclouds
-    #produce_gcloud_dumps() # 2023-07-20 BReaking with the past, I want to start putting gcloud code in same place as parsing code to better couple it :)
-    #seed_from_gcloud_dumps()
-    Dir["db/fixtures/gcloud/asset_inventory.d/assets-for.project=*.json"]
-      .reverse
-      .each do |gcloud_json_file|
-      puts "Ricc 👙J ul23: 🏊  parsing: '#{gcloud_json_file}' "
-      # This is broken!
-
-      require "#{Rails.root}/lib/asset_inventory_parser"
-
-      include AssetInventoryParser
-      parseAssetInventoryGcloudJsonIntoUInventoryItem(gcloud_json_file)
-
-      # ApplicationRecord.generic_parse_array_of_jsons_from_file_with_method(
-      #   gcloud_json_file,
-      #   "Inventory info from gcloud2 (jul23)",
-      #   InventoryItem,
-      #   :parse_asset_inventory_dict_from_gcloud
-      # )
-    end
-    exit 42
+  if SeedFromLocalGclouds
+    produce_gcloud_dumps() # 2023-07-20 BReaking with the past, I want to start putting gcloud code in same place as parsing code to better couple it :)
+    seed_from_gcloud_dumps()
+    #exit 42
   end
 
   seed_generic_stuff_programmatically() if SeedFromLocalFixtures

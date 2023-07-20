@@ -168,8 +168,8 @@ module HaruspexMagicParser
             puts "Returning from generic_parse_array_of_jsons_from_file_with_method (#{description}) after #{ix} calls, as i'm just testing and the file is HUMOUNGUSLY big (#{json_buridone.count})"
             return "Array out of MaxIndex: returing last of array", ret
           end
+          puts "FYI: 🔢#{ix} elements parsed" if ix % 100 == 0
         end
-        puts "FYI: 🔢## ix} elements parsed" if ix % 100 == 0
         puts "🖖 Finished parsing file of #{json_buridone.size} elements."
         return "Array finished normally", ret
       elsif json_buridone.is_a?(Hash)
