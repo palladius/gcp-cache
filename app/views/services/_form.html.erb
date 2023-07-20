@@ -1,0 +1,57 @@
+<%= form_with(model: service) do |form| %>
+  <% if service.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :gcp_tag, style: "display: block" %>
+    <%= form.text_field :gcp_tag %>
+  </div>
+
+  <div>
+    <%= form.label :priority, style: "display: block" %>
+    <%= form.number_field :priority %>
+  </div>
+
+  <div>
+    <%= form.label :expected_status, style: "display: block" %>
+    <%= form.text_field :expected_status %>
+  </div>
+
+  <div>
+    <%= form.label :devconsole_url, style: "display: block" %>
+    <%= form.text_field :devconsole_url %>
+  </div>
+
+  <div>
+    <%= form.label :inventory_item_id, style: "display: block" %>
+    <%= form.text_field :inventory_item_id %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :internal_notes, style: "display: block" %>
+    <%= form.text_area :internal_notes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -190,4 +190,4 @@ normal visualization shows this:
 eg: gcloud --project XXXX compute instances list --format json | tee .gcloud.instances.list.project=XXXX.json
 
 
-rails g scaffold service name:string gcp_tag:string priority:integer expected_status:string devconsole_url:string inventory_item:references description:text
+rails g scaffold service name:string gcp_tag:string priority:integer expected_status:string devconsole_url:string inventory_item:references description:text internal_notes:text

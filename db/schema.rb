@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_061206) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_194219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_061206) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "gcp_tag"
+    t.integer "priority"
+    t.string "expected_status"
+    t.string "devconsole_url"
+    t.bigint "inventory_item_id", null: false
+    t.text "description"
+    t.text "internal_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inventory_item_id"], name: "index_services_on_inventory_item_id"
+  end
+
   create_table "vms", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -98,5 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_061206) do
     t.index ["project_id"], name: "index_vms_on_project_id"
   end
 
+  add_foreign_key "services", "inventory_items"
   add_foreign_key "vms", "projects"
 end
